@@ -1,0 +1,2 @@
+class PlayerTypeError < StandardError
+end
