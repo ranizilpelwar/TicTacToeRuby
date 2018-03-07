@@ -3,9 +3,9 @@ require_relative '../../Players/Player.rb'
 require_relative '../../Players/PlayerType.rb'
 require_relative '../../Players/PlayerManager.rb'
 
-class TC_PlayerManagerInitializationTests < Test::Unit::TestCase
+class TestPlayerManagerInitialization < Test::Unit::TestCase
   
-  def setup()
+  def setup
     @player1 = Player.new(:Human, "X")
     @player2 = Player.new(:Computer, "Y")
     @player_manager = PlayerManager.new(@player1, @player2)
