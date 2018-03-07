@@ -3,9 +3,9 @@ require_relative '../../Players/Player.rb'
 require_relative '../../Players/PlayerType.rb'
 require_relative '../../Players/PlayerManager.rb'
 
-class TC_PlayerManagerTest < Test::Unit::TestCase
+class TestPlayerManager < Test::Unit::TestCase
   
-  def setup()
+  def setup
     @player1 = Player.new(:Human, "X")
     @player2 = Player.new(:Computer, "Y")
     @player_manager = PlayerManager.new(@player1, @player2)
@@ -30,5 +30,4 @@ class TC_PlayerManagerTest < Test::Unit::TestCase
     player = @player_manager.updateCurrentPlayer()
     assert_equal(@player2, @player_manager.currentPlayer)
   end
-
 end
