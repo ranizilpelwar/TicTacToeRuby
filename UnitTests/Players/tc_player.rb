@@ -1,7 +1,7 @@
 require 'test/unit'
 require_relative '../../Players/Player.rb'
 
-class TC_PlayerTest < Test::Unit::TestCase
+class TestPlayer < Test::Unit::TestCase
   
   def test_player_initialization_sets_type_to_the_given_value
     @player = Player.new("Human", "X")
@@ -25,7 +25,7 @@ class TC_PlayerTest < Test::Unit::TestCase
     assert(!@player1.equals?(@player2), "False is not returned when comparing the players.")
   end
 
-    def test_equals_returns_false_when_two_players_have_a_difference_in_one_property_value_for_type
+  def test_equals_returns_false_when_two_players_have_a_difference_in_one_property_value_for_type
     @player1 = Player.new(:Human, "X")
     @player2 = Player.new(:Computer, "X")
     assert(!@player1.equals?(@player2), "False is not returned when comparing the players.")
