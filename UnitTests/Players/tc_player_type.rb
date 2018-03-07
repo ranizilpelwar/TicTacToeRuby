@@ -1,6 +1,6 @@
 require 'test/unit'
 require_relative '../../Players/PlayerType.rb'
-require_relative '../../Exceptions/PlayerTypeError.rb'
+require_relative '../../Exceptions/player_type_error.rb'
 
 class TestPlayerType < Test::Unit::TestCase
   
