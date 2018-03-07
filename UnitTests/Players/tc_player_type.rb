@@ -14,8 +14,5 @@ class TestPlayerType < Test::Unit::TestCase
   def test_player_type_initialization_returns_false_when_created_as_a_robot
 
     assert_raises(PlayerTypeError) { PlayerType.new(:Robot) }
-
   end
-
-
 end
