@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../../Players/Player.rb'
+require_relative '../../Players/player.rb'
 require_relative '../../Players/PlayerType.rb'
 require_relative '../../Players/player_manager.rb'
 
