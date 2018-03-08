@@ -7,12 +7,6 @@ class Player
   end
 
   def equals?(player)
-    isEqual = false
-    if (player != nil)
-      if (type == player.type && symbol == player.symbol)
-        isEqual = true
-      end
-    end
-    return isEqual
+    isEqual = @type == player.type && @symbol == player.symbol ? true : false
   end
 end
