@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../../Players/Player.rb'
+require_relative '../../Players/player.rb'
 
 class TestPlayer < Test::Unit::TestCase
   
