@@ -14,7 +14,7 @@ class PlayerType
     @selected_option = if PlayerType.valid?(type)
                           type
                         else
-                          raise PlayerTypeError.new("PlayerType has only two valid choices: Human, Computer.")  
+                          raise PlayerTypeError.new("Invalid type was chosen during PlayerType initialization.")  
                         end
   end
 end
