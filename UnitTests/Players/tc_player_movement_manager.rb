@@ -32,5 +32,50 @@ class TestPlayerMovementManager < Test::Unit::TestCase
   def test_get_last_move_for_player_throws_exception_when_player_number_is_zero
     assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(0) }
   end  
+
+  def test_get_last_move_for_player_throws_exception_when_player_number_is_negative
+    assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(-1) }
+  end
+
+  def test_get_last_move_for_player_throws_exception_when_player_number_is_three
+    assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(3) }
+  end
+
+  def test_get_last_move_returns_last_move_for_player1_when_player_number_is_one
+    player_number = 1
+    updated_move = 5
+    @player_movement_manager.update_last_move_for_player(player_number, updated_move)
+    assert_equal(updated_move, @player_movement_manager.get_last_move_for_player(player_number))
+  end
+
+  def test_get_last_move_returns_last_move_for_player2_when_player_number_is_two
+    player_number = 2
+    updated_move = 5
+    @player_movement_manager.update_last_move_for_player(player_number, updated_move)
+    assert_equal(updated_move, @player_movement_manager.get_last_move_for_player(player_number))
+  end
+
+  def test_an_exception_is_raised_when_move_is_negative_one
+    assert_raises(ArgumentError) { @player_movement_manager.raise_argument_error_for_invalid_move(-1) }
+  end
+
+  def test_an_exception_is_raised_when_move_is_greater_than_largest_index
+     largest_index = PlayerMovementManager::LARGEST_INDEX + 1
+     assert_raises(ArgumentError) { @player_movement_manager.raise_argument_error_for_invalid_move(largest_index) }
+  end
+
+  def test_last_move_is_updated_when_move_is_zero
+    player_number = 1
+    move = 0
+    @player_movement_manager.update_last_move_for_player(player_number, move)
+    assert_equal(move, @player_movement_manager.get_last_move_for_player(player_number))
+  end
+
+  def test_last_move_is_updated_when_move_is_the_same_as_the_largest_index
+    player_number = 1
+    move = PlayerMovementManager::LARGEST_INDEX
+    @player_movement_manager.update_last_move_for_player(player_number, move)
+    assert_equal(move, @player_movement_manager.get_last_move_for_player(player_number))
+  end
 end
 
