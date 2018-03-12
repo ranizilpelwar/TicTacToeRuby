@@ -1,7 +1,7 @@
 require 'test/unit'
-require_relative '../../Players/player.rb'
-require_relative '../../Players/player_type.rb'
-require_relative '../../Players/player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Players/player.rb'
+require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
+require_relative '../../TicTacToeRuby.Core/Players/player_manager.rb'
 
 class TestPlayerManagerInitialization < Test::Unit::TestCase
   

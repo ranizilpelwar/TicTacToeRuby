@@ -42,5 +42,5 @@ class PlayerMovementManager
     else
       @player2_last_move = updated_move
     end
-  end  
+  end
 end

@@ -1,7 +1,7 @@
 require 'test/unit'
-require_relative '../../Players/player_type.rb'
-require_relative '../../Exceptions/player_type_error.rb'
-require_relative '../../GamePlay/match_type.rb'
+require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/player_type_error.rb'
+require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 
 class TestMatchType < Test::Unit::TestCase
   
