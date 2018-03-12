@@ -8,17 +8,45 @@ class TestPlayerSymbolValidation < Test::Unit::TestCase
     assert_false(return_value, "An empty string should not be a valid player symbol.")
   end
 
-  def test_a_digit_is_not_a_valid_player_symbol
+  def test_a_single_digit_value_is_not_a_valid_player_symbol
     input = "1"
     return_value = PlayerSymbolValidator.valid?(input)
-    assert_false(return_value, "A digit should not be a valid symbol.")
+    assert_false(return_value, "A single digit should not be a valid player symbol.")
+  end
+
+  def test_a_two_digit_value_is_not_a_valid_player_symbol
+    input = "10"
+    return_value = PlayerSymbolValidator.valid?(input)
+    assert_false(return_value, "A two digit value should not be a valid player symbol.")
   end
 
   def test_input_with_length_greater_than_one_is_not_a_valid_player_symbol
     input = "XX"
     return_value = PlayerSymbolValidator.valid?(input)
-    assert_false(return_value, "An input with length greater than one is not a valid symbol.")
+    assert_false(return_value, "An input with length greater than one is not a valid player symbol.")
   end
 
-  
+  def test_an_upper_case_alpha_character_is_a_valid_player_symbol
+    input = "A"
+    return_value = PlayerSymbolValidator.valid?(input)
+    assert(return_value, "An upper case alpha character should be a valid player symbol.")
+  end
+
+  def test_a_lower_case_alpha_character_is_a_valid_player_symbol
+    input = "a"
+    return_value = PlayerSymbolValidator.valid?(input)
+    assert(return_value, "A lower case alpha character should be a valid player symbol.")
+  end
+
+  def test_a_percent_character_is_a_valid_player_symbol
+    input = "%"
+    return_value = PlayerSymbolValidator.valid?(input)
+    assert(return_value, "A percent character should be a valid player symbol.")
+  end
+
+  def test_a_pound_character_is_a_valid_player_symbol
+    input = "#"
+    return_value = PlayerSymbolValidator.valid?(input)
+    assert(return_value, "A pound character should be a valid player symbol.")
+  end
 end

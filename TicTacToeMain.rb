@@ -3,6 +3,7 @@ require_relative 'TicTacToeRuby.Console/Output/console_writer.rb'
 require_relative 'TicTacToeRuby.Console/Input/console_reader.rb'
 introduction = GameIntroduction.new
 message = introduction.welcome_message()
+
 puts message
 board = *('0'..'8').to_a
 console_writer = ConsoleWriter.new
