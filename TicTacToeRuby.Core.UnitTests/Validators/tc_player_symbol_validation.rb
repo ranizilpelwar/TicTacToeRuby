@@ -49,4 +49,10 @@ class TestPlayerSymbolValidation < Test::Unit::TestCase
     return_value = PlayerSymbolValidator.valid?(input)
     assert(return_value, "A pound character should be a valid player symbol.")
   end
+
+    def test_a_space_character_is_not_a_valid_player_symbol
+    input = " "
+    return_value = PlayerSymbolValidator.valid?(input)
+    assert_false(return_value, "A space character should not be a valid player symbol.")
+  end
 end

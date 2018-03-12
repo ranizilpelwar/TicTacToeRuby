@@ -36,7 +36,7 @@ puts "Test scripts:"
 # puts valid
 
 def valid?(input)
-  pattern = /\A[^0-9]{1}\z/
+  pattern = /\A[^0-9\s]{1}\z/
   match_data = pattern.match(input)
   valid = match_data !=nil ? true : false
 end
@@ -76,5 +76,8 @@ result = valid?(input)
 puts "For input of " + input + ":"
 puts result
 
-
+input = " "
+result = valid?(input)
+puts "For input of " + input + ":"
+puts result
 
