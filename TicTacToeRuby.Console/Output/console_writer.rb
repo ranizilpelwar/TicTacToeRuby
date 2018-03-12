@@ -1,6 +1,6 @@
 class ConsoleWriter
   
-  # Displays the provided message on it's own line.
+  # Displays the provided message on it's own.
   def display_message(message)
     puts message
   end
