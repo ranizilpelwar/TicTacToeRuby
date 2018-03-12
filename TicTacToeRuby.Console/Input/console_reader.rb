@@ -15,5 +15,6 @@ class ConsoleReader
       attempts = attempts + 1
       input = read_input
     end while input == "" && attempts < 5
+    return input
   end
 end
