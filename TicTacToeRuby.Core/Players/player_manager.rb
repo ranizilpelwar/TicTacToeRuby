@@ -13,6 +13,6 @@ class PlayerManager
   end
 
   def get_next_player
-    next_player = current_player.equals?(player1) ? player2 : player1
+    next_player = @current_player.equals?(@player1) ? @player2 : @player1
   end
 end
