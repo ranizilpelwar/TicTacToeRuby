@@ -35,4 +35,19 @@ class TestMatchTypeManager < Test::Unit::TestCase
     actual_player1_type = actual_match_type.player1_type.selected_option
     assert_equal(expected_player1_type, actual_player1_type, "Player 1 type for first match should be Human.")
   end
+
+  def test_when_match_number_is_provided_as_four_then_it_is_not_a_valid_match
+    match_type_manager = MatchTypeManager.new
+    assert_false(match_type_manager.valid?(4), "This should not be a valid match.")
+  end
+
+  def test_when_match_number_is_provided_as_one_then_it_is_a_valid_match
+    match_type_manager = MatchTypeManager.new
+    assert(match_type_manager.valid?(1), "This should be a valid match.")
+  end
+
+  def test_when_match_number_is_provided_as_zero_then_it_is_not_a_valid_match
+    match_type_manager = MatchTypeManager.new
+    assert_false(match_type_manager.valid?(0), "This should not be a valid match.")
+  end
 end
