@@ -5,7 +5,7 @@ class PlayerManager
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
-    @current_player = player1
+    @current_player = @player1
   end
 
   def update_current_player
