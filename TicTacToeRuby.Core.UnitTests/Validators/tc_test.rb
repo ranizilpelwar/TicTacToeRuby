@@ -1,6 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type_manager.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
 
 puts "Test scripts:"
 
@@ -85,14 +86,38 @@ puts "Test scripts:"
 # puts "For input of " + input + ":"
 # puts result
 
+# expected_player1_type = :Human
+# match_type_manager = MatchTypeManager.new
+# actual_match_type = match_type_manager.get_match_type(1)
+# puts actual_match_type.class
+# actual_player1_type = actual_match_type.player1_type
 
+board = []
+board << "X"
+board << "X"
+board << "X"
+board << "X"
+board << "X"
+board << "X"
+board << "X"
+board << "X"
+board << "9"
+iterator = 1
+available_spaces = []
+board.each do |tile_on_board| 
+  puts tile_on_board
+  available_spaces.push(tile_on_board) unless AvailableSpacesValidator.digit?(tile_on_board) == false
+end
 
-expected_player1_type = :Human
-match_type_manager = MatchTypeManager.new
-actual_match_type = match_type_manager.get_match_type(1)
-puts actual_match_type.class
-actual_player1_type = actual_match_type.player1_type
+puts "Available Spaces:"
+puts available_spaces
 
+puts "End available spaces."
+
+board.each { |tile_on_board| 
+  puts tile_on_board
+  available_spaces.push(tile_on_board) unless AvailableSpacesValidator.digit?(tile_on_board) == false
+}
 
 
 
