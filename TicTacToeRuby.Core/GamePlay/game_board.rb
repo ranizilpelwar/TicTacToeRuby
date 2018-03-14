@@ -24,9 +24,16 @@ class GameBoard
   end
 
   def update_board(index, player_symbol)
-    raise ArgumentError, "Cannot update board with invalid player_symbol" unless PlayerSymbolValidator.valid?
+    raise ArgumentError, "Cannot update board with invalid player_symbol" unless PlayerSymbolValidator.valid?(player_symbol)
     raise ArgumentError, "Index provided cannot be greater than the last spot on the board." unless index < board.length
-    raise ArgumentError, "Index provided cannot be less than the first spot on the board." unless index > 0
-    
+    raise ArgumentError, "Index provided cannot be less than the first spot on the board." unless index >= 0
+    @board[index] = player_symbol
+  end
+
+  def revert_board(index)
+    raise ArgumentError, "Index provided cannot be greater than the last spot on the board." unless index < board.length
+    raise ArgumentError, "Index provided cannot be less than the first spot on the board." unless index >= 0
+    tile = index + 1
+    @board[index] = tile.to_s
   end
 end

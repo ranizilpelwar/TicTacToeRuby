@@ -34,11 +34,64 @@ class TestGameBoard < Test::Unit::TestCase
   end
 
   def test_update_board_raises_argument_error_when_index_is_length_of_board
-    assert_raises(ArgumentError) do @game_board.update_board(9, @board) end
+    assert_raises(ArgumentError) do @game_board.update_board(9, "X") end
   end
 
   def test_update_board_raises_argument_error_when_index_is_greater_than_length_of_board
-    assert_raises(ArgumentError) do @game_board.update_board(-1, @board) end
+    assert_raises(ArgumentError) do @game_board.update_board(-1, "X") end
   end
 
+  def test_expected_spot_on_board_is_updated_with_provided_symbol
+    index_on_board = 0
+    player_symbol = "X"
+    @game_board.update_board(index_on_board, player_symbol)
+    stored_symbol_at_index = @game_board.board[index_on_board]
+    assert_equal(player_symbol, stored_symbol_at_index, "Expected the spot on the board to match provided symbol.")
+  end
+
+  def test_the_only_spot_on_the_board_that_is_updated_is_at_the_provided_index
+    expected_board = []
+    expected_board << "X"
+    expected_board << "2"
+    expected_board << "3"
+    expected_board << "4"
+    expected_board << "5"
+    expected_board << "6"
+    expected_board << "7"
+    expected_board << "8"
+    expected_board << "9"
+    
+    @game_board.update_board(0, "X")
+    result = @game_board.board - expected_board
+    assert(result == [], "Expected boards to have same contents, but difference was: #{result}")
+  end
+
+  def test_rever_board_raises_argument_error_when_index_is_length_of_board
+    assert_raises(ArgumentError) do @game_board.revert_board(9, "X") end
+  end
+
+  def test_revert_board_raises_argument_error_when_index_is_greater_than_length_of_board
+    assert_raises(ArgumentError) do @game_board.revert_board(-1, "X") end
+  end
+
+  def test_the_only_spot_on_the_board_that_is_reverted_is_at_the_provided_index
+    # first, update the board
+    @game_board.update_board(0, "X")
+
+    # then, revert the board
+    expected_board = []
+    expected_board << "1"
+    expected_board << "2"
+    expected_board << "3"
+    expected_board << "4"
+    expected_board << "5"
+    expected_board << "6"
+    expected_board << "7"
+    expected_board << "8"
+    expected_board << "9"
+    
+    @game_board.revert_board(0)
+    result = @game_board.board - expected_board
+    assert(result == [], "Expected boards to have same contents, but difference was: #{result}")
+  end
 end
