@@ -5,6 +5,7 @@ class Player
 
   def initialize(type, symbol)
     raise ArgumentError, "Cannot create Player with an invalid symbol." unless PlayerSymbolValidator.valid?(symbol) 
+    raise ArgumentError, "Cannot create Player with a nil type." unless type != nil
     @type = type
     @symbol = symbol
   end
