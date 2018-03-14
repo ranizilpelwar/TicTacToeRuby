@@ -11,6 +11,5 @@ reader = ConsoleReader.new
 # #MatchTypeSetup.prompt_for_match_type_selection(writer, match_type_manager)
 # MatchTypeSetup.get_valid_match_type(writer, reader, match_type_manager)
 
-GamePlaySetup.new(writer, reader)
-
+# GamePlaySetup.new(writer, reader)
 

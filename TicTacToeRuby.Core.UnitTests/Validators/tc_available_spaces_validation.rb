@@ -1,6 +1,6 @@
 require 'test/unit'
-require '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
-require '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
+require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 
 class TestAvailableSpacesValidation < Test::Unit::TestCase
   def test_get_available_spaces_raises_an_error_when_board_is_nil

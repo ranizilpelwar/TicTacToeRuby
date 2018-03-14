@@ -92,32 +92,40 @@ puts "Test scripts:"
 # puts actual_match_type.class
 # actual_player1_type = actual_match_type.player1_type
 
-board = []
-board << "X"
-board << "X"
-board << "X"
-board << "X"
-board << "X"
-board << "X"
-board << "X"
-board << "X"
-board << "9"
-iterator = 1
-available_spaces = []
-board.each do |tile_on_board| 
-  puts tile_on_board
-  available_spaces.push(tile_on_board) unless AvailableSpacesValidator.digit?(tile_on_board) == false
-end
+# board = []
+# board << "X"
+# board << "X"
+# board << "X"
+# board << "X"
+# board << "X"
+# board << "X"
+# board << "X"
+# board << "X"
+# board << "9"
+# iterator = 1
+# available_spaces = []
+# board.each do |tile_on_board| 
+#   puts tile_on_board
+#   available_spaces.push(tile_on_board) unless AvailableSpacesValidator.digit?(tile_on_board) == false
+# end
 
-puts "Available Spaces:"
-puts available_spaces
+# puts "Available Spaces:"
+# puts available_spaces
 
-puts "End available spaces."
+# puts "End available spaces."
 
-board.each { |tile_on_board| 
-  puts tile_on_board
-  available_spaces.push(tile_on_board) unless AvailableSpacesValidator.digit?(tile_on_board) == false
-}
+# board.each { |tile_on_board| 
+#   puts tile_on_board
+#   available_spaces.push(tile_on_board) unless AvailableSpacesValidator.digit?(tile_on_board) == false
+# }
 
 
+
+    is_valid = false
+    index_of_board = 1
+    expected_result = []
+    expected_result << is_valid
+    expected_result << index_of_board
+
+    puts expected_result
 
