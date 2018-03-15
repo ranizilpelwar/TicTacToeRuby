@@ -1,5 +1,7 @@
 require_relative '../GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/player_symbol_validator.rb'
 
 class GamePlayValidator
 
@@ -25,4 +27,26 @@ class GamePlayValidator
   def self.generate_result(is_valid_move, index_of_board)
     result = Struct.new(:is_valid_move, :index_of_board).new(is_valid_move, index_of_board)
   end
+
+  def self.winning_game?(player_symbol, board, available_spaces)
+    raise ArgumentError, "Cannot evaluate winning game because board is nil." unless !board.nil?
+    raise ArgumentError, "Cannot evaluate winning game because available_spaces is nil." unless !available_spaces.nil?
+    raise ArgumentError, "Cannot evaluate winning game because player_symbol is invalid." unless PlayerSymbolValidator.valid?(player_symbol)
+    found_best_move = false
+    winning_spot = -1
+    temp_board = board.each {  }
+    available_spaces.each do |current_spot| 
+      temp_board[current_spot] = player_symbol
+      if GameOverValidator.game_over?(temp_board)
+        found_best_move = true
+        winning_spot = current_spot
+        result = generate_result(found_best_move, winning_spot)
+        return result
+      else
+        temp_board[current_spot] = current_spot.to_s
+      end     
+    end
+    result = generate_result(found_best_move, winning_spot)
+  end
+
 end
