@@ -48,5 +48,4 @@ class GamePlayValidator
     end
     result = generate_result(found_best_move, winning_spot)
   end
-
 end
