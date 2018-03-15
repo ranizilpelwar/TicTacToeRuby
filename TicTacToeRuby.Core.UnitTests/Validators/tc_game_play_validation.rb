@@ -8,12 +8,12 @@ class GamePlayValidation < Test::Unit::TestCase
     assert_raises(ArgumentError) do GamePlayValidator.evaluate_move(nil, "1") end
   end
 
-  def test_evaluate_move_returns_a_two_element_array
+  def test_evaluate_move_returns_two_elements
     player_manager = MockPlayerManager.new
     board = GameBoard.create_board
     game_board = GameBoard.new(player_manager, board)
     result = GamePlayValidator.evaluate_move(game_board, "1")
     expected_length = 2
-    assert_equal(expected_length, result.length, "Expecting to receive a two element array.")
+    assert_equal(expected_length, result.length, "Expecting to receive two elements in the result set.")
   end
 end

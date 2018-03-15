@@ -1,5 +1,7 @@
 require_relative '../GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
+require 'forwardable'
+require 'tuples'
 
 class GamePlayValidator
 
@@ -19,8 +21,14 @@ class GamePlayValidator
       end
     end
 
-    result = []
-    result << is_valid_move
-    result << index_of_board
+    result = generate_result(is_valid_move, index_of_board)
+  end
+
+  def self.generate_result(is_valid_move, index_of_board)
+    # result = []
+    # result << is_valid_move
+    # result << index_of_board
+
+    result = Pair.new(is_valid_move, index_of_board)
   end
 end
