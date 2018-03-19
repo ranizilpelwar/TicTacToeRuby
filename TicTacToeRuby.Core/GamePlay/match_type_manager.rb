@@ -36,6 +36,6 @@ class MatchTypeManager
 
   def valid?(match_number)
     max_match_number = get_total_available_matches
-    valid = match_number >= 1 && match_number <= max_match_number ? true : false
+    valid = match_number >= 1 && match_number <= max_match_number
   end
 end
