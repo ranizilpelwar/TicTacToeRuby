@@ -1,6 +1,5 @@
 require 'test/unit'
 require_relative '../../TicTacToeRuby.Console/Players/first_player_setup.rb'
-require_relative '../../TicTacToeRuby.Console/Input/console_reader.rb'
 require_relative '../../TicTacToeRuby.Console/Output/console_writer.rb'
 require_relative '../Input/mock_console_reader.rb'
 
@@ -23,7 +22,7 @@ class TestFirstPlayerSetup < Test::Unit::TestCase
   def test_prompt_for_first_player_symbol_returns_symbol_in_upper_case_format
     input = "y"
     setup_reader_and_writer(input)
-    assert_equal("Y", FirstPlayerSetup.prompt_for_first_player_symbol, 
+    assert_equal("Y", FirstPlayerSetup.prompt_for_first_player_symbol(@writer, @reader, "x", "y"), 
       "Symbol read in should be returned in upper case format as it it valid.")
   end
 end
