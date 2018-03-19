@@ -18,7 +18,6 @@ class GamePlayValidator
       index_of_board = board.index(tile_on_board)
       is_valid_move = true if !index_of_board.nil?
     end
-
     result = generate_result(is_valid_move, index_of_board)
   end
 
@@ -38,8 +37,6 @@ class GamePlayValidator
       if GameOverValidator.game_over?(temp_board)
         found_best_move = true
         winning_spot = current_spot
-        result = generate_result(found_best_move, winning_spot)
-        return result
       else
         temp_board[current_spot] = current_spot.to_s
       end     
