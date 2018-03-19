@@ -6,12 +6,12 @@ class MockPlayerManager
 
   def initialize
     # setup symbols for each player
-      symbol_one = "X"
-      symbol_two = "Y"
+      symbol_one = "O"
+      symbol_two = "X"
 
       # get types for each player
-      player1_type = :Human
-      player2_type = :Computer
+      player1_type = :Computer
+      player2_type = :Human
 
       # create the players
       @player1 = Player.new(player1_type, symbol_one)
