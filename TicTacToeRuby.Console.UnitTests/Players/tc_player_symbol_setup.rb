@@ -22,7 +22,7 @@ class TestPlayerSymbolSetup < Test::Unit::TestCase
   def test_get_symbol_for_player_returns_symbol_in_upper_case_format
     input = "y"
     setup_reader_and_writer(input)
-    assert_equal("Y", PlayerSymbolSetup.get_symbol_for_player(@writer, @reader), 'Symbol read in should be returned as it it valid.')
+    assert_equal("Y", PlayerSymbolSetup.get_symbol_for_player(@writer, @reader), 'Symbol read in should be returned in upper case as it it valid.')
   end
 end
 
