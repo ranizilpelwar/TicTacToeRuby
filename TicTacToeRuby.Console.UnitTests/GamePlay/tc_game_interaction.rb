@@ -48,10 +48,16 @@ class TestGameInteraction < Test::Unit::TestCase
     end
   end
 
-  def test_player_manager_should_be_nil_when_last_moves_are_recorded_property_is_false
+  def test_player_manager_should_be_nil_when_last_moves_property_is_false
     last_moves_are_recorded = false
     game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
-    assert_equal(nil, game_interaction.player_movement_manager, "Expecting player_movement_manager to be nil because last_moves_are_recorded is false.")
+    assert(game_interaction.player_movement_manager.nil?, "Expecting player_movement_manager to be nil because last_moves_are_recorded is false.")
+  end
+
+  def test_player_manager_should_not_be_nil_when_last_moves_property_is_true
+    last_moves_are_recorded = true
+    game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
+    assert(!game_interaction.player_movement_manager.nil?, "Expecting player_movement_manager to not be nil because last_moves_are_recorded is true.")
   end
 end
 
