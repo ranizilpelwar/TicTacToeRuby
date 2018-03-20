@@ -59,6 +59,59 @@ class TestGameInteraction < Test::Unit::TestCase
     game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
     assert(!game_interaction.player_movement_manager.nil?, "Expecting player_movement_manager to not be nil because last_moves_are_recorded is true.")
   end
+
+  def test_get_computers_spot_returns_an_index_on_the_game_board
+    last_moves_are_recorded = false
+    game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
+    spot = game_interaction.get_computers_spot
+    assert(spot >= 0 && spot < @game_board.board.length, "Expected spot to be an index on the game board.")
+  end
+
+  def test_record_last_move_stores_correct_move_for_player
+    last_moves_are_recorded = true
+    game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
+    player = @game_board.player_manager.player1
+    expected_player1_last_move = 4
+    game_interaction.record_last_move(player, expected_player1_last_move)
+    actual_player1_last_move = game_interaction.player_movement_manager.player1_last_move
+    assert_equal(expected_player1_last_move, actual_player1_last_move, "Expected that the stored value would match what was passed in.")
+  end
+
+  def test_there_are_no_moves_to_undo_when_game_is_first_started
+    last_moves_are_recorded = true
+    game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
+    assert(!game_interaction.can_undo_moves?)
+  end
+
+  def test_there_are_no_moves_to_undo_when_only_one_player_makes_a_move
+    last_moves_are_recorded = true
+    game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
+    player = @game_board.player_manager.player1
+    player1_last_move = 4
+    game_interaction.record_last_move(player, player1_last_move)
+    assert(!game_interaction.can_undo_moves?)
+  end
+
+  def test_there_are_moves_to_undo_when_both_players_have_made_a_move
+    last_moves_are_recorded = true
+    game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
+    player = @game_board.player_manager.player1
+    player1_last_move = 4
+    game_interaction.record_last_move(player, player1_last_move)
+    player = @game_board.player_manager.player2
+    player2_last_move = 5
+    game_interaction.record_last_move(player, player2_last_move)
+    assert(game_interaction.can_undo_moves?)
+  end
+
+  def there_are_no_moves_to_undo_when_last_moves_are_not_recorded
+    last_moves_are_recorded = false
+    game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
+    assert(!game_interaction.any_moves_to_undo?)
+  end
+
+  
+
 end
 
 
