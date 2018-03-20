@@ -14,6 +14,7 @@ class GameInteraction
     raise ArgumentError, "Cannot create new GameInteraction because writer is nil." if writer.nil?
     raise ArgumentError, "Cannot create new GameInteraction because reader is nil." if reader.nil?
     raise ArgumentError, "Cannot create new GameInteraction because game_board is nil." if game_board.nil?
+    raise ArgumentError, "Cannot create new GameInteraction because match_type is nil." if match_type.nil?
     @writer = writer
     @reader = reader
     @game_board = game_board
@@ -21,6 +22,6 @@ class GameInteraction
     @player1 = player_manager.player1
     @player2 = player_manager.player2
     @record_last_moves = last_moves_are_recorded
-    player_movement_manager = PlayerMovementManager.new(match_type) if @record_last_moves
+    @player_movement_manager = PlayerMovementManager.new(match_type) if @record_last_moves
   end
 end
