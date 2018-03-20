@@ -9,7 +9,7 @@ require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
 
 class TestGameInteraction < Test::Unit::TestCase
   
-   attr_reader :writer, :reader, :game_board, :last_moves_are_recorded, :match_type
+  attr_reader :writer, :reader, :game_board, :last_moves_are_recorded, :match_type
 
   def setup
     @writer = ConsoleWriter.new
@@ -17,7 +17,7 @@ class TestGameInteraction < Test::Unit::TestCase
     board = GameBoard.create_board
     player_manager = MockPlayerManager.new()
     @game_board = GameBoard.new(player_manager, board)
-    @match_type = MatchType.new(:Human, :Computer)
+    @match_type = MatchType.new(:Computer, :Human)
   end
 
   def test_raise_argument_error_when_writer_is_nil
@@ -104,14 +104,13 @@ class TestGameInteraction < Test::Unit::TestCase
     assert(game_interaction.can_undo_moves?)
   end
 
-  def there_are_no_moves_to_undo_when_last_moves_are_not_recorded
+  def test_play_next_turn_raises_argument_error_when_current_player_is_nil
     last_moves_are_recorded = false
     game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
-    assert(!game_interaction.any_moves_to_undo?)
+    assert_raises(ArgumentError) do
+      game_interaction.play_next_turn(nil)
+    end
   end
-
-  
-
 end
 
 

@@ -1,4 +1,8 @@
 require_relative '../../TicTacToeRuby.Core/GamePlay/computer_actions.rb'
+require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/game_play_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
 
 class GameInteraction
 
@@ -25,6 +29,99 @@ class GameInteraction
     @player2 = player_manager.player2
     @record_last_moves = last_moves_are_recorded
     @player_movement_manager = PlayerMovementManager.new(match_type) if @record_last_moves
+  end
+
+  def play_game
+    @writer.clear_screen
+    show_the_players
+    show_the_board
+    current_player = @game_board.player_manager.current_player
+    prompt_to_continue if current_player.type != "Human" # Allows human player to review updated board from computer player's last move and proceed to play when ready
+    continue_playing = true
+    while continue_playing
+      play_next_turn(current_player)
+      continue_playing = !GameOverValidator.game_over?(@game_board.board) && !TieGameValidator.tie_game?(@game_board.board)
+      current_player = @game_board.player_manager.update_current_player if continue_playing
+    end
+    display_game_over_messages
+  end
+
+  def play_next_turn(current_player)
+    raise ArgumentError, "Cannot play next turn because current_player is nil." if current_player.nil?
+    symbol_of_current_player = current_player.symbol
+    type_of_current_player = current_player.type
+    spot = -10
+    tile = ""
+    if type_of_current_player == :Human
+      prompt_for_next_move
+      @writer.display_message("OR type the letter U to undo the last move.") if can_undo_moves?
+      spot = get_human_spot(can_undo_moves?)
+      if spot == -1 # reflects Undo choice selection
+        @player_movement_manager.undo_last_move(@game_board)
+        @writer.clear_screen
+        show_the_players
+        display_undo_last_moves_message
+        show_the_board
+        prompt_for_next_move
+        spot = get_human_spot(false)
+      end
+    else
+      spot = get_computers_spot
+      # Give the feel that the computer is thinking of the next move:
+      display_thinking_process(symbol_of_current_player)
+    end
+    record_last_move(current_player, spot) if record_last_moves
+    puts "spot = #{spot}"
+    tile = @game_board.board[spot]
+    @game_board.update_board(spot, symbol_of_current_player)
+    @writer.clear_screen
+    show_the_players
+    display_updated_board_message(symbol_of_current_player, tile)
+    show_the_board
+  end
+
+  def display_game_over_messages
+    @writer.display_message("Game Over!")
+    display_game_outcome
+    prompt_to_exit
+  end
+
+  def prompt_to_exit
+    5.times do 
+      @writer.display_message("Press the letter E to exit the game. Goodbye!")
+      input = @reader.read_input
+      break if input.upcase == "E"
+    end 
+  end
+
+  def display_game_outcome
+    if TieGameValidator.tie_game?(@game_board.board)
+      @writer.display_message("No winners this time. It's a tie!")
+    else
+      winning_symbol = @game_board.player_manager.current_player.symbol
+      @writer.display_message("Player #{winning_symbol} won! Good game!")
+    end
+  end
+
+  def prompt_to_continue
+    @writer.display_message("Press any key to continue...")
+    @reader.read_input  
+  end
+
+  def show_the_players
+    @writer.display_text("Players: ")
+    player1_type = player1.type
+    player1_symbol = player1.symbol
+    player2_type = player2.type
+    player2_symbol = player2.symbol
+    @writer.display_text("#{player1_symbol} [ #{player1_type} ], ")
+    @writer.display_text("#{player2_symbol} [ #{player2_type} ]\n")
+    @writer.display_message("")
+  end
+
+  def show_the_board
+    @writer.display_message("Tic Tac Toe Board:\n")
+    @writer.display_board(@game_board.board)
   end
 
   # Evaluates whether the game play allows for undoing a move. False is returned if there are no moves to undo. This happens when the game first
