@@ -1,8 +1,10 @@
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type_manager.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
+require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_manager.rb'
+require_relative '../../TicTacToeRuby.Console/GamePlay/game_interaction.rb'
 require_relative '../Output/console_writer.rb'
 require_relative '../Input/console_reader.rb'
 require_relative '../Players/player_symbol_setup.rb'
@@ -10,9 +12,11 @@ require_relative '../Players/first_player_setup.rb'
 require_relative 'match_type_setup.rb'
 
 class GamePlaySetup
-  attr_reader :player_manager, :writer, :reader
+  attr_reader :writer, :reader, :game_interaction
 
   def initialize(writer, reader)
+    raise ArgumentError, "Cannot initialize GamePlaySetup because writer is nil." if writer.nil?
+    raise ArgumentError, "Cannot initialize GamePlaySetup because reader is nil." if reader.nil?
     @writer = writer
     @reader = reader
     setup
@@ -21,7 +25,9 @@ class GamePlaySetup
   def setup
     display_introductory_message
     match_type = setup_match
-    setup_players(match_type)
+    player_manager = setup_players(match_type)
+    game_board = setup_board(player_manager)
+    @game_interaction = setup_game_interaction(game_board, match_type)
   end
 
   def display_introductory_message
@@ -48,12 +54,28 @@ class GamePlaySetup
     player1 = Player.new(player1_type, symbol_one)
     player2 = Player.new(player2_type, symbol_two)
    
-    @player_manager = PlayerManager.new(player1, player2)
+    player_manager = PlayerManager.new(player1, player2)
 
     # update current player based on who is selected as first player
     symbol_of_first_player = FirstPlayerSetup.prompt_for_first_player_symbol(@writer, @reader, symbol_one, symbol_two)
-    current_player_symbol = @player_manager.current_player.symbol
-    @player_manager.update_current_player unless symbol_of_first_player == current_player_symbol 
+    current_player_symbol = player_manager.current_player.symbol
+    player_manager.update_current_player unless symbol_of_first_player == current_player_symbol 
+    result = player_manager
+  end
+
+  def setup_board(player_manager)
+    game_board = GameBoard.new(player_manager, GameBoard.create_board)
+  end
+
+  def setup_game_interaction(game_board, match_type)
+    raise ArgumentError, "Cannot setup GameInteraction because game_board is nil." if game_board.nil?
+    raise ArgumentError, "Cannot setup GameInteraction because match_type is nil." if match_type.nil?
+    record_last_moves = match_type.player1_type == :Human || match_type.player2_type == :Human
+    game_interaction = GameInteraction.new(@writer, @reader, game_board, record_last_moves, match_type)
+  end
+
+  def play
+    @game_interaction.play_game
   end
 
   def get_player_symbols
