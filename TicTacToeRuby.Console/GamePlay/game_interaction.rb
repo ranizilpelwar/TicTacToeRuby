@@ -35,7 +35,7 @@ class GameInteraction
     show_the_players
     show_the_board
     current_player = @game_board.player_manager.current_player
-    prompt_to_continue if current_player.type != "Human" # Allows human player to review updated board from computer player's last move and proceed to play when ready
+    prompt_to_continue if current_player.type.selected_option != :Human # Allows human player to review updated board from computer player's last move and proceed to play when ready
     continue_playing = true
     while continue_playing
       play_next_turn(current_player)
@@ -48,7 +48,7 @@ class GameInteraction
   def play_next_turn(current_player)
     raise ArgumentError, "Cannot play next turn because current_player is nil." if current_player.nil?
     symbol_of_current_player = current_player.symbol
-    type_of_current_player = current_player.type
+    type_of_current_player = current_player.type.selected_option
     spot = -10
     tile = ""
     if type_of_current_player == :Human
