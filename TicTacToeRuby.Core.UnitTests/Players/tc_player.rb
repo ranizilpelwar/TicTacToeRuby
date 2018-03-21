@@ -30,4 +30,12 @@ class TestPlayer < Test::Unit::TestCase
     player2 = Player.new(:Computer, "X")
     assert(!player1.equals?(player2), "False is not returned when comparing the players.")
   end
+
+  def test_player_initialization_raises_an_error_when_an_invalid_symbol_is_passed_in
+    assert_raises(ArgumentError) do Player.new(:Human, " ") end
+  end
+
+  def test_player_initialization_raises_an_error_when_a_nil_type_is_passed_in
+    assert_raises(ArgumentError) do Player.new(nil, "X") end
+  end
 end

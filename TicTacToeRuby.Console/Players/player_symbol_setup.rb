@@ -9,7 +9,7 @@ class PlayerSymbolSetup
     begin
       input = reader.read_input_ignore_empty
       valid_input = PlayerSymbolValidator.valid?(input)
-      display_invalid_input_message(writer) unless valid_input
+      display_invalid_input_message(writer) if !valid_input
     end while !valid_input
     input = input.upcase
   end

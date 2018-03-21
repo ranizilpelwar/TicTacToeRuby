@@ -30,4 +30,23 @@ class TestPlayerManager < Test::Unit::TestCase
     player = @player_manager.update_current_player
     assert_equal(@player2, @player_manager.current_player)
   end
+
+  def test_get_player_number_returns_one_when_player1_is_provided
+    assert_equal(1, @player_manager.get_player_number(@player1))
+  end
+  
+  def test_get_player_number_returns_two_when_player2_is_provided
+    assert_equal(2, @player_manager.get_player_number(@player2))
+  end
+  
+  def test_get_player_number_returns_negative_one_when_player_cannot_be_found
+    player = Player.new(:Human, "O")
+    assert_equal(-1, @player_manager.get_player_number(player))
+  end
+
+  def test_get_player_number_raises_an_argument_error_when_player_is_nil
+    assert_raises(ArgumentError) do
+      @player_manager.get_player_number(nil)
+    end
+  end
 end
