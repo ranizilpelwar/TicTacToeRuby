@@ -80,6 +80,7 @@ class GameInteraction
 
   def display_game_over_messages
     @writer.display_message("Game Over!")
+    @writer.display_message("\n")
     display_game_outcome
     prompt_to_exit
   end
@@ -99,6 +100,7 @@ class GameInteraction
       winning_symbol = @game_board.player_manager.current_player.symbol
       @writer.display_message("Player #{winning_symbol} won! Good game!")
     end
+    @writer.display_message("\n")
   end
 
   def prompt_to_continue
@@ -113,13 +115,16 @@ class GameInteraction
     player2_type = player2.type.selected_option
     player2_symbol = player2.symbol
     @writer.display_text("#{player1_symbol} [ #{player1_type} ], ")
-    @writer.display_text("#{player2_symbol} [ #{player2_type} ]\n")
+    @writer.display_text("#{player2_symbol} [ #{player2_type} ]")
+    @writer.display_message("\n")
     @writer.display_message("")
   end
 
   def show_the_board
-    @writer.display_message("Tic Tac Toe Board:\n")
+    @writer.display_message("Tic Tac Toe Board:")
+    @writer.display_message("\n")
     @writer.display_board(@game_board.board)
+    @writer.display_message("\n")
   end
 
   # Evaluates whether the game play allows for undoing a move. False is returned if there are no moves to undo. This happens when the game first
@@ -142,7 +147,8 @@ class GameInteraction
   end
 
   def display_updated_board_message(symbol_of_current_player, spot)
-    @writer.display_message("Player #{symbol_of_current_player} picked spot #{spot}!\n")
+    @writer.display_message("Player #{symbol_of_current_player} picked spot #{spot}!")
+    @writer.display_message("\n")
   end
 
   def display_undo_last_moves_message
