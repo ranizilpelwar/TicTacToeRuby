@@ -3,7 +3,6 @@ require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/game_play_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
-
 class GameInteraction
 
   # Used to pass in the constraints for the GetComputerSpot method. Represents the Alpha in the Alpha-Beta 
@@ -70,8 +69,8 @@ class GameInteraction
       # Give the feel that the computer is thinking of the next move:
       display_thinking_process(symbol_of_current_player)
     end
+    
     record_last_move(current_player, spot) if record_last_moves
-    puts "spot = #{spot}"
     tile = @game_board.board[spot]
     @game_board.update_board(spot, symbol_of_current_player)
     @writer.clear_screen
@@ -187,6 +186,7 @@ class GameInteraction
         spot = return_result.index_of_board
       end
     end
+    return spot
   end
 
   def get_computers_spot
