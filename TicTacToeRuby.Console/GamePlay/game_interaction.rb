@@ -160,6 +160,7 @@ class GameInteraction
       @writer.display_text(".")
       sleep(1) # seconds
     end
+    @writer.display_text("\n")
   end
 
   def prompt_for_next_move
