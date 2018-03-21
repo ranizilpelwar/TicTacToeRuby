@@ -69,7 +69,6 @@ class GameInteraction
       # Give the feel that the computer is thinking of the next move:
       display_thinking_process(symbol_of_current_player)
     end
-    
     record_last_move(current_player, spot) if record_last_moves
     tile = @game_board.board[spot]
     @game_board.update_board(spot, symbol_of_current_player)
@@ -187,7 +186,7 @@ class GameInteraction
         spot = return_result.index_of_board
       end
     end
-    return spot
+    result = spot
   end
 
   def get_computers_spot
