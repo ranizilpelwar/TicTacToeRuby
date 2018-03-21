@@ -6,13 +6,10 @@ class PlayerMovementManager
 
 # Type of Match being played determines which player moves are reverted (one or both).
   def initialize(type_of_match)
-    if type_of_match == nil
-      raise ArgumentError, 'Type of match is null.' 
-    else
+    raise ArgumentError, "Type of match is null." if type_of_match == nil
       @player1_last_move = -1
       @player2_last_move = -1
       @match_type = type_of_match
-    end
   end
 
   def raise_argument_error_for_invalid_player_number(player_number)
