@@ -7,7 +7,7 @@ class PlayerMovementManager
 # Type of Match being played determines which player moves are reverted (one or both).
   def initialize(type_of_match)
     if type_of_match == nil
-    raise ArgumentError, 'Type of match is null.' 
+      raise ArgumentError, 'Type of match is null.' 
     else
       @player1_last_move = -1
       @player2_last_move = -1
@@ -22,9 +22,7 @@ class PlayerMovementManager
 
   def raise_argument_error_for_invalid_move(updated_move)
     raise ArgumentError, "updated_move is nil." if updated_move.nil?
-    if updated_move < 0 || updated_move > LARGEST_INDEX
-      raise ArgumentError, "Updated move must correspond to a valid index on the board."
-    end
+    raise ArgumentError, "Updated move must correspond to a valid index on the board." if updated_move < 0 || updated_move > LARGEST_INDEX
   end
 
   def get_last_move_for_player(player_number)
