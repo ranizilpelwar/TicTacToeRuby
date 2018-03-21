@@ -31,8 +31,11 @@ class GamePlaySetup
   end
 
   def display_introductory_message
-    writer.display_message("Welcome to Tic Tac Toe!")
-    writer.display_message("Let's play a game!\n")
+    @writer.clear_screen
+    @writer.display_message("Welcome to Tic Tac Toe!")
+    @writer.display_message("\n")
+    @writer.display_message("Let's play a game!")
+    @writer.display_message("\n")
   end
 
   def setup_match

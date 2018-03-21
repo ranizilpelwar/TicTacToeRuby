@@ -117,7 +117,7 @@ class GameInteraction
     @writer.display_text("#{player1_symbol} [ #{player1_type} ], ")
     @writer.display_text("#{player2_symbol} [ #{player2_type} ]")
     @writer.display_message("\n")
-    @writer.display_message("")
+    @writer.display_message("\n")
   end
 
   def show_the_board
