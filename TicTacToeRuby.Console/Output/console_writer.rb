@@ -13,7 +13,7 @@ class ConsoleWriter
   end
 
   def clear_screen
-    system ('clear')
+    system "cls"
   end
 
   # Displays the provided text without adding a new line
