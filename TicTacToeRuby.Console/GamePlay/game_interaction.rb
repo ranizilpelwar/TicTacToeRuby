@@ -108,9 +108,9 @@ class GameInteraction
 
   def show_the_players
     @writer.display_text("Players: ")
-    player1_type = player1.type
+    player1_type = player1.type.selected_option
     player1_symbol = player1.symbol
-    player2_type = player2.type
+    player2_type = player2.type.selected_option
     player2_symbol = player2.symbol
     @writer.display_text("#{player1_symbol} [ #{player1_type} ], ")
     @writer.display_text("#{player2_symbol} [ #{player2_type} ]\n")
