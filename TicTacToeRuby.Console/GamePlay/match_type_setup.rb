@@ -24,7 +24,8 @@ class MatchTypeSetup
   end
 
   def self.prompt_for_match_type_selection(writer, match_type_manager)
-    writer.display_message("Who is playing? Please select one of the matches below:\n")
+    writer.display_message("Who is playing? Please select one of the matches below:")
+    writer.display_message("\n")
     type = 1
     match_type_manager.matches.each { |match|  
       player1_type_selection = match.player1_type.selected_option
