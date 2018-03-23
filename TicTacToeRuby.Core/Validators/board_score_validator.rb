@@ -1,4 +1,4 @@
-class BoardScoreValidator
+module BoardScoreValidator
   def self.evaluate_score_of_board(board, symbol_of_current_player, symbol_of_other_player)
     raise ArgumentError, "Cannot evaluate score of board because board is nil." if board.nil?
     raise ArgumentError, "Cannot evaluate score of board because symbol_of_current_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_current_player)

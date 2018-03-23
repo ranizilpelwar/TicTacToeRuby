@@ -1,4 +1,4 @@
-class AvailableSpacesValidator
+module AvailableSpacesValidator
 
   # Returns a list of indexes on the board where possible moves can be made.
   def self.get_available_spaces(board)

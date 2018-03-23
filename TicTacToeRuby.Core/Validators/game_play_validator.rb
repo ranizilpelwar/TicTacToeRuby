@@ -3,7 +3,7 @@ require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator
 require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/player_symbol_validator.rb'
 
-class GamePlayValidator
+module GamePlayValidator
 
   # Returns an array containing two elements:
   # 1) is_valid: True if the tile chosen on the board is a valid move that can be made in the game and false otherwise, and

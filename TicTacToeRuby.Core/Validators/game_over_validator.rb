@@ -1,6 +1,6 @@
 require_relative '../Validators/player_symbol_validator.rb'
 
-class GameOverValidator
+module GameOverValidator
   def self.game_over?(board)
     raise ArgumentError, "Cannot determine if game is over because provided board is nil." if board.nil?
     result =  board[0] == board[1] && board[1] == board[2] ||
