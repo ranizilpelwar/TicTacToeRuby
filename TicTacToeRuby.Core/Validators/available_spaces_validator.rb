@@ -10,7 +10,7 @@ class AvailableSpacesValidator
         available_spaces.push(index)
       end
     end
-    return available_spaces
+    result = available_spaces
   end
 
   # Note: A negative number is not a valid digit in this game.
