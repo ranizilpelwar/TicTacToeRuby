@@ -9,4 +9,12 @@ task :run_tests do
   ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_match_type_manager.rb'
   ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_game_board.rb'
   ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_computer_actions.rb'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_available_spaces_validation.rb'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_board_score_validation_parameterized_tests'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_board_score_validation'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_game_over_validation'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_game_play_validation'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_player_selection_validation'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_player_symbol_validation'
+  ruby 'TicTacToeRuby.Core.UnitTests/GamePlay/tc_tie_game_validation'
 end
