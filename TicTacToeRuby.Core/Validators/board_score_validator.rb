@@ -5,21 +5,21 @@ class BoardScoreValidator
     raise ArgumentError, "Cannot evaluate score of board because symbol_of_other_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_other_player)
     
     score = 0
-    # Score for each row on board:
-    score = score + evaluate_score_of_line(board, [0, 1, 2], symbol_of_current_player, symbol_of_other_player)
-    score = score + evaluate_score_of_line(board, [3, 4, 5], symbol_of_current_player, symbol_of_other_player)
-    score = score + evaluate_score_of_line(board, [6, 7, 8], symbol_of_current_player, symbol_of_other_player)
-    
-    # Score for each column on board
-    score = score + evaluate_score_of_line(board, [0, 3, 6], symbol_of_current_player, symbol_of_other_player)
-    score = score + evaluate_score_of_line(board, [1, 4, 7], symbol_of_current_player, symbol_of_other_player)
-    score = score + evaluate_score_of_line(board, [2, 5, 8], symbol_of_current_player, symbol_of_other_player)
 
-    # Score for diagonal from left side
-    score = score + evaluate_score_of_line(board, [0, 4, 8], symbol_of_current_player, symbol_of_other_player)
+    [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ].each do |row|
+      score = score + evaluate_score_of_line(board, row, symbol_of_current_player, symbol_of_other_player)
+    end
 
-    # Score for diagonal from right side
-    score = score + evaluate_score_of_line(board, [2, 4, 6], symbol_of_current_player, symbol_of_other_player)
+    result = score
   end
 
   def self.evaluate_score_of_line(board, indexes, symbol_of_current_player, symbol_of_other_player)
