@@ -32,14 +32,6 @@ RSpec.describe "a match" do
     raise message if player1_type != :Computer && player2_type != :Computer
   end
   
-  describe "a game" do 
-
-    it "has three matches available to play" do
-      raise if match_manager.get_total_available_matches != 3
-    end
-
-  end
-
   def match_manager
     MatchTypeManager.new
   end
