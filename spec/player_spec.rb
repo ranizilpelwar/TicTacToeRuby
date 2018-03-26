@@ -8,14 +8,28 @@ RSpec.describe "a player" do
 	end
 
   describe "symbol" do
-    it "can have alpha characters" do
-      raise if !symbol_valid?("a")
-    end
     it "is one character long" do
       raise if symbol_valid?("ab")
     end
-    it "does not have numbers in it" do
+    
+    it "can be an alpha character" do
+      raise if !symbol_valid?("a")
+    end
+
+    it "can be a keyboard symbol" do
+      raise if !symbol_valid?("$")
+    end
+
+    it "cannot be a number" do
       raise if symbol_valid?("1")
+    end
+
+    it "cannot be a space character" do
+      raise if symbol_valid?(" ")
+    end
+
+    it "cannot be an empty character" do
+      raise if symbol_valid?("")
     end
   end
 
@@ -25,11 +39,16 @@ RSpec.describe "a player" do
 
 	describe "type" do
 	  it "can be a computer" do
-	    raise if player_type_option(:Computer) != :Computer 
+	    raise if player_type(:Computer).selected_option != :Computer 
 	  end
+
 	  it "can be a human" do
-	    raise if player_type_option(:Human) != :Human 
+	    raise if player_type(:Human).selected_option != :Human 
 	  end
+
+    it "cannot be a robot" do
+      raise if PlayerType.valid?(:Robot)
+    end
   end
 
 
@@ -44,8 +63,8 @@ RSpec.describe "a player" do
     PlayerSymbolValidator.valid?(symbol)
   end
 
-  def player_type_option(type)
-    PlayerType.new(type).selected_option
+  def player_type(type)
+    PlayerType.new(type)
   end
 end
 
