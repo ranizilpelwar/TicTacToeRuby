@@ -23,6 +23,16 @@ RSpec.describe "a Tic Tac Toe board" do
     grid_value = grid[index]
     raise "grid_value = #{grid_value} but expected it to be #{symbol}" if grid_value != symbol
   end
+
+  it "has the original number on a square when a player reverts it" do
+    index = 4
+    original_value = "5"
+    symbol = "X"
+    select_square(index, symbol)
+    revert_square(index)
+    grid_value = grid[index]
+    raise "grid_value = #{grid_value} but expected it to be #{original_value}" if grid_value != original_value
+  end
  
   def game_board 
     player_manager = double()
@@ -37,7 +47,11 @@ RSpec.describe "a Tic Tac Toe board" do
     AvailableSpacesValidator.digit?(input)
   end
 
-  def select_square(index_on_grid, symbol)
-    @game.update_board(index_on_grid, symbol)
+  def select_square(index, symbol)
+    @game.update_board(index, symbol)
+  end
+
+  def revert_square(index)
+    @game.revert_board(index)
   end
 end
