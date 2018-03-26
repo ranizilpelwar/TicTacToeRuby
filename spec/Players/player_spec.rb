@@ -1,6 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/Players/player.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/player_symbol_validator.rb'
+require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 
 RSpec.describe "a player" do
 
@@ -87,6 +88,19 @@ RSpec.describe "a player" do
   end
 end
 
+RSpec.describe "a game" do 
 
+  it "is against two players" do
+    player1 = double()
+    player2 = double()
+    match = match_type(player1, player2)
+    raise if match.player1_type.nil?
+    raise if match.player2_type.nil?
+  end
+
+  def match_type(player1, player2)
+    MatchType.new(player1, player2)
+  end
+end
 
 
