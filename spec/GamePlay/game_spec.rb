@@ -5,8 +5,6 @@ require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/player_selection_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
 require_relative '../../TicTacToeRuby.Console/GamePlay/match_type_setup.rb'
-# require_relative '../../TicTacToeRuby.Console/Output/console_writer.rb'
-# require_relative '../../TicTacToeRuby.Console/Input/console_reader.rb'
 
 RSpec.describe "a game" do 
 
@@ -15,14 +13,10 @@ RSpec.describe "a game" do
   end
 
   it "allows the user to chose the game type" do
-    writer = double("ConsoleWriter", :display_message => "")
-    reader = double("ConsoleReader", :read_input => "1", :read_input_ignore_empty => "1")
-    player1_type = double("PlayerType", :selected_option => :Human)
-    player2_type = double("PlayerType", :selected_option => :Human)
-    match = double("MatchType", :player1_type => player1_type, :player2_type => player2_type)
-    player_type = double("PlayerType", )
-    match_manager = double("MatchTypeManager", :get_total_available_matches => "1", :matches => [match], :valid? => true, :get_match_type => match)
-    match_type = MatchTypeSetup.get_valid_match_type(writer, reader, match_manager)
+    writer = writer_double
+    reader = reader_double
+    match_type_manager = match_type_manager_double
+    match_type = MatchTypeSetup.get_valid_match_type(writer, reader, match_type_manager)
     raise if match_type.nil?
   end
 
@@ -73,15 +67,31 @@ RSpec.describe "a game" do
     raise if manager.get_last_move_for_player(player_number) != updated_move
   end
 
-  def match_manager
-    MatchTypeManager.new
-  end
+def writer_double
+  double("ConsoleWriter", :display_message => "")
+end
 
-  def match_type(player1, player2)
-    MatchType.new(player1, player2)
-  end
+def reader_double
+  double("ConsoleReader", :read_input => "1", :read_input_ignore_empty => "1")
+end
 
-  def movement_manager(match_type)
-    PlayerMovementManager.new(match_type)
-  end
+def match_type_manager_double
+  player1_type = double("PlayerType", :selected_option => :Human)
+  player2_type = double("PlayerType", :selected_option => :Human)
+  match = double("MatchType", :player1_type => player1_type, :player2_type => player2_type)
+  player_type = double("PlayerType", )
+  match_manager = double("MatchTypeManager", :get_total_available_matches => "1", :matches => [match], :valid? => true, :get_match_type => match)
+end
+
+def match_manager
+  MatchTypeManager.new
+end
+
+def match_type(player1_type, player2_type)
+  match = double("MatchType", :player1_type => player1_type, :player2_type => player2_type)
+end
+
+def movement_manager(match_type)
+  PlayerMovementManager.new(match_type)
+end
 end
