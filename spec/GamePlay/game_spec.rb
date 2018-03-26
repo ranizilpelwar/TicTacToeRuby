@@ -2,12 +2,28 @@ require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type_manager.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/player_selection_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
+require_relative '../../TicTacToeRuby.Console/GamePlay/match_type_setup.rb'
+# require_relative '../../TicTacToeRuby.Console/Output/console_writer.rb'
+# require_relative '../../TicTacToeRuby.Console/Input/console_reader.rb'
 
 RSpec.describe "a game" do 
 
   it "has three matches available to play" do
     raise if match_manager.get_total_available_matches != 3
+  end
+
+  it "allows the user to chose the game type" do
+    writer = double("ConsoleWriter", :display_message => "")
+    reader = double("ConsoleReader", :read_input => "1", :read_input_ignore_empty => "1")
+    player1_type = double("PlayerType", :selected_option => :Human)
+    player2_type = double("PlayerType", :selected_option => :Human)
+    match = double("MatchType", :player1_type => player1_type, :player2_type => player2_type)
+    player_type = double("PlayerType", )
+    match_manager = double("MatchTypeManager", :get_total_available_matches => "1", :matches => [match], :valid? => true, :get_match_type => match)
+    match_type = MatchTypeSetup.get_valid_match_type(writer, reader, match_manager)
+    raise if match_type.nil?
   end
 
   it "is against two players" do
@@ -16,6 +32,13 @@ RSpec.describe "a game" do
     match = match_type(player1, player2)
     raise if match.player1_type.nil?
     raise if match.player2_type.nil?
+  end
+
+  it "allows the user to choose which player goes first" do
+    symbol1 = "X"
+    symbol2 = "Y"
+    selection = "X"
+    raise if !PlayerSelectionValidator.valid?(selection, symbol1, symbol2)
   end
 
   it "can end in a win when a player has three squares in a row" do
