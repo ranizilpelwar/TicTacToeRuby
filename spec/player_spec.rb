@@ -1,10 +1,11 @@
 require_relative '../TicTacToeRuby.Core/Players/player.rb'
 require_relative '../TicTacToeRuby.Core/Players/player_type.rb'
+require_relative '../TicTacToeRuby.Core/Validators/player_symbol_validator.rb'
 
 RSpec.describe "a player" do
 
 	it "has a symbol" do
-		raise if player("Human", "X").symbol != "X" 
+		raise if player(:Human, "X").symbol != "X" 
 	end
 
   describe "symbol" do
@@ -34,7 +35,7 @@ RSpec.describe "a player" do
   end
 
 	it "has a type" do
-		raise if player("Human", "X").type != "Human"
+		raise if player(:Human, "X").type != :Human
 	end
 
 	describe "type" do
@@ -51,7 +52,25 @@ RSpec.describe "a player" do
     end
   end
 
+  describe "two players" do
+    context "with the same type and symbol" do
+      it "are equal" do
+        raise if !player(:Human, "X").equals?(player(:Human, "X"))
+      end
+    end
 
+    context "with the same type and a different symbol" do
+      it "are not equal" do
+        raise if player(:Human, "X").equals?(player(:Human, "Y"))
+      end
+    end
+
+    context "with a different type and same symbol" do
+      it "are not equal" do
+        raise if player(:Human, "X").equals?(player(:Computer, "X"))
+      end
+    end
+  end
 
 # Automation Logic
   
