@@ -45,8 +45,16 @@ RSpec.describe "a board score validator" do
       expect{ BoardScoreValidator.evaluate_score_of_line(board, [], "X", "1") }.to raise_error(ArgumentError)
     end
 
-    include_examples "score of line", "1", ["O", "O", "O", "O", "5", "O", "7", "O", "X"], [0, 1, 2], 100
-    
+    include_examples "score of line", 1, ["O", "O", "O", "O", "5", "O", "7", "O", "X"], [0, 1, 2], 100
+    include_examples "score of line", 2, ["1", "O", "O", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], 10
+    include_examples "score of line", 3, ["1", "O", "3", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], 1
+    include_examples "score of line", 4, ["1", "2", "O", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], 1
+    include_examples "score of line", 5, ["X", "X", "X", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], -100
+    include_examples "score of line", 6, ["1", "X", "X", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], -10
+    include_examples "score of line", 7, ["1", "X", "3", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], -1
+    include_examples "score of line", 8, ["1", "2", "X", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], -1
+    include_examples "score of line", 9, ["1", "2", "3", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], 0
+    include_examples "score of line", 10, ["X", "O", "X", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], 0
   end
 
 
