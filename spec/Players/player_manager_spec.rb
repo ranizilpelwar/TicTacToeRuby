@@ -13,6 +13,14 @@ RSpec.describe "a player manager" do
     it "sets player1 to the given value" do
       expect(@player_manager.player1).to eq(@player1)
     end
+
+    it "sets player2 to the given value" do
+      expect(@player_manager.player2).to eq(@player2)
+    end
+
+    it "sets current player to the first player provided" do
+      expect(@player_manager.current_player).to eq(@player1)
+    end
   end
 
   context "method called get_next_player" do
