@@ -20,7 +20,7 @@ class TestPlayerType < Test::Unit::TestCase
     assert_equal(expected_option, playerType.selected_option, 'Computer should be selected.')
   end
 
-  def test_player_type_initialization_returns_false_when_created_as_a_robot
+  def test_player_type_initialization_raises_PlayerTypeError_when_created_as_a_robot
 
     assert_raises(PlayerTypeError) { PlayerType.new(:Robot) }
   end
