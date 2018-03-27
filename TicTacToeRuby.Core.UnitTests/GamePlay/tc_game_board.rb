@@ -11,7 +11,7 @@ class TestGameBoard < Test::Unit::TestCase
     @game_board = GameBoard.new(@player_manager, @board)
   end
 
-  def test_initialize_will_raise_an_exception_when_player_manager_is_nil
+  def test_initialize_will_raise_an_ArgumentError_when_player_manager_is_nil
     assert_raises(ArgumentError) do GameBoard.new(nil) end
   end
 
@@ -38,6 +38,10 @@ class TestGameBoard < Test::Unit::TestCase
   end
 
   def test_update_board_raises_argument_error_when_index_is_greater_than_length_of_board
+    assert_raises(ArgumentError) do @game_board.update_board(11, "X") end
+  end
+
+  def test_update_board_raises_argument_error_when_index_is_negative
     assert_raises(ArgumentError) do @game_board.update_board(-1, "X") end
   end
 
@@ -56,11 +60,15 @@ class TestGameBoard < Test::Unit::TestCase
     assert(result == [], "Expected boards to have same contents, but difference was: #{result}")
   end
 
-  def test_rever_board_raises_argument_error_when_index_is_length_of_board
+  def test_revert_board_raises_argument_error_when_index_is_length_of_board
     assert_raises(ArgumentError) do @game_board.revert_board(9, "X") end
   end
 
   def test_revert_board_raises_argument_error_when_index_is_greater_than_length_of_board
+    assert_raises(ArgumentError) do @game_board.revert_board(11, "X") end
+  end
+
+  def test_revert_board_raises_argument_error_when_index_is_negative
     assert_raises(ArgumentError) do @game_board.revert_board(-1, "X") end
   end
 
