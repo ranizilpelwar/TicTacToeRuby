@@ -17,3 +17,8 @@ Terminal command: gem list
 - Will show you all the gems you have installed.
 Terminal command: gem env
 - Will show you all the environment information including paths to your rubies and gems.
+
+
+NOTES ON RSPEC:
+To run Rspec files, use the following command at the command prompt at the top-level directory:
+rspec -P "spec/*/*_spec.rb"
