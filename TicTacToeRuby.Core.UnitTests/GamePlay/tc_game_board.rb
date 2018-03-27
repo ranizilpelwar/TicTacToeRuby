@@ -50,17 +50,7 @@ class TestGameBoard < Test::Unit::TestCase
   end
 
   def test_the_only_spot_on_the_board_that_is_updated_is_at_the_provided_index
-    expected_board = []
-    expected_board << "X"
-    expected_board << "2"
-    expected_board << "3"
-    expected_board << "4"
-    expected_board << "5"
-    expected_board << "6"
-    expected_board << "7"
-    expected_board << "8"
-    expected_board << "9"
-    
+    expected_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]    
     @game_board.update_board(0, "X")
     result = @game_board.board - expected_board
     assert(result == [], "Expected boards to have same contents, but difference was: #{result}")
