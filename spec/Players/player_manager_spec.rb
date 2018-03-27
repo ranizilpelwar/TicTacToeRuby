@@ -9,6 +9,12 @@ RSpec.describe "a player manager" do
     @player_manager = PlayerManager.new(@player1, @player2)
   end
 
+  context "intialization" do
+    it "sets player1 to the given value" do
+      expect(@player_manager.player1).to eq(@player1)
+    end
+  end
+
   context "method called get_next_player" do
     it "returns the correct next player" do
       player = @player_manager.get_next_player
