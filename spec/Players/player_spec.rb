@@ -82,7 +82,7 @@ RSpec.describe "a player" do
     end
   end
 
-  describe "method called initialize" do
+  describe "intialization" do
     it "raises an ArgumentError when an invalid symbol is passed in" do
       expect{ Player.new(:Human, " ") }.to raise_error(ArgumentError)
     end
