@@ -82,6 +82,16 @@ RSpec.describe "a player" do
     end
   end
 
+  describe "method called initialize" do
+    it "raises an ArgumentError when an invalid symbol is passed in" do
+      expect{ Player.new(:Human, " ") }.to raise_error(ArgumentError)
+    end
+
+    it "raises an ArgumentError when type is nil" do
+      expect{ Player.new(nil, " ") }.to raise_error(ArgumentError)
+    end
+  end
+
 # Automation Logic
   
   def player(type, symbol)
