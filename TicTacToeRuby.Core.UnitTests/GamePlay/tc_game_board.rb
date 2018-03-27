@@ -67,19 +67,8 @@ class TestGameBoard < Test::Unit::TestCase
   def test_the_only_spot_on_the_board_that_is_reverted_is_at_the_provided_index
     # first, update the board
     @game_board.update_board(0, "X")
-
     # then, revert the board
-    expected_board = []
-    expected_board << "1"
-    expected_board << "2"
-    expected_board << "3"
-    expected_board << "4"
-    expected_board << "5"
-    expected_board << "6"
-    expected_board << "7"
-    expected_board << "8"
-    expected_board << "9"
-    
+    expected_board = GameBoard.create_board
     @game_board.revert_board(0)
     result = @game_board.board - expected_board
     assert(result == [], "Expected boards to have same contents, but difference was: #{result}")
