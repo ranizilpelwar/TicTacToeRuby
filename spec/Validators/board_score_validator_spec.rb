@@ -57,5 +57,23 @@ RSpec.describe "a board score validator" do
     include_examples "score of line", 10, ["X", "O", "X", "O", "5", "O", "7", "O", "X" ], [0, 1, 2], 0
   end
 
+  shared_examples "score of board" do |scenario, board, expected_score|
+    it "returns expected score for scenario #{scenario}" do
+      actual_score = BoardScoreValidator.evaluate_score_of_board(board, "O", "X")
+      expect(actual_score).to eq(expected_score)
+    end
+  end
 
+  describe "method called evaluate_score_of_board" do 
+    include_examples "score of board", 1, ["O", "O", "O", "O", "5", "O", "7", "O", "X"], 131
+    include_examples "score of board", 2, ["1", "O", "O", "O", "5", "O", "7", "O", "X"], 31
+    include_examples "score of board", 3, ["1", "O", "3", "O", "5", "O", "7", "O", "X"], 21
+    include_examples "score of board", 4, ["1", "2", "O", "O", "5", "O", "7", "O", "X"], 13
+    include_examples "score of board", 5, ["X", "X", "X", "O", "5", "O", "7", "O", "X"], -101
+    include_examples "score of board", 6, ["1", "X", "X", "O", "5", "O", "7", "O", "X"], -1
+    include_examples "score of board", 7, ["1", "X", "3", "O", "5", "O", "7", "O", "X"], 9
+    include_examples "score of board", 8, ["1", "2", "X", "O", "5", "O", "7", "O", "X"], 9
+    include_examples "score of board", 9, ["1", "2", "3", "O", "5", "O", "7", "O", "X"], 11
+    include_examples "score of board", 10, ["X", "O", "X", "O", "5", "O", "7", "O", "X"], 9
+  end
 end
