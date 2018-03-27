@@ -41,7 +41,7 @@ RSpec.describe "a match type manager" do
     end
   end
 
-  context "method valid" do
+  context "method called valid" do
     it "returns false when match number is four" do
       match_type_manager = MatchTypeManager.new
       expect(match_type_manager.valid?(4)).to be false
