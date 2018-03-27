@@ -4,8 +4,6 @@ require_relative '../../TicTacToeRuby.Core/Validators/player_symbol_validator.rb
 
 RSpec.describe "a player" do
 
-  let(:player) { Player.new(type, symbol) }
-  
 	it "has a symbol" do
 		expect(player(:Human, "X").symbol).to eq("X") 
 	end
