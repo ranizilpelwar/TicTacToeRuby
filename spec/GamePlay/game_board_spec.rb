@@ -8,44 +8,44 @@ RSpec.describe "a game board" do
     @game_board = GameBoard.new(@player_manager, @board)
   end
 
-  context "create board" do
-    it "will create a nine element board" do
+  context "method called create board" do
+    it "creates a nine element board" do
       expect(@board.length).to eq(9)
     end
   end
 
-  context "initialize" do
-    it "will raise an ArgumentError when player manager is nil" do
+  context "initialization" do
+    it "raises an ArgumentError when player manager is nil" do
       expect{ GameBoard.new(nil) }.to raise_error(ArgumentError)
     end
 
-    it "will set the board to the provided parameter" do
+    it "sets the board to the provided parameter" do
       expect(@game_board.board).to eq(@board)
     end
 
-    it "will set the player manager to the provided parameter" do
+    it "sets the player manager to the provided parameter" do
       expect(@game_board.player_manager).to eq(@player_manager)
     end
   end
 
-  context "update board" do
-    it "will raise an ArgumentError when the game piece is nil" do
+  context "method called update board" do
+    it "raises an ArgumentError when the game piece is nil" do
       expect{ @game_board.update_board(0, nil) }.to raise_error(ArgumentError)
     end
 
-    it "will raise an ArgumentError when the index is the length of the board" do
+    it "raises an ArgumentError when the index is the length of the board" do
       expect{ @game_board.update_board(9, "X") }.to raise_error(ArgumentError)
     end
 
-    it "will raise an ArgumentError when the index is greater than the length of the board" do
+    it "raises an ArgumentError when the index is greater than the length of the board" do
       expect { @game_board.update_board(11, "X") }.to raise_error(ArgumentError)
     end
 
-    it "will raise an ArgumentError when the index is negative" do
+    it "raises an ArgumentError when the index is negative" do
       expect { @game_board.update_board(-1, "X") }.to raise_error(ArgumentError)
     end
 
-    it "will update a location on the board with the provided symbol" do
+    it "updates a location on the board with the provided symbol" do
       index_on_board = 0
       player_symbol = "X"
       @game_board.update_board(index_on_board, player_symbol)
@@ -53,7 +53,7 @@ RSpec.describe "a game board" do
       expect(stored_symbol_at_index).to eq(player_symbol)
     end
 
-    it "will only update the provided location on the board" do
+    it "updates only the provided location on the board" do
       expected_board = ["X", "2", "3", "4", "5", "6", "7", "8", "9"]    
       @game_board.update_board(0, "X")
       result = @game_board.board - expected_board
@@ -61,16 +61,16 @@ RSpec.describe "a game board" do
     end
   end
 
-  context "revert board" do
-    it "will raise an ArgumentError when the index is the length of the board" do
+  context "method called revert board" do
+    it "raises an ArgumentError when the index is the length of the board" do
       expect{ @game_board.revert_board(9, "X") }.to raise_error(ArgumentError)
     end
 
-    it "will raise an ArgumentError when the index is greater than the length of the board" do
+    it "raises an ArgumentError when the index is greater than the length of the board" do
       expect{ @game_board.revert_board(11, "X") }.to raise_error(ArgumentError)
     end
 
-    it "will raise an ArgumentError when the index is negative" do
+    it "raises an ArgumentError when the index is negative" do
       expect{ @game_board.revert_board(-1, "X") }.to raise_error(ArgumentError)
     end
 
