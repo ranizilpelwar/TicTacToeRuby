@@ -8,23 +8,20 @@ RSpec.describe "an available spaces validator" do
     end
   end
 
-  context "method called digit?" do
-    it "returns false for an alpha character" do
-      value = "A"
+  shared_examples "digit?" do |description, value, expected|
+    it "returns #{expected} for #{description}" do
       result = AvailableSpacesValidator.digit?(value)
-      expect(result).to be false
-    end
-
-    it "returns false for a space character" do
-      value = " "
-      result = AvailableSpacesValidator.digit?(value)
-      expect(result).to be false
-    end
-
-    it "returns true for a single digit" do
-      value = " "
-      result = AvailableSpacesValidator.digit?(value)
-      expect(result).to be false
+      expect(result).to be expected
     end
   end
+
+  describe "method called digit?" do
+    include_examples "digit?", "a single digit", "1", true
+    include_examples "digit?", "an alpha character", "A", false
+    include_examples "digit?", "a space character", " ", false
+    include_examples "digit?", "a dual digit character", "11", true
+    include_examples "digit?", "a zero", "0", true
+    include_examples "digit?", "a negative number", "-1", false
+  end
+
 end
