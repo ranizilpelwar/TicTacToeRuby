@@ -32,30 +32,28 @@ class ComputerActions
       next_moves.each do |move|
 	      tile = board[move]
         board[move] = player_symbol
-      	if player_symbol == current_player
-          i_won = GameOverValidator.win_for_player?(player_symbol, board)
-      	  if i_won 
-            # An early win has an advantage:
-      	    current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
-      	  else
-      	    current_score = get_best_move(board, other_player, depth - 1, best_max_value, best_min_value).score
-          end
+        win_exists = GameOverValidator.win_for_player?(player_symbol, board)
+        if player_symbol == current_player 
+          opposing_symbol = other_player
+        else
+          opposing_symbol = current_player
+        end
+    	  if win_exists
+          # An early win or block has an advantage:
+    	    current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
+    	  else
+    	    current_score = get_best_move(board, opposing_symbol, depth - 1, best_max_value, best_min_value).score
+        end
+        if player_symbol == current_player
           if current_score > best_max_value
             best_max_value = current_score
             best_move = move
       	  end
-      	else
-    	    he_won = GameOverValidator.win_for_player?(player_symbol, board)
-    	    if he_won
-            # A block is an advantage:
-    	      current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
-    	    else
-            current_score = get_best_move(board, current_player, depth - 1, best_max_value, best_min_value).score
-    	    end
-    	    if current_score < best_min_value
-    	      best_min_value = current_score
-    	      best_move = move
-    	    end
+        else
+          if current_score < best_min_value
+            best_min_value = current_score
+            best_move = move
+          end
       	end
     	  #Reset the board tile:
         board[move] = tile
