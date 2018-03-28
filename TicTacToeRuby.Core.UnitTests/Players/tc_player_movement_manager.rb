@@ -12,7 +12,7 @@ class TestPlayerMovementManager < Test::Unit::TestCase
     @player_movement_manager = PlayerMovementManager.new(@type_of_match)
   end
 
-  def test_initialize_raises_an_exception_when_type_of_match_is_null
+  def test_initialize_raises_an_exception_when_type_of_match_is_nil
     type_of_match = nil
     assert_raises(ArgumentError) { PlayerMovementManager.new(type_of_match) }
   end
@@ -29,15 +29,15 @@ class TestPlayerMovementManager < Test::Unit::TestCase
     assert_equal(@type_of_match, @player_movement_manager.match_type, "Match types should be the same")
   end
 
-  def test_get_last_move_for_player_throws_exception_when_player_number_is_zero
+  def test_get_last_move_for_player_raises_ArgumentError_when_player_number_is_zero
     assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(0) }
   end  
 
-  def test_get_last_move_for_player_throws_exception_when_player_number_is_negative
+  def test_get_last_move_for_player_raises_ArgumentError_when_player_number_is_negative
     assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(-1) }
   end
 
-  def test_get_last_move_for_player_throws_exception_when_player_number_is_three
+  def test_get_last_move_for_player_raises_ArgumentError_when_player_number_is_three
     assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(3) }
   end
 
@@ -55,7 +55,7 @@ class TestPlayerMovementManager < Test::Unit::TestCase
     assert_equal(updated_move, @player_movement_manager.get_last_move_for_player(player_number))
   end
 
-  def test_an_exception_is_raised_when_move_is_negative_one
+  def test_raises_ArgumentError_when_move_is_negative_one
     assert_raises(ArgumentError) { @player_movement_manager.raise_argument_error_for_invalid_move(-1) }
   end
 

@@ -5,6 +5,11 @@ require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/player_selection_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
 require_relative '../../TicTacToeRuby.Console/GamePlay/match_type_setup.rb'
+require_relative './doubles.rb'
+
+RSpec.configure do |config|
+  config.include Doubles
+end
 
 RSpec.describe "a game" do 
 
@@ -23,7 +28,7 @@ RSpec.describe "a game" do
   it "is against two players" do
     player1 = double()
     player2 = double()
-    match = match_type(player1, player2)
+    match = match_type_double(player1, player2)
     expect(match.player1_type).to_not be_nil
     expect(match.player2_type).to_not be_nil
   end
@@ -67,32 +72,12 @@ RSpec.describe "a game" do
     stored_value = manager.update_last_move_for_player(player_number, updated_move)
     expect(manager.get_last_move_for_player(player_number)).to eq(updated_move)
   end
-
-  def writer_double
-    double("ConsoleWriter", :display_message => "")
-  end
-
-  def reader_double
-    double("ConsoleReader", :read_input => "1", :read_input_ignore_empty => "1")
-  end
-
-  def match_type_manager_double
-    player1_type = double("PlayerType", :selected_option => :Human)
-    player2_type = double("PlayerType", :selected_option => :Human)
-    match = double("MatchType", :player1_type => player1_type, :player2_type => player2_type)
-    player_type = double("PlayerType", )
-    match_manager = double("MatchTypeManager", :get_total_available_matches => "1", :matches => [match], :valid? => true, :get_match_type => match)
-  end
-
+ 
   def match_manager
     MatchTypeManager.new
   end
 
-  def match_type(player1_type, player2_type)
-    match = double("MatchType", :player1_type => player1_type, :player2_type => player2_type)
-  end
-
   def movement_manager(match_type)
     PlayerMovementManager.new(match_type)
-end
+  end
 end

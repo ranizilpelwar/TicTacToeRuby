@@ -44,16 +44,7 @@ class TestAvailableSpacesValidation < Test::Unit::TestCase
   end
 
   def test_get_available_spaces_contains_one_element_when_there_is_only_one_available_spot_on_the_board
-    board = []
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "9"
+    board = ["X", "X", "X", "X", "X", "X", "X", "X", "9"]
     expected_result = 1
     available_spaces = AvailableSpacesValidator.get_available_spaces(board)
     actual_result = available_spaces.length
@@ -61,16 +52,7 @@ class TestAvailableSpacesValidation < Test::Unit::TestCase
   end
 
   def test_get_available_spaces_contains_expected_index_when_there_is_only_one_available_spot_on_the_board
-    board = []
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "9"
+    board = ["X", "X", "X", "X", "X", "X", "X", "X", "9"]
     expected_result = 8
     available_spaces = AvailableSpacesValidator.get_available_spaces(board)
     actual_result = available_spaces[0]
@@ -78,16 +60,7 @@ class TestAvailableSpacesValidation < Test::Unit::TestCase
   end
 
   def test_get_available_spaces_contains_zero_elements_when_there_are_no_available_spots_on_the_board
-    board = []
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "X"
+    board = ["X", "X", "X", "X", "X", "X", "X", "X", "X"]
     expected_result = 0
     available_spaces = AvailableSpacesValidator.get_available_spaces(board)
     actual_result = available_spaces.length
@@ -95,16 +68,7 @@ class TestAvailableSpacesValidation < Test::Unit::TestCase
   end
 
   def test_get_available_spaces_contains_nine_elements_when_there_are_all_available_spots_on_the_board
-    board = []
-    board << "1"
-    board << "2"
-    board << "3"
-    board << "4"
-    board << "5"
-    board << "6"
-    board << "7"
-    board << "8"
-    board << "9"
+    board = GameBoard.create_board
     expected_result = 9
     available_spaces = AvailableSpacesValidator.get_available_spaces(board)
     actual_result = available_spaces.length
