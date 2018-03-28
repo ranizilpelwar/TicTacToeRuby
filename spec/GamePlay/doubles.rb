@@ -3,8 +3,8 @@ module Doubles
     double("ConsoleWriter", :display_message => "")
   end
 
-  def reader_double
-    double("ConsoleReader", :read_input => "1", :read_input_ignore_empty => "1")
+  def reader_double(input)
+    double("ConsoleReader", :read_input => input, :read_input_ignore_empty => input)
   end
 
   def match_type_manager_double
