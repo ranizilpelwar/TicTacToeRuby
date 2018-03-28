@@ -14,7 +14,7 @@ end
 RSpec.describe "a game interaction" do
   before(:example) do
     @writer = writer_double
-    @reader = reader_double
+    @reader = reader_double("1")
     board = GameBoard.create_board
     player_manager = player_manager_double
     @game_board = GameBoard.new(player_manager, board)
