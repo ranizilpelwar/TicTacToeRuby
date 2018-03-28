@@ -8,128 +8,47 @@ class TestGameOverValidation < Test::Unit::TestCase
   end
 
   def test_game_is_over_when_first_row_on_board_contains_matching_tiles
-    board = []
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "4"
-    board << "5"
-    board << "6"
-    board << "7"
-    board << "8"
-    board << "9"
+    board = ["X", "X", "X", "X", "4", "5", "6", "7", "8", "9"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_over_when_middle_row_on_board_contains_matching_tiles
-    board = []
-    board << "1"
-    board << "2"
-    board << "3"
-    board << "X"
-    board << "X"
-    board << "X"
-    board << "7"
-    board << "8"
-    board << "9"
+    board = ["1", "2", "3", "X", "X", "X", "7", "8", "9"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_over_when_last_row_on_board_contains_matching_tiles
-    board = []
-    board << "1"
-    board << "2"
-    board << "3"
-    board << "4"
-    board << "5"
-    board << "6"
-    board << "X"
-    board << "X"
-    board << "X"
+    board = ["1", "2", "3", "4", "5", "6", "X", "X", "X"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_over_when_first_column_on_board_contains_matching_tiles
-    board = []
-    board << "X"
-    board << "2"
-    board << "3"
-    board << "X"
-    board << "5"
-    board << "6"
-    board << "X"
-    board << "8"
-    board << "9"
+    board = ["X", "2", "3", "X", "5", "6", "X", "8", "9"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_over_when_last_column_on_board_contains_matching_tiles
-    board = []
-    board << "1"
-    board << "2"
-    board << "X"
-    board << "4"
-    board << "5"
-    board << "X"
-    board << "7"
-    board << "8"
-    board << "X"
+    board = ["1", "2", "X", "4", "5", "X", "7", "8", "X"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_over_when_middle_column_on_board_contains_matching_tiles
-    board = []
-    board << "1"
-    board << "X"
-    board << "3"
-    board << "4"
-    board << "X"
-    board << "6"
-    board << "7"
-    board << "X"
-    board << "9"
+    board = ["1", "X", "3", "4", "X", "6", "7", "X", "9"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_over_when_left_to_right_diagonal_on_board_contains_matching_tiles
-    board = []
-    board << "X"
-    board << "2"
-    board << "3"
-    board << "4"
-    board << "X"
-    board << "6"
-    board << "7"
-    board << "8"
-    board << "X"
+    board = ["X", "2", "3", "4", "X", "6", "7", "8", "X"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_over_when_right_to_left_diagonal_on_board_contains_matching_tiles
-    board = []
-    board << "1"
-    board << "2"
-    board << "X"
-    board << "4"
-    board << "X"
-    board << "6"
-    board << "X"
-    board << "8"
-    board << "9"
+    board = ["1", "2", "X", "4", "X", "6", "X", "8", "9"]
     assert(GameOverValidator.game_over?(board), "Expected detection of game over.")
   end
 
   def test_game_is_not_over_when_there_are_no_matching_tiles_on_board
-    board = []
-    board << "1"
-    board << "2"
-    board << "3"
-    board << "4"
-    board << "X"
-    board << "6"
-    board << "X"
-    board << "8"
-    board << "9"
+    board = ["1", "2", "3", "4", "X", "6", "X", "8", "9"]
     assert(!GameOverValidator.game_over?(board), "Expected game over to be false.")
   end
 
