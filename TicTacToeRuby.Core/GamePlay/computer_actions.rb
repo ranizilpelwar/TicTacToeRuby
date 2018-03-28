@@ -34,14 +34,13 @@ class ComputerActions
         board[move] = player_symbol
 
         #Refactored:
-        if player_symbol == current_player
-          i_won = GameOverValidator.win_for_player?(player_symbol, board)
+        win_exists = GameOverValidator.win_for_player?(player_symbol, board)
+        if player_symbol == current_player 
           opposing_symbol = other_player
         else
-          he_won = GameOverValidator.win_for_player?(player_symbol, board)
           opposing_symbol = current_player
         end
-    	  if i_won || he_won
+    	  if win_exists
           # An early win or block has an advantage:
     	    current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
     	  else
