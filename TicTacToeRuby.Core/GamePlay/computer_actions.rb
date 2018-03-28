@@ -32,8 +32,6 @@ class ComputerActions
       next_moves.each do |move|
 	      tile = board[move]
         board[move] = player_symbol
-
-        #Refactored:
         win_exists = GameOverValidator.win_for_player?(player_symbol, board)
         if player_symbol == current_player 
           opposing_symbol = other_player
@@ -51,48 +49,12 @@ class ComputerActions
             best_max_value = current_score
             best_move = move
       	  end
-        else #player_symbol = other_player:
+        else
           if current_score < best_min_value
             best_min_value = current_score
             best_move = move
           end
       	end
-         
-    	    
-    	    
-    	    
-      	
-
-
-
-        #Original:
-        # if player_symbol == current_player
-        #   i_won = GameOverValidator.win_for_player?(player_symbol, board)
-        #   if i_won 
-        #     # An early win has an advantage:
-        #     current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
-        #   else
-        #     current_score = get_best_move(board, other_player, depth - 1, best_max_value, best_min_value).score
-        #   end
-        #   if current_score > best_max_value
-        #     best_max_value = current_score
-        #     best_move = move
-        #   end
-        # else #player_symbol = other_player
-        #   he_won = GameOverValidator.win_for_player?(player_symbol, board)
-        #   if he_won
-        #     # A block is an advantage:
-        #     current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
-        #   else
-        #     current_score = get_best_move(board, current_player, depth - 1, best_max_value, best_min_value).score
-        #   end
-        #   if current_score < best_min_value
-        #     best_min_value = current_score
-        #     best_move = move
-        #   end
-        # end
-
-
     	  #Reset the board tile:
         board[move] = tile
     	  #Stop traversing more nodes in this branch:
