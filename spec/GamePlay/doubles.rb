@@ -19,4 +19,7 @@ module Doubles
     match = double("MatchType", :player1_type => player1_type, :player2_type => player2_type)
   end
 
+  def player_manager_double
+    manager = MockPlayerManager.new
+  end
 end
