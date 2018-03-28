@@ -21,5 +21,5 @@ Terminal command: gem env
 
 NOTES ON RSPEC:
 To run Rspec files, use the following command at the command prompt at the top-level directory:
-rspec --color --format doc -P "spec/*/*_spec.rb"
+rspec --color --format doc -P "spec/\*/\*_spec.rb"
 
