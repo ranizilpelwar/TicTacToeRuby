@@ -1,5 +1,5 @@
-module BoardScoreValidator
-  def self.evaluate_score_of_board(board, symbol_of_current_player, symbol_of_other_player)
+module BoardScoreEvaluator
+  def self.score_of_board(board, symbol_of_current_player, symbol_of_other_player)
     raise ArgumentError, "Cannot evaluate score of board because board is nil." if board.nil?
     raise ArgumentError, "Cannot evaluate score of board because symbol_of_current_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_current_player)
     raise ArgumentError, "Cannot evaluate score of board because symbol_of_other_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_other_player)
@@ -22,7 +22,7 @@ module BoardScoreValidator
     result = score
   end
 
-  def self.evaluate_score_of_line(board, indexes, symbol_of_current_player, symbol_of_other_player)
+  def self.score_of_line(board, indexes, symbol_of_current_player, symbol_of_other_player)
     raise ArgumentError, "Cannot evaluate score of line because board is nil." if board.nil?
     raise ArgumentError, "Cannot evaluate score of line because indexes is nil." if indexes.nil?
     raise ArgumentError, "Cannot evaluate score of line because symbol_of_current_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_current_player)
