@@ -2,9 +2,9 @@ require_relative 'game_board.rb'
 require_relative 'weighted_move.rb'
 require_relative '../Players/player_manager.rb'
 require_relative '../Validators/available_spaces_validator.rb'
-require_relative '../Validators/board_score_evaluator.rb'
 require_relative '../Validators/game_over_validator.rb'
 require_relative '../Validators/player_symbol_validator.rb'
+require_relative '../Evaluators/board_score_evaluator.rb'
 
 class ComputerActions
   attr_reader :current_player, :other_player, :game_board
