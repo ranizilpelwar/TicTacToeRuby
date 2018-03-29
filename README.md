@@ -1,12 +1,14 @@
 # TicTacToeRuby
 Tic Tac Toe console game built using Ruby
 
-Unit Tests:
-To run the unit tests, change directory ("cd") to the unit tests folder and execute the rake file on a terminal prompt using the following command: 
+NOTES ON RUNNING TESTS:
+On the top-level parent folder, execute the following commands on the terminal prompt:
+- FOR UNIT TESTS:
 rake run_tests
-
-The file is located in the UnitTests folder. There is one set of tests for the Core logic in
-folder: TicTacToeRuby.Core.UnitTests
+- FOR RSPEC TESTS: ('\' is displaying in the readme file to dislay the * in the html readme file only)
+rspec --color --format doc -P "spec/\*/\*_spec.rb"
+-- If copy-pasting from Readme file, use this:
+rspec --color --format doc -P "spec/*/*_spec.rb"
 
 NOTES ON GEMS:
 Tuples:
@@ -18,8 +20,4 @@ Terminal command: gem list
 Terminal command: gem env
 - Will show you all the environment information including paths to your rubies and gems.
 
-
-NOTES ON RSPEC:
-To run Rspec files, use the following command at the command prompt at the top-level directory:
-rspec --color --format doc -P "spec/\*/\*_spec.rb"
 
