@@ -27,7 +27,7 @@ class ComputerActions
     if next_moves.size == 0 || depth == 0
       current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player)
       move = WeightedMove.new(best_move, current_score)
-      return move
+      #return move
     else
       if player_symbol == current_player 
           opposing_symbol = other_player
@@ -61,14 +61,18 @@ class ComputerActions
     	  #Stop traversing more nodes in this branch:
     	  break if best_max_value >= best_min_value
       end
+      if player_symbol == current_player
+        score = best_max_value
+      else
+        score = best_min_value
+      end
+      weighted_move = WeightedMove.new(best_move, score)
+      #return weighted_move
     end
-    if player_symbol == current_player
-      score = best_max_value
-    else
-      score = best_min_value
-    end
-    weighted_move = WeightedMove.new(best_move, score)
-    return weighted_move
+
+
+
+    
   end
 end
 
