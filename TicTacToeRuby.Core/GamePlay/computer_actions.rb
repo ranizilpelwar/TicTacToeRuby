@@ -2,7 +2,7 @@ require_relative 'game_board.rb'
 require_relative 'weighted_move.rb'
 require_relative '../Players/player_manager.rb'
 require_relative '../Validators/available_spaces_validator.rb'
-require_relative '../Validators/board_score_validator.rb'
+require_relative '../Validators/board_score_evaluator.rb'
 require_relative '../Validators/game_over_validator.rb'
 require_relative '../Validators/player_symbol_validator.rb'
 
@@ -25,7 +25,7 @@ class ComputerActions
     current_score = 0
     best_move = -1
     if next_moves.size == 0 || depth == 0
-      current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player)
+      current_score = BoardScoreEvaluator.score_of_board(board, current_player, other_player)
       move = WeightedMove.new(best_move, current_score)
       #return move
     else
@@ -42,7 +42,7 @@ class ComputerActions
         
     	  if win_exists
           # An early win or block has an advantage:
-    	    current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
+    	    current_score = BoardScoreEvaluator.score_of_board(board, current_player, other_player) * depth
     	  else
     	    current_score = get_best_move(board, opposing_symbol, depth - 1, best_max_value, best_min_value).score
         end
