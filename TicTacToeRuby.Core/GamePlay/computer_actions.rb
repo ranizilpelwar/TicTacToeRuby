@@ -29,15 +29,16 @@ class ComputerActions
       move = WeightedMove.new(best_move, current_score)
       return move
     else
+      if player_symbol == current_player 
+          opposing_symbol = other_player
+      else
+          opposing_symbol = current_player
+      end
       next_moves.each do |move|
 	      tile = board[move]
         board[move] = player_symbol
         win_exists = GameOverValidator.win_for_player?(player_symbol, board)
-        if player_symbol == current_player 
-          opposing_symbol = other_player
-        else
-          opposing_symbol = current_player
-        end
+        
     	  if win_exists
           # An early win or block has an advantage:
     	    current_score = BoardScoreValidator.evaluate_score_of_board(board, current_player, other_player) * depth
