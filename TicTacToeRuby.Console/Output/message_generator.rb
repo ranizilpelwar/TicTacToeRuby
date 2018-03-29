@@ -16,8 +16,14 @@ module MessageGenerator
 
   def self.language_selection
     message = YAMLReader.read_data("application_text", "language_selection")
+    message = message + "\n\n"
     options = YAMLReader.read_data("language_options", "languages")
-    puts options
-     
+    count = options.size
+    iterator = 0
+    count.times do
+      message = message + iterator.to_s + ". " + options[iterator] + "\n"
+      iterator = iterator + 1
+    end
+     message = message + "\n"
   end
 end
