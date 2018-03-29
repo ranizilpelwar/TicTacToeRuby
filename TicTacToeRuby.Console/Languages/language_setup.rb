@@ -25,8 +25,10 @@ module LanguageSetup
       iterator = iterator + 1
     end
     input = InputValidator.get_valid_selection
-    
+    configure_language
   end
 
-
+  def configure_language(setting)
+    @localization = setting
+  end
 end

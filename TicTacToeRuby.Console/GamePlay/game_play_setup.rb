@@ -25,14 +25,18 @@ class GamePlaySetup
   end
 
   def setup
-    display_introductory_message
-    display_language_config_option
-    display_match_options
+    display_home_screen
     evaluate_if_language_should_be_configured
     match_type = setup_match
     player_manager = setup_players(match_type)
     game_board = setup_board(player_manager)
     @game_interaction = setup_game_interaction(game_board, match_type)
+  end
+
+  def display_home_screen
+    display_introductory_message
+    display_language_config_option
+    display_match_options
   end
 
   def display_introductory_message
@@ -52,9 +56,16 @@ class GamePlaySetup
     selections.push(*match_numbers)
     input = InputValidator.get_valid_selection(@writer, @reader, selections)
     if selections.include? input
-      @writer.clear_screen
-      display_language_options 
+       configure_language
     end
+  end
+
+  def configure_language
+    @writer.clear_screen
+    display_language_options
+    LanguageSetup.get_language_selection(writer, reader)
+    @writer.clear_screen
+    display_home_screen
   end
 
   def display_language_options
