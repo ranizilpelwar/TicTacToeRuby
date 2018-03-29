@@ -29,7 +29,8 @@ class ComputerActions
       move = WeightedMove.new(best_move, current_score)
       #return move
     else
-      if player_symbol == current_player 
+      current = player_symbol == current_player
+      if current 
           opposing_symbol = other_player
       else
           opposing_symbol = current_player
@@ -45,7 +46,7 @@ class ComputerActions
     	  else
     	    current_score = get_best_move(board, opposing_symbol, depth - 1, best_max_value, best_min_value).score
         end
-        if player_symbol == current_player
+        if current
           if current_score > best_max_value
             best_max_value = current_score
             best_move = move
@@ -61,7 +62,7 @@ class ComputerActions
     	  #Stop traversing more nodes in this branch:
     	  break if best_max_value >= best_min_value
       end
-      if player_symbol == current_player
+      if current
         score = best_max_value
       else
         score = best_min_value
