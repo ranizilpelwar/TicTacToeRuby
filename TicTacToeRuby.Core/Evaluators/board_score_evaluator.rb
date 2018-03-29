@@ -16,7 +16,7 @@ module BoardScoreEvaluator
       [0, 4, 8],
       [2, 4, 6]
     ].each do |row|
-      score = score + evaluate_score_of_line(board, row, symbol_of_current_player, symbol_of_other_player)
+      score = score + score_of_line(board, row, symbol_of_current_player, symbol_of_other_player)
     end
 
     result = score
