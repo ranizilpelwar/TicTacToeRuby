@@ -1,4 +1,5 @@
 require_relative '../Output/console_writer.rb'
+require_relative '../Output/message_generator.rb'
 require_relative '../Input/console_reader.rb'
 
 module LanguageSetup
@@ -13,9 +14,7 @@ module LanguageSetup
     result = @localization
   end
 
-  def self.display_language_options 
-    
-  end
+
 
 
 end

@@ -1,5 +1,5 @@
 require 'yaml'
-require_relative '../Languages/language_setup.rb'
+require_relative '../Languages/language_setup.en.rb'
 
 module YAMLReader
 

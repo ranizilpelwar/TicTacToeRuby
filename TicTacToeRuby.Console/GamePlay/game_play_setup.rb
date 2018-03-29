@@ -53,8 +53,12 @@ class GamePlaySetup
     input = InputValidator.get_valid_selection(@writer, @reader, selections)
     if selections.include? input
       @writer.clear_screen
-      LanguageSetup.display_language_options 
+      display_language_options 
     end
+  end
+
+  def display_language_options
+    @writer.display_message(MessageGenerator.language_selection)
   end
 
   def display_match_options

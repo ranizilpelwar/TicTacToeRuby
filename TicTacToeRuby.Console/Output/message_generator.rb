@@ -13,4 +13,11 @@ module MessageGenerator
   def self.language_configuration
     message = YAMLReader.read_data("application_text", "language_configuration")
   end
+
+  def self.language_selection
+    message = YAMLReader.read_data("application_text", "language_selection")
+    options = YAMLReader.read_data("language_options", "languages")
+    puts options
+     
+  end
 end
