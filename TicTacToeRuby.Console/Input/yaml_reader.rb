@@ -1,15 +1,10 @@
 require 'yaml'
+require_relative '../Languages/language_setup.rb'
 
 module YAMLReader
 
-  @localization = "en"
-
-  def self.set_localization(language)
-    @localization = language
-  end
-
   def self.generate_file_name(file)
-    file_name = "TicTacToeRuby.Console/Languages/" + file + "." + @localization.to_s + ".yaml"
+    file_name = "TicTacToeRuby.Console/Languages/" + file + "." + LanguageSetup.get_localization + ".yaml"
   end
 
   def self.read_data(file, property)

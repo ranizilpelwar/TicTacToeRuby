@@ -11,9 +11,10 @@ require_relative '../Players/player_symbol_setup.rb'
 require_relative '../Players/first_player_setup.rb'
 require_relative 'match_type_setup.rb'
 require_relative '../Output/message_generator.rb'
+require_relative '../Validators/input_validator.rb'
 
 class GamePlaySetup
-  attr_reader :writer, :reader, :game_interaction
+  attr_reader :writer, :reader, :game_interaction, :match_type_manager
 
   def initialize(writer, reader)
     raise ArgumentError, "Cannot initialize GamePlaySetup because writer is nil." if writer.nil?
@@ -25,7 +26,9 @@ class GamePlaySetup
 
   def setup
     display_introductory_message
-    setup_language_option
+    display_language_config_option
+    display_match_options
+    evaluate_if_language_should_be_configured
     match_type = setup_match
     player_manager = setup_players(match_type)
     game_board = setup_board(player_manager)
@@ -38,14 +41,29 @@ class GamePlaySetup
     @writer.display_message("\n")
   end
 
-  def setup_language_option
+  def display_language_config_option
     @writer.display_message(MessageGenerator.language_configuration)
     @writer.display_message("\n")
   end
 
+  def evaluate_if_language_should_be_configured
+    selections = ["L", "l"]
+    match_numbers = @match_type_manager.get_match_numbers
+    selections.push(*match_numbers)
+    input = InputValidator.get_valid_selection(@writer, @reader, selections)
+    if selections.include? input
+      @writer.clear_screen
+      LanguageSetup.display_language_options 
+    end
+  end
+
+  def display_match_options
+    @match_type_manager = MatchTypeManager.new
+    MatchTypeSetup.prompt_for_match_type_selection(writer, @match_type_manager)
+  end
+
   def setup_match
-    match_type_manager = MatchTypeManager.new
-    match_type = MatchTypeSetup.get_valid_match_type(@writer, @reader, match_type_manager)
+    match_type = MatchTypeSetup.get_valid_match_type(@writer, @reader, @match_type_manager)
   end
 
   def setup_players(match_type)

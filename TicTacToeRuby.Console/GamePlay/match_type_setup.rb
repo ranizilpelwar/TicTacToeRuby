@@ -12,8 +12,6 @@ class MatchTypeSetup
     input = ""
     valid = false
     total_matches = match_type_manager.get_total_available_matches
-    prompt_for_match_type_selection(writer, match_type_manager)
-
     while !valid
       input = reader.read_input_ignore_empty
       numeric_input = input.to_i
