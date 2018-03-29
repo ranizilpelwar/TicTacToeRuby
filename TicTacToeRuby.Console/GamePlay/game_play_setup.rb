@@ -10,6 +10,7 @@ require_relative '../Input/console_reader.rb'
 require_relative '../Players/player_symbol_setup.rb'
 require_relative '../Players/first_player_setup.rb'
 require_relative 'match_type_setup.rb'
+require_relative '../Output/message_generator.rb'
 
 class GamePlaySetup
   attr_reader :writer, :reader, :game_interaction
@@ -24,6 +25,7 @@ class GamePlaySetup
 
   def setup
     display_introductory_message
+    setup_language_option
     match_type = setup_match
     player_manager = setup_players(match_type)
     game_board = setup_board(player_manager)
@@ -32,9 +34,12 @@ class GamePlaySetup
 
   def display_introductory_message
     @writer.clear_screen
-    @writer.display_message("Welcome to Tic Tac Toe!")
+    @writer.display_message(MessageGenerator.welcome)
     @writer.display_message("\n")
-    @writer.display_message("Let's play a game!")
+  end
+
+  def setup_language_option
+    @writer.display_message(MessageGenerator.language_configuration)
     @writer.display_message("\n")
   end
 

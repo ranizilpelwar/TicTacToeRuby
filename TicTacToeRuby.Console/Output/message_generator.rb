@@ -9,4 +9,8 @@ module MessageGenerator
   def self.welcome
     message = YAMLReader.read_data("application_text", "welcome_message")
   end
+
+  def self.language_configuration
+    message = YAMLReader.read_data("application_text", "language_configuration")
+  end
 end

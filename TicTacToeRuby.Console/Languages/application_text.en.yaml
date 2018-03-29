@@ -1,1 +1,3 @@
-welcome_message: "Welcome to Tic Tac Toe!"
+welcome_message: "Welcome to Tic Tac Toe! Let's play a game!"
+language_configuration: "[Press L to change language.]"
+
