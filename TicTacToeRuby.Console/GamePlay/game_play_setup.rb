@@ -27,8 +27,11 @@ class GamePlaySetup
 
   def setup
     display_start_screen
-    configure_language if (language_configuration_requested?)
-    match_type = setup_match
+    inquiry = (language_configuration_requested?)
+    request_language_setup = inquiry.feedback
+    input = inquiry.input
+    configure_language if request_language_setup
+    match_type = setup_match##TODO - change so that the match type is provided to method
     player_manager = setup_players(match_type)
     game_board = setup_board(player_manager)
     @game_interaction = setup_game_interaction(game_board, match_type)
@@ -57,6 +60,7 @@ class GamePlaySetup
     selections.push(*match_numbers)
     input = InputValidator.get_valid_selection(@writer, @reader, selections)
     feedback = selections.include? input
+    result = Struct.new(:feedback, :input).new(feedback, input)
   end
 
   def configure_language
