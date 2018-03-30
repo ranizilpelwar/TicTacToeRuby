@@ -12,6 +12,7 @@ require_relative '../Players/first_player_setup.rb'
 require_relative 'match_type_setup.rb'
 require_relative '../Output/message_generator.rb'
 require_relative '../Validators/input_validator.rb'
+require_relative '../Languages/language_setup.rb'
 
 class GamePlaySetup
   attr_reader :writer, :reader, :game_interaction, :match_type_manager
@@ -25,7 +26,7 @@ class GamePlaySetup
   end
 
   def setup
-    display_home_screen
+    display_start_screen
     evaluate_if_language_should_be_configured
     match_type = setup_match
     player_manager = setup_players(match_type)
@@ -33,7 +34,7 @@ class GamePlaySetup
     @game_interaction = setup_game_interaction(game_board, match_type)
   end
 
-  def display_home_screen
+  def display_start_screen
     display_introductory_message
     display_language_config_option
     display_match_options
@@ -63,7 +64,7 @@ class GamePlaySetup
   def configure_language
     @writer.clear_screen
     display_language_options
-    LanguageSetup.get_language_selection(writer, reader)
+    LanguageSetup.set_selected_language(writer, reader)
     @writer.clear_screen
     display_home_screen
   end

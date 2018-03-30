@@ -2,6 +2,7 @@ require_relative '../Output/console_writer.rb'
 require_relative '../Output/message_generator.rb'
 require_relative '../Input/console_reader.rb'
 require_relative '../Validators/input_validator.rb'
+require_relative '../Input/yaml_reader.rb'
 
 module LanguageSetup
 
@@ -15,20 +16,24 @@ module LanguageSetup
     result = @localization
   end
 
-  def get_language_selection(writer, reader)
-    options = YAMLReader.read_data("language_options", "languages")
-    count = options.size
-    valid_selections = []
-    iterator = 0 
-    count.times do
-      valid_selections << options[iterator]
-      iterator = iterator + 1
-    end
-    input = InputValidator.get_valid_selection
-    configure_language
+  def self.set_selected_language(writer, reader)
+    language_tag_options = get_language_options
+    list_of_input_choices = generate_input_choices(language_tag_options)
+    input = InputValidator.get_valid_selection(writer, reader, list_of_input_choices)
+    language_tag = language_tag_options[input.to_i -1]
+    configure_language(language_tag)
   end
 
-  def configure_language(setting)
-    @localization = setting
+  def self.get_language_options
+    options = YAMLReader.read_data("language_options", "languages")
+  end
+
+  def self.generate_input_choices(options)
+    count = options.size
+    valid_selections = [*1..count] 
+  end
+
+  def self.configure_language(language_tag)
+    @localization = language_tag
   end
 end
