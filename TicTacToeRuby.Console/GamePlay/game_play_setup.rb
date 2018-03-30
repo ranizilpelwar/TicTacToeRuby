@@ -27,7 +27,7 @@ class GamePlaySetup
 
   def setup
     display_start_screen
-    configure_language if (request_language_configuration?)
+    configure_language if (language_configuration_requested?)
     match_type = setup_match
     player_manager = setup_players(match_type)
     game_board = setup_board(player_manager)
@@ -51,7 +51,7 @@ class GamePlaySetup
     @writer.display_message("\n")
   end
 
-  def request_language_configuration?
+  def language_configuration_requested?
     selections = ["L", "l"]
     match_numbers = @match_type_manager.get_match_numbers
     selections.push(*match_numbers)
