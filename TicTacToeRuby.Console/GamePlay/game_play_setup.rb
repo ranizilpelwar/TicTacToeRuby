@@ -66,7 +66,7 @@ class GamePlaySetup
     display_language_options
     LanguageSetup.set_selected_language(writer, reader)
     @writer.clear_screen
-    display_home_screen
+    display_start_screen
   end
 
   def display_language_options
