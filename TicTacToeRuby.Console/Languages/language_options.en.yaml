@@ -1,3 +1,5 @@
 languages:
-  - English
-  - Spanish
+  - description: English
+    tag: en
+  - description: Spanish
+    tag: es

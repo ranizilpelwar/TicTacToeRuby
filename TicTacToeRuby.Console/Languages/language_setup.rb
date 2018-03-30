@@ -20,7 +20,7 @@ module LanguageSetup
     language_tag_options = get_language_options
     list_of_input_choices = generate_input_choices(language_tag_options)
     input = InputValidator.get_valid_selection(writer, reader, list_of_input_choices)
-    language_tag = language_tag_options[input.to_i - 1]
+    language_tag = language_tag_options[input.to_i - 1]['tag']
     configure_language(language_tag)
   end
 
