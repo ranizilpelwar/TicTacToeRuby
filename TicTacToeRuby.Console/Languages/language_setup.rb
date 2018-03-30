@@ -20,7 +20,7 @@ module LanguageSetup
     language_tag_options = get_language_options
     list_of_input_choices = generate_input_choices(language_tag_options)
     input = InputValidator.get_valid_selection(writer, reader, list_of_input_choices)
-    language_tag = language_tag_options[input.to_i -1]
+    language_tag = language_tag_options[input.to_i - 1]
     configure_language(language_tag)
   end
 
@@ -29,8 +29,13 @@ module LanguageSetup
   end
 
   def self.generate_input_choices(options)
+    puts "start generate_input_choices: "
     count = options.size
-    valid_selections = [*1..count] 
+    valid_selections = [*1..count]
+    valid_selections = valid_selections.map(&:to_s)
+    puts "valid_selections = "
+    puts valid_selections 
+    puts ":end generate_input_choices"
   end
 
   def self.configure_language(language_tag)
