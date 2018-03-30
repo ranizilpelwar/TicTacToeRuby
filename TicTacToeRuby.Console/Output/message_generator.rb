@@ -18,14 +18,8 @@ module MessageGenerator
     message = YAMLReader.read_data("application_text", "language_selection")
     message = message + "\n\n"
     options = YAMLReader.read_data("language_options", "languages")
-    puts "MessageGenerator options = "
-    puts options
     input_choices = LanguageSetup.generate_input_choices(options)
-    puts "MessageGenerator input_choices = "
-    puts input_choices
     count = input_choices.size
-    puts "MessageGenerator count = "
-    puts count
     iterator = 1
     count.times do
       message = message + iterator.to_s + ". " + options[iterator-1]['description'] + "\n"
