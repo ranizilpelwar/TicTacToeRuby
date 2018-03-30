@@ -29,13 +29,14 @@ module LanguageSetup
   end
 
   def self.generate_input_choices(options)
-    puts "start generate_input_choices: "
+    puts "start LanguageSetup generate_input_choices: "
     count = options.size
     valid_selections = [*1..count]
     valid_selections = valid_selections.map(&:to_s)
     puts "valid_selections = "
     puts valid_selections 
-    puts ":end generate_input_choices"
+    puts ":end LanguageSetup generate_input_choices"
+    result = valid_selections
   end
 
   def self.configure_language(language_tag)
