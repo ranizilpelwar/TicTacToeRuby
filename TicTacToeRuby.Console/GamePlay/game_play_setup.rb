@@ -32,8 +32,9 @@ class GamePlaySetup
     if request_language_setup
       configure_language 
     else
-      match_type = inquiry.input
-      player_manager = setup_players(match_type.to_i)
+      match_input = inquiry.input
+      match_type = @match_type_manager.get_match_type(match_input.to_i)
+      player_manager = setup_players(match_type)
       game_board = setup_board(player_manager)
       @game_interaction = setup_game_interaction(game_board, match_type)
     end
@@ -129,28 +130,26 @@ class GamePlaySetup
   end
 
   def get_player_symbols
-    # get info for player 1
-    current_player = 1
-    message = prompt_for_player_symbol(current_player)
-    writer.display_message(message)
+    prompt_for_info_for_player(1)
     symbol_one = PlayerSymbolSetup.get_symbol_for_player(writer, reader)
+    prompt_for_info_for_player(2)
+    symbol_two = get_unique_symbol_for_player2(symbol_one)
+    symbols = [symbol_one, symbol_two]
+  end
 
-    # get info for player 2
-    symbol_two = ""
-    current_player = current_player + 1
-    message = prompt_for_player_symbol(current_player)
-    writer.display_message(message)
-
-    # validate that both players didn't provide the same symbol
+  def get_unique_symbol_for_player2(symbol_one)
     same_value = true
     while same_value
       symbol_two = PlayerSymbolSetup.get_symbol_for_player(writer, reader)
       same_value = symbol_one.eql? symbol_two
       writer.display_message("Oops! I can't use the same one. Try a different key.") unless !same_value
     end
-    symbols = []
-    symbols << symbol_one
-    symbols << symbol_two
+    result = symbol_two
+  end
+
+  def prompt_for_info_for_player(number)
+    message = prompt_for_player_symbol(number)
+    writer.display_message(message)
   end
 
   def prompt_for_player_symbol(player_number)
