@@ -27,14 +27,17 @@ class GamePlaySetup
 
   def setup
     display_start_screen
-    inquiry = (language_configuration_requested?)
+    inquiry = language_configuration_requested?
     request_language_setup = inquiry.feedback
-    input = inquiry.input
-    configure_language if request_language_setup
-    match_type = setup_match##TODO - change so that the match type is provided to method
-    player_manager = setup_players(match_type)
-    game_board = setup_board(player_manager)
-    @game_interaction = setup_game_interaction(game_board, match_type)
+    if request_language_setup
+      configure_language 
+    else
+      input = inquiry.input
+      match_type = setup_match##TODO - change so that the match type is provided to method
+      player_manager = setup_players(match_type)
+      game_board = setup_board(player_manager)
+      @game_interaction = setup_game_interaction(game_board, match_type)
+    end
   end
 
   def display_start_screen
@@ -55,24 +58,31 @@ class GamePlaySetup
   end
 
   def language_configuration_requested?
-    selections = ["L", "l"]
+    language_selections = ["L", "l"]
+    input_choices = []
+    input_choices.push(*language_selections)
     match_numbers = @match_type_manager.get_match_numbers
-    selections.push(*match_numbers)
-    input = InputValidator.get_valid_selection(@writer, @reader, selections)
-    feedback = selections.include? input
+    input_choices.push(*match_numbers)
+    input = InputValidator.get_valid_selection(@writer, @reader, input_choices)
+    feedback = language_selections.include? input
     result = Struct.new(:feedback, :input).new(feedback, input)
   end
 
   def configure_language
     @writer.clear_screen
-    display_language_options
-    LanguageSetup.set_selected_language(writer, reader)
+    @writer.display_message(MessageGenerator.language_selection_prompt)
+    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.language_options)
+    input = InputValidator.get_valid_selection(@writer, @reader, LanguageSetup.get_input_choices)
+    language_tag = LanguageSetup.get_language_tag(input)
+    LanguageSetup.set_localization(language_tag)
     @writer.clear_screen
     setup
   end
 
-  def display_language_options
-    @writer.display_message(MessageGenerator.language_selection)
+  def get_language_selection
+    list_of_input_choices = LanguageSetup.get_input_choices
+    input = InputValidator.get_valid_selection(writer, reader, list_of_input_choices)
   end
 
   def display_match_options

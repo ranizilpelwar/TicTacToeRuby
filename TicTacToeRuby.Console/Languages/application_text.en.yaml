@@ -1,4 +1,4 @@
 welcome_message: "Welcome to Tic Tac Toe! Let's play a game!"
 language_configuration: "[Press L to change language.]"
-language_selection: "Which language do you want to use?"
+language_selection_prompt: "Which language do you want to use?"
 
