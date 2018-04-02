@@ -92,22 +92,16 @@ class GamePlaySetup
   end
 
   def setup_players(match_type)
-    # get symbols for each player
     symbols = get_player_symbols
     symbol_one = symbols[0]
     symbol_two = symbols[1]
-
-    # get types for each player
     player1_type = match_type.player1_type
     player2_type = match_type.player2_type
-
-    # create the players
     player1 = Player.new(player1_type, symbol_one)
     player2 = Player.new(player2_type, symbol_two)
    
     player_manager = PlayerManager.new(player1, player2)
-
-    # update current player based on who is selected as first player
+   
     symbol_of_first_player = FirstPlayerSetup.prompt_for_first_player_symbol(@writer, @reader, symbol_one, symbol_two)
     current_player_symbol = player_manager.current_player.symbol
     player_manager.update_current_player unless symbol_of_first_player == current_player_symbol 
