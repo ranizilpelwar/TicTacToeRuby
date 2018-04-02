@@ -32,9 +32,8 @@ class GamePlaySetup
     if request_language_setup
       configure_language 
     else
-      input = inquiry.input
-      match_type = setup_match##TODO - change so that the match type is provided to method
-      player_manager = setup_players(match_type)
+      match_type = inquiry.input
+      player_manager = setup_players(match_type.to_i)
       game_board = setup_board(player_manager)
       @game_interaction = setup_game_interaction(game_board, match_type)
     end
@@ -62,6 +61,7 @@ class GamePlaySetup
     input_choices = []
     input_choices.push(*language_selections)
     match_numbers = @match_type_manager.get_match_numbers
+    match_numbers = match_numbers.map(&:to_s)
     input_choices.push(*match_numbers)
     input = InputValidator.get_valid_selection(@writer, @reader, input_choices)
     feedback = language_selections.include? input
@@ -88,10 +88,6 @@ class GamePlaySetup
   def display_match_options
     @match_type_manager = MatchTypeManager.new
     MatchTypeSetup.prompt_for_match_type_selection(writer, @match_type_manager)
-  end
-
-  def setup_match
-    match_type = MatchTypeSetup.get_valid_match_type(@writer, @reader, @match_type_manager)
   end
 
   def setup_players(match_type)
