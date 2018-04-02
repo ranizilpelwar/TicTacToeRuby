@@ -1,12 +1,12 @@
 require 'yaml'
-require_relative '../Languages/language_setup.en.rb'
+require_relative '../Languages/language_setup.rb'
 
 module YAMLReader
 
   def self.generate_file_path(file_name)
     raise ArgumentError, "YAMLReader cannot generate file name as file is nil." if file_name.nil?
     raise ArgumentError, "YAMLReader cannot generate file name as file is empty." if file_name == ""
-    file_path = "TicTacToeRuby.Console/Languages/" + file_name + "." + LanguageSetup.get_localization + ".yaml"
+    file_path = "TicTacToeRuby.Console/Languages/" + file_name + "." + LanguageSetup.get_current_localization + ".yaml"
   end
 
   def self.read_data(file_name, property)
