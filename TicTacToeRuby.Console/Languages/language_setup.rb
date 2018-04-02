@@ -6,14 +6,14 @@ require_relative '../Input/yaml_reader.rb'
 
 module LanguageSetup
 
-  @localization = "en"
-
-  def self.set_localization(language)
-    @localization = language
+  def self.set_localization(language_tag)
+    raise ArgumentError, "LanguageSetup cannot set localization as language_tag is nil." if language_tag.nil?
+    raise ArgumentError, "LanguageSetup cannot set localization as language_tag is not a valid value." if !(get_language_tags.include?(language_tag))
+    @localization = language_tag
   end
 
-  def self.get_current_localization
-    result = @localization
+  def self.get_localization
+    @localization ||= YAMLReader.read_data("TicTacToeRuby.Console/Languages/global_settings.yaml", "selected_language_tag")
   end
 
   def self.set_selected_language(writer, reader)
@@ -24,18 +24,26 @@ module LanguageSetup
     configure_language(language_tag)
   end
 
-  def self.get_language_options
-    options = YAMLReader.read_data("language_options", "languages")
+  def self.get_languages
+    file_path = MessageGenerator.generate_file_path("language_options", get_localization)
+    raise ArgumentError, "LanguageSetup cannot get languages as file path does not exist." if !(File.exist?(file_path))
+    options = YAMLReader.read_data(file_path, "languages")
   end
 
-  def self.generate_input_choices(options)
+  def self.get_input_choices
+    options = get_languages
     count = options.size
     valid_selections = [*1..count]
     valid_selections = valid_selections.map(&:to_s)
     result = valid_selections
   end
 
-  def self.configure_language(language_tag)
-    @localization = language_tag
+  def self.get_language_tags
+    options = get_languages
+    tags = []
+    options.each do |language|
+      tags << language['tag']
+    end
+    result = tags
   end
 end
