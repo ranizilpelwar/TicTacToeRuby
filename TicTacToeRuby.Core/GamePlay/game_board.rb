@@ -5,7 +5,7 @@ class GameBoard
   attr_reader :player_manager, :board
 
   def initialize(player_manager, board)
-    raise ArgumentError, "Cannot create GameBoard with nil player_manager." if player_manager == nil
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "player_manager", "nil") if player_manager.nil?
     @player_manager = player_manager
     @board = board
   end
@@ -15,15 +15,15 @@ class GameBoard
   end
 
   def update_board(index, player_symbol)
-    raise ArgumentError, "Cannot update board with invalid player_symbol" if !PlayerSymbolValidator.valid?(player_symbol)
-    raise ArgumentError, "Index provided cannot be greater than the largest index on the board." if index >= board.length
-    raise ArgumentError, "Index provided cannot be less than the first spot on the board." if index < 0
+    raise ArgumentError, MessageGenerator.argument_error("update_board", "player_symbol", "invalid") if !PlayerSymbolValidator.valid?(player_symbol)
+    raise ArgumentError, MessageGenerator.argument_error("update_board", "index", "greater or equal to board length") if index >= board.length
+    raise ArgumentError, MessageGenerator.argument_error("update_board", "index", "less than the first spot on the board") if index < 0
     @board[index] = player_symbol
   end
 
   def revert_board(index)
-    raise ArgumentError, "Index provided cannot be greater than the largest index on the board." if index >= board.length
-    raise ArgumentError, "Index provided cannot be less than the first spot on the board." if index < 0
+    raise ArgumentError, MessageGenerator.argument_error("revert_board", "index", "greater than the largest index on the board") if index >= board.length
+    raise ArgumentError, MessageGenerator.argument_error("revert_board", "index", "less than the first spot on the board") if index < 0
     tile = index + 1
     @board[index] = tile.to_s
   end

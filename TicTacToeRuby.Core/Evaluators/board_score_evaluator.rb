@@ -53,7 +53,7 @@ module BoardScoreEvaluator
         when 0
           score
         else
-          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_current_player", "is not within range of 1-3")
+          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_current_player", "not within range of 1-3")
         end
 
         case count_for_other_player
@@ -66,7 +66,7 @@ module BoardScoreEvaluator
         when 0
           score
         else
-          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_other_player", "is not within range of 1-3")
+          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_other_player", "not within range of 1-3")
         end
     end
   end
