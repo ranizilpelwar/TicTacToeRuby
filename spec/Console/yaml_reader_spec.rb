@@ -56,7 +56,7 @@ RSpec.describe "a YAML Reader" do
     end
 
     it "returns the text stored in the yaml file when a valid file and property name is supplied" do
-      expect(YAMLReader.read_data("TicTacToeRuby.Console/Languages/application_text.en.yaml", "welcome_message")).to eq("Welcome to Tic Tac Toe! Let's play a game!")
+      expect(YAMLReader.read_data("spec/TestFiles/testing.en.yaml", "test_readonly_property")).to eq("Welcome message for game!")
     end
   end
 end
