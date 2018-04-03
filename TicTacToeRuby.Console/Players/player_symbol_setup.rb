@@ -15,6 +15,6 @@ class PlayerSymbolSetup
   end
 
   def self.display_invalid_input_message(writer)
-    writer.display_message("Oops! I can't use that. Try a different key.")
+    writer.display_message(MessageGenerator.invalid_selection_error)
   end
 end
