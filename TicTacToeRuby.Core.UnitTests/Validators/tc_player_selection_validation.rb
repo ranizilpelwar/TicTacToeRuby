@@ -6,8 +6,7 @@ class TestPlayerSelectionValidation < Test::Unit::TestCase
     input = ""
     player_symbol_one = "A"
     player_symbol_two = "B"
-    return_value = PlayerSelectionValidator.valid?(input, player_symbol_one, player_symbol_two)
-    assert_false(return_value, "An empty string should not match symbol entries.")
+    assert_raise ArgumentError do PlayerSelectionValidator.valid?(input, player_symbol_one, player_symbol_two) end
   end
 
   def test_a_space_character_should_not_match_symbol_entries
