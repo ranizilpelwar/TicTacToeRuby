@@ -25,5 +25,17 @@ RSpec.describe "a player selection validator" do
     it "raises an ArgumentError when player_symbol_two is nil" do
       expect{ PlayerSelectionValidator.valid?("input", "X", nil) }.to raise_error(ArgumentError)
     end
+
+    it "raises an ArgumentError when input is an empty string" do
+      expect{ PlayerSelectionValidator.valid?("", "X", "Y") }.to raise_error(ArgumentError)
+    end
+
+    it "raises an ArgumentError when player_symbol_one is an empty string" do
+      expect{ PlayerSelectionValidator.valid?("input", "", "X") }.to raise_error(ArgumentError)
+    end
+
+    it "raises an ArgumentError when player_symbol_two is an empty string" do
+      expect{ PlayerSelectionValidator.valid?("input", "X", "") }.to raise_error(ArgumentError)
+    end
   end
 end
