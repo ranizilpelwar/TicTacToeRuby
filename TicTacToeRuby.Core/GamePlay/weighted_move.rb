@@ -4,6 +4,8 @@ class WeightedMove
   attr_accessor :index, :score
 
   def initialize(index, score)
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "index", "nil") if index.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "score", "nil") if score.nil?
     @index = index
     @score = score
   end
