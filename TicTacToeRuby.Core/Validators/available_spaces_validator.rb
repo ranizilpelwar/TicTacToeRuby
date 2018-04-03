@@ -1,3 +1,5 @@
+require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
+
 module AvailableSpacesValidator
 
   # Returns a list of indexes on the board where possible moves can be made.

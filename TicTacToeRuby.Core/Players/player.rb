@@ -1,4 +1,5 @@
 require_relative '../Validators/player_symbol_validator.rb'
+require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
 
 class Player
   attr_reader :type, :symbol

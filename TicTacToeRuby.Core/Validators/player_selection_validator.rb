@@ -1,3 +1,5 @@
+require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
+
 module PlayerSelectionValidator
   def self.valid?(input, player_symbol_one, player_symbol_two)
     raise ArgumentError, MessageGenerator.argument_error("determine if valid", "input", "nil") if input.nil?

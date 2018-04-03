@@ -1,4 +1,5 @@
 require_relative '../Validators/player_symbol_validator.rb'
+require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
 
 module GameOverValidator
   def self.game_over?(board)
