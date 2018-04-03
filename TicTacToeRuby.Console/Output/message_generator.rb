@@ -125,6 +125,12 @@ module MessageGenerator
     message = message.gsub("[2]", player2_type.to_s) if parameter_provided?(player2_type)
   end
 
+  def self.first_player_of_game_prompt(player_symbol_one, player_symbol_two)
+    message = get_data("application_text", "first_player_of_game_prompt")
+    message = message.gsub("[1]", player_symbol_one.to_s) if parameter_provided?(player_symbol_one)
+    message = message.gsub("[2]", player_symbol_two.to_s) if parameter_provided?(player_symbol_two)
+  end
+
   def self.option_number(number)
     message = get_data("application_text", "option_number")
     message = message.gsub("[1]", number.to_s) if parameter_provided?(number)
