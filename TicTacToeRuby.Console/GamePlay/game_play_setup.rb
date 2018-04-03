@@ -49,12 +49,12 @@ class GamePlaySetup
   def display_introductory_message
     @writer.clear_screen
     @writer.display_message(MessageGenerator.welcome)
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def display_language_config_option
     @writer.display_message(MessageGenerator.language_configuration)
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def language_configuration_requested?
@@ -72,7 +72,7 @@ class GamePlaySetup
   def configure_language
     @writer.clear_screen
     @writer.display_message(MessageGenerator.language_selection_prompt)
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
     @writer.display_message(MessageGenerator.language_options)
     input = InputValidator.get_valid_selection(@writer, @reader, LanguageSetup.get_input_choices)
     language_tag = LanguageSetup.get_language_tag(input)
