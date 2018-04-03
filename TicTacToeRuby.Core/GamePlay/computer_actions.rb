@@ -10,7 +10,7 @@ class ComputerActions
   attr_reader :current_player, :other_player, :game_board
 
   def initialize(game_board)
-    raise ArgumentError, "Cannot create ComputerActions with nil game_board." if game_board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "game_board", "nil") if game_board.nil?
     @game_board = game_board
     @player_manager = @game_board.player_manager
     @current_player = @player_manager.current_player.symbol
@@ -22,8 +22,8 @@ class ComputerActions
   end
 
   def get_best_move(board, player_symbol, depth, best_max_value, best_min_value)
-    raise ArgumentError, "Cannot get best move because board is nil." if board.nil?
-    raise ArgumentError, "Cannot get best move because player_symbol is invalid." if !PlayerSymbolValidator.valid?(player_symbol)
+    raise ArgumentError, MessageGenerator.argument_error("get_best_move", "board", "nil") if board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("get_best_move", "player_symbol", "invalid") if !PlayerSymbolValidator.valid?(player_symbol)
     next_moves = AvailableSpacesValidator.get_available_spaces(board)
     tile = ""
     current_score = 0
