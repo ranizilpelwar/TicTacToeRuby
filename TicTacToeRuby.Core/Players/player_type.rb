@@ -14,7 +14,7 @@ class PlayerType
     @selected_option = if PlayerType.valid?(type)
                           type
                         else
-                          raise PlayerTypeError.new("Invalid type was chosen during PlayerType initialization.")  
+                          raise PlayerTypeError.new(MessageGenerator.argument_error("initialize", "type", "invalid"))  
                         end
   end
 end
