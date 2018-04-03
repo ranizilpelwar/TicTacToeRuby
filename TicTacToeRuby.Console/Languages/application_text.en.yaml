@@ -1,5 +1,6 @@
 welcome_message: "Welcome to Tic Tac Toe! Let's play a game!"
 language_configuration: "[Press L to change language.]"
 language_selection_prompt: "Which language do you want to use?"
+prompt_for_player_symbol: "Let's setup Player number [1]! Press a key that Player [1] can use in the game. It can be a letter or a symbol."
 argument_error: "Cannot [1] because [2] is [3]."
-
+uniqueness_error: "Oops! I can't use the same one. Try again."

@@ -18,8 +18,8 @@ class GamePlaySetup
   attr_reader :writer, :reader, :game_interaction, :match_type_manager
 
   def initialize(writer, reader)
-    raise ArgumentError, "Cannot initialize GamePlaySetup because writer is nil." if writer.nil?
-    raise ArgumentError, "Cannot initialize GamePlaySetup because reader is nil." if reader.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "writer", "nil") if writer.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "reader", "nil") if reader.nil?
     @writer = writer
     @reader = reader
     setup
@@ -113,8 +113,8 @@ class GamePlaySetup
   end
 
   def setup_game_interaction(game_board, match_type)
-    raise ArgumentError, "Cannot setup GameInteraction because game_board is nil." if game_board.nil?
-    raise ArgumentError, "Cannot setup GameInteraction because match_type is nil." if match_type.nil?
+    raise ArgumentError, MessageGenerator.argument_error("setup_game_interaction", "game_board", "nil") if game_board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("setup_game_interaction", "match_type", "nil") if match_type.nil?
     record_last_moves = match_type.player1_type == :Human || match_type.player2_type == :Human
     game_interaction = GameInteraction.new(@writer, @reader, game_board, record_last_moves, match_type)
   end
@@ -124,9 +124,9 @@ class GamePlaySetup
   end
 
   def get_player_symbols
-    prompt_for_info_for_player(1)
+    prompt_for_player_symbol(1)
     symbol_one = PlayerSymbolSetup.get_symbol_for_player(writer, reader)
-    prompt_for_info_for_player(2)
+    prompt_for_player_symbol(2)
     symbol_two = get_unique_symbol_for_player2(symbol_one)
     symbols = [symbol_one, symbol_two]
   end
@@ -136,17 +136,12 @@ class GamePlaySetup
     while same_value
       symbol_two = PlayerSymbolSetup.get_symbol_for_player(writer, reader)
       same_value = symbol_one.eql? symbol_two
-      writer.display_message("Oops! I can't use the same one. Try a different key.") unless !same_value
+      writer.display_message(MessageGenerator.uniqueness_error) unless !same_value
     end
     result = symbol_two
   end
 
-  def prompt_for_info_for_player(number)
-    message = prompt_for_player_symbol(number)
-    writer.display_message(message)
-  end
-
   def prompt_for_player_symbol(player_number)
-    message = "Let's setup Player #{player_number}! Press a key that Player #{player_number} can use in the game. It can be a letter or a symbol."
+    writer.display_message(MessageGenerator.prompt_for_player_symbol(player_number))
   end
 end

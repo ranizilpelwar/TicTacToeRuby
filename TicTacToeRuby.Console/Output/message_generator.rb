@@ -51,4 +51,13 @@ module MessageGenerator
     message = message.sub("[2]", argument_name)
     message = message.sub("[3]", reason)
   end
+
+  def self.uniqueness_error
+    message = get_data("application_text", "uniqueness_error")
+  end
+
+  def self.prompt_for_player_symbol(player_number)
+    message = get_data("application_text", "prompt_for_player_symbol")
+    message = message.sub("[1]", player_number.to_s)
+  end
 end
