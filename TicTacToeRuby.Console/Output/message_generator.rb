@@ -7,8 +7,8 @@ module MessageGenerator
   end
 
   def self.generate_file_path(file_name, language_tag)
-    raise ArgumentError, "MessageGenerator cannot generate file name as file is nil." if file_name.nil?
-    raise ArgumentError, "MessageGenerator cannot generate file name as file is empty." if file_name == ""
+    raise ArgumentError, argument_error("generate_file_path", "file_name", "nil") if file_name.nil?
+    raise ArgumentError, argument_error("generate_file_path", "file_name", "empty") if file_name == ""
     file_path = get_directory + file_name + "." + language_tag + ".yaml"
   end
 
