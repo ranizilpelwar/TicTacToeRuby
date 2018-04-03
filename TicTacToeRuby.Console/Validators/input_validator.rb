@@ -8,7 +8,7 @@ module InputValidator
     while !valid
       input = reader.read_input_ignore_empty
       valid = list_of_choices.include?(input)
-      writer.display_message("Oops! I couldn't use that. Please try again.") if !valid
+      writer.display_message(MessageGenerator.invalid_selection_error) if !valid
     end
     result = input  
   end
