@@ -44,4 +44,11 @@ module MessageGenerator
     end
      message = message + "\n"
   end
+
+  def self.argument_error(method_name, argument_name, reason)
+    message = get_data("application_text", "argument_error")
+    message = message.sub("[1]", method_name)
+    message = message.sub("[2]", argument_name)
+    message = message.sub("[3]", reason)
+  end
 end

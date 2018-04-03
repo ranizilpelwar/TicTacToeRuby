@@ -1,4 +1,5 @@
 welcome_message: "Welcome to Tic Tac Toe! Let's play a game!"
 language_configuration: "[Press L to change language.]"
 language_selection_prompt: "Which language do you want to use?"
+argument_error: "Cannot [1] because [2] is [3]."
 
