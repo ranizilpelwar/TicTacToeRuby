@@ -100,6 +100,10 @@ module MessageGenerator
     message = message.gsub("[1]", player_symbol.to_s) if parameter_provided?(player_symbol)
   end
 
+  def self.thinking_process_incrementor
+    message = get_data("application_text", "thinking_process_incrementor")
+  end
+
   def self.next_move_prompt(player_symbol)
     message = get_data("application_text", "next_move_prompt")
     message = message.gsub("[1]", player_symbol.to_s) if parameter_provided?(player_symbol)
@@ -139,6 +143,10 @@ module MessageGenerator
 
   def self.invalid_selection_error
     message = get_data("application_text", "invalid_selection_error")
+  end
+
+  def self.line_spacer
+    message = get_data("application_text", "line_spacer")
   end
 
   def self.parameter_provided?(parameter)

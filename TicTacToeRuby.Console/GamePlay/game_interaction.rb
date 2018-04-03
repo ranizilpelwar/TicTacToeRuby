@@ -80,7 +80,7 @@ class GameInteraction
 
   def display_game_over_messages
     @writer.display_message(MessageGenerator.game_over)
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
     display_game_outcome
     prompt_to_exit
   end
@@ -100,7 +100,7 @@ class GameInteraction
       winning_symbol = @game_board.player_manager.current_player.symbol
       @writer.display_message(MessageGenerator.player_won(winning_symbol))
     end
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def prompt_to_continue
@@ -114,13 +114,13 @@ class GameInteraction
     player2_symbol = player2.symbol
     player2_type = player2.type.selected_option
     @writer.display_message(MessageGenerator.players_intro(player1_symbol, player1_type, player2_symbol, player2_type))
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def show_the_board
     @writer.display_message(MessageGenerator.board_intro)
     @writer.display_board(@game_board.board)
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   # Evaluates whether the game play allows for undoing a move. False is returned if there are no moves to undo. This happens when the game first
@@ -144,7 +144,7 @@ class GameInteraction
 
   def display_updated_board_message(symbol_of_current_player, spot)
     @writer.display_message(MessageGenerator.board_square_selection(symbol_of_current_player, spot))
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def display_undo_last_moves_message
@@ -153,13 +153,16 @@ class GameInteraction
     else
       @writer.display_message(MessageGenerator.undo_completion_for_one_player)
     end
-    @writer.display_text("!\n\n")
   end
 
   def display_thinking_process(symbol_of_current_player)
     raise ArgumentError, MessageGenerator.argument_error("display_thinking_process", "symbol_of_current_player", "empty") if symbol_of_current_player == ""
     @writer.display_text(MessageGenerator.thinking_process_for_computers_turn(symbol_of_current_player))
-    @writer.display_text("\n")
+    3.times do
+      @writer.display_text(MessageGenerator.thinking_process_incrementor)
+      sleep(1) # seconds
+    end
+    @writer.display_text(MessageGenerator.line_spacer)
   end
 
   def prompt_for_next_move
