@@ -21,7 +21,7 @@ module MessageGenerator
   end
 
   def self.welcome
-    message = get_data("application_text", "welcome_message")
+    message = get_data("application_text", "welcome")
   end
 
   def self.language_configuration
@@ -45,19 +45,88 @@ module MessageGenerator
      message = message + "\n"
   end
 
+  def self.player_symbol_prompt(player_number)
+    message = get_data("application_text", "player_symbol_prompt")
+    message = message.gsub("[1]", player_number.to_s)
+  end
+
+  def self.undo_last_move_option
+    message = get_data("application_text", "undo_last_move_option")
+  end
+
+  def self.game_over
+    message = get_data("application_text", "game_over")
+  end
+
+  def self.exit_game
+    message = get_data("application_text", "exit_game")
+  end
+
+  def self.tie_game
+    message = get_data("application_text", "tie_game")
+  end
+
+  def self.continue_prompt
+    message = get_data("application_text", "continue_prompt")
+  end
+
+  def self.player_won(winning_symbol)
+    message = get_data("application_text", "player_won")
+    message = message.gsub("[1]", winning_symbol) if parameter_provided?(winning_symbol)
+  end
+
+  def self.players_intro(player1_symbol, player1_type, player2_symbol, player2_type)
+    message = get_data("application_text", "players_intro")
+    message = message.gsub("[1]", player1_symbol.to_s) if parameter_provided?(player1_symbol)
+    message = message.gsub("[2]", player1_type.to_s) if parameter_provided?(player1_type)
+    message = message.gsub("[3]", player2_symbol.to_s) if parameter_provided?(player2_symbol)
+    message = message.gsub("[4]", player2_type.to_s) if parameter_provided?(player2_type)
+  end
+
+  def self.board_intro
+    message = get_data("application_text", "board_intro")
+  end
+
+  def self.undo_completion_for_one_player
+    message = get_data("application_text", "undo_completion_for_one_player")
+  end
+
+  def self.undo_completion_for_both_players
+    message = get_data("application_text", "undo_completion_for_both_players")
+  end
+
+  def self.thinking_process_for_computers_turn(player_symbol)
+    message = get_data("application_text", "thinking_process_for_computers_turn")
+    message = message.gsub("[1]", player_symbol.to_s) if parameter_provided?(player_symbol)
+  end
+
+  def self.next_move_prompt(player_symbol)
+    message = get_data("application_text", "next_move_prompt")
+    message = message.gsub("[1]", player_symbol.to_s) if parameter_provided?(player_symbol)
+  end
+
+  def self.board_square_selection(player_symbol, board_square)
+    message = get_data("application_text", "board_square_selection")
+    message = message.gsub("[1]", player_symbol.to_s) if parameter_provided?(player_symbol)
+    message = message.gsub("[2]", board_square.to_s) if parameter_provided?(board_square)
+  end
+  
   def self.argument_error(method_name, argument_name, reason)
     message = get_data("application_text", "argument_error")
-    message = message.sub("[1]", method_name)
-    message = message.sub("[2]", argument_name)
-    message = message.sub("[3]", reason)
+    message = message.gsub("[1]", method_name)
+    message = message.gsub("[2]", argument_name)
+    message = message.gsub("[3]", reason)
   end
 
   def self.uniqueness_error
     message = get_data("application_text", "uniqueness_error")
   end
 
-  def self.prompt_for_player_symbol(player_number)
-    message = get_data("application_text", "prompt_for_player_symbol")
-    message = message.sub("[1]", player_number.to_s)
+  def self.invalid_selection_error
+    message = get_data("application_text", "invalid_selection_error")
+  end
+
+  def self.parameter_provided?(parameter)
+    result = parameter != "" || !(parameter.nil?)
   end
 end

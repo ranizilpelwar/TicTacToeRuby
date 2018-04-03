@@ -115,7 +115,7 @@ class GamePlaySetup
   def setup_game_interaction(game_board, match_type)
     raise ArgumentError, MessageGenerator.argument_error("setup_game_interaction", "game_board", "nil") if game_board.nil?
     raise ArgumentError, MessageGenerator.argument_error("setup_game_interaction", "match_type", "nil") if match_type.nil?
-    record_last_moves = match_type.player1_type == :Human || match_type.player2_type == :Human
+    record_last_moves = match_type.player1_type.selected_option == :Human || match_type.player2_type.selected_option == :Human
     game_interaction = GameInteraction.new(@writer, @reader, game_board, record_last_moves, match_type)
   end
 
@@ -142,6 +142,6 @@ class GamePlaySetup
   end
 
   def prompt_for_player_symbol(player_number)
-    writer.display_message(MessageGenerator.prompt_for_player_symbol(player_number))
+    writer.display_message(MessageGenerator.player_symbol_prompt(player_number))
   end
 end
