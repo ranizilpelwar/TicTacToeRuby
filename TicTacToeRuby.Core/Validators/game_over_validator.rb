@@ -1,8 +1,9 @@
 require_relative '../Validators/player_symbol_validator.rb'
+require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
 
 module GameOverValidator
   def self.game_over?(board)
-    raise ArgumentError, "Cannot determine if game is over because provided board is nil." if board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("determine game_over", "board", "nil") if board.nil?
     result =  board[0] == board[1] && board[1] == board[2] ||
               board[3] == board[4] && board[4] == board[5] ||
               board[6] == board[7] && board[7] == board[8] ||
@@ -14,8 +15,8 @@ module GameOverValidator
   end
 
   def self.win_for_player?(player_symbol, board)
-    raise ArgumentError, "Cannot determine if player won because provided board is nil." if board.nil?
-    raise ArgumentError, "Cannot determine if player won because provided player symbol is invalid." if !PlayerSymbolValidator.valid?(player_symbol)
+    raise ArgumentError, MessageGenerator.argument_error("determine win_for_player", "board", "nil") if board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("determine win_for_player", "player_symbol", "invalid") if !PlayerSymbolValidator.valid?(player_symbol)
     result =    (board[0] == player_symbol && board[1] == player_symbol && board[2] == player_symbol) ||
                 (board[3] == player_symbol && board[4] == player_symbol && board[5] == player_symbol) ||
                 (board[6] == player_symbol && board[7] == player_symbol && board[8] == player_symbol) ||

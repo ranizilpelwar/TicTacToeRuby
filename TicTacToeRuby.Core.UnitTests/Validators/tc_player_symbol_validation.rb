@@ -4,8 +4,7 @@ require_relative '../../TicTacToeRuby.Core/Validators/player_symbol_validator.rb
 class TestPlayerSymbolValidation < Test::Unit::TestCase
   def test_an_empty_string_is_not_a_valid_player_symbol
     input = ""
-    return_value = PlayerSymbolValidator.valid?(input)
-    assert_false(return_value, "An empty string should not be a valid player symbol.")
+    assert_raise ArgumentError do PlayerSymbolValidator.valid?(input) end
   end
 
   def test_a_single_digit_value_is_not_a_valid_player_symbol

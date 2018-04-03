@@ -16,12 +16,11 @@ class FirstPlayerSetup
   end
 
   def self.prompt_for_input(writer, player_symbol_one, player_symbol_two)
-    message = "Who should play first, #{player_symbol_one} or #{player_symbol_two}?"
-    writer.display_message(message)
+    writer.display_message(MessageGenerator.first_player_of_game_prompt(player_symbol_one, player_symbol_two))
   end
 
   def self.display_invalid_input_message(writer)
-    writer.display_message("Oops! I couldn't use that. Try again.")
+    writer.display_message(MessageGenerator.invalid_selection_error)
   end
 
   def self.display_message_and_prompt(writer, player_symbol_one, player_symbol_two)

@@ -1,11 +1,12 @@
 require_relative '../Validators/player_symbol_validator.rb'
+require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
 
 class Player
   attr_reader :type, :symbol
 
   def initialize(type, symbol)
-    raise ArgumentError, "Cannot create Player with an invalid symbol." if !PlayerSymbolValidator.valid?(symbol) 
-    raise ArgumentError, "Cannot create Player with a nil type." if type == nil
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "type", "invalid") if type.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "symbol", "invalid") if !PlayerSymbolValidator.valid?(symbol) 
     @type = type
     @symbol = symbol
   end

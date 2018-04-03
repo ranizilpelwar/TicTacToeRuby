@@ -16,10 +16,10 @@ class GameInteraction
   attr_reader :game_board, :writer, :reader, :player1, :player2, :player_movement_manager, :record_last_moves
 
   def initialize(writer, reader, game_board, last_moves_are_recorded, match_type)
-    raise ArgumentError, "Cannot create new GameInteraction because writer is nil." if writer.nil?
-    raise ArgumentError, "Cannot create new GameInteraction because reader is nil." if reader.nil?
-    raise ArgumentError, "Cannot create new GameInteraction because game_board is nil." if game_board.nil?
-    raise ArgumentError, "Cannot create new GameInteraction because match_type is nil." if match_type.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "writer", "nil") if writer.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "reader", "nil") if reader.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "game_board", "nil") if game_board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("initialize", "match_type", "nil") if match_type.nil?
     @writer = writer
     @reader = reader
     @game_board = game_board
@@ -35,7 +35,7 @@ class GameInteraction
     show_the_players
     show_the_board
     current_player = @game_board.player_manager.current_player
-    prompt_to_continue if current_player.type.selected_option != :Human # Allows human player to review updated board from computer player's last move and proceed to play when ready
+    prompt_to_continue if current_player.type.selected_option != :Human
     continue_playing = true
     while continue_playing
       play_next_turn(current_player)
@@ -46,16 +46,17 @@ class GameInteraction
   end
 
   def play_next_turn(current_player)
-    raise ArgumentError, "Cannot play next turn because current_player is nil." if current_player.nil?
+    raise ArgumentError, MessageGenerator.argument_error("play_next_turn", "current_player", "nil") if current_player.nil?
     symbol_of_current_player = current_player.symbol
     type_of_current_player = current_player.type.selected_option
     spot = -10
     tile = ""
     if type_of_current_player == :Human
       prompt_for_next_move
-      @writer.display_message("OR type the letter U to undo the last move.") if can_undo_moves?
+      @writer.display_message(MessageGenerator.undo_last_move_option) if can_undo_moves?
       spot = get_human_spot(can_undo_moves?)
-      if spot == -1 # reflects Undo choice selection
+      undo_is_selected = spot == -1
+      if undo_is_selected
         @player_movement_manager.undo_last_move(@game_board)
         @writer.clear_screen
         show_the_players
@@ -66,7 +67,6 @@ class GameInteraction
       end
     else
       spot = get_computers_spot
-      # Give the feel that the computer is thinking of the next move:
       display_thinking_process(symbol_of_current_player)
     end
     record_last_move(current_player, spot) if record_last_moves
@@ -79,15 +79,15 @@ class GameInteraction
   end
 
   def display_game_over_messages
-    @writer.display_message("Game Over!")
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.game_over)
+    @writer.display_message(MessageGenerator.line_spacer)
     display_game_outcome
     prompt_to_exit
   end
 
   def prompt_to_exit
     5.times do 
-      @writer.display_message("Press the letter E to exit the game. Goodbye!")
+      @writer.display_message(MessageGenerator.exit_game)
       input = @reader.read_input
       break if input.upcase == "E"
     end 
@@ -95,36 +95,32 @@ class GameInteraction
 
   def display_game_outcome
     if TieGameValidator.tie_game?(@game_board.board)
-      @writer.display_message("No winners this time. It's a tie!")
+      @writer.display_message(MessageGenerator.tie_game)
     else
       winning_symbol = @game_board.player_manager.current_player.symbol
-      @writer.display_message("Player #{winning_symbol} won! Good game!")
+      @writer.display_message(MessageGenerator.player_won(winning_symbol))
     end
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def prompt_to_continue
-    @writer.display_message("Press any key to continue...")
+    @writer.display_message(MessageGenerator.continue_prompt)
     @reader.read_input  
   end
 
   def show_the_players
-    @writer.display_text("Players: ")
-    player1_type = player1.type.selected_option
     player1_symbol = player1.symbol
-    player2_type = player2.type.selected_option
+    player1_type = player1.type.selected_option
     player2_symbol = player2.symbol
-    @writer.display_text("#{player1_symbol} [ #{player1_type} ], ")
-    @writer.display_text("#{player2_symbol} [ #{player2_type} ]")
-    @writer.display_message("\n")
-    @writer.display_message("\n")
+    player2_type = player2.type.selected_option
+    @writer.display_message(MessageGenerator.players_intro(player1_symbol, player1_type, player2_symbol, player2_type))
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def show_the_board
-    @writer.display_message("Tic Tac Toe Board:")
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.board_intro)
     @writer.display_board(@game_board.board)
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   # Evaluates whether the game play allows for undoing a move. False is returned if there are no moves to undo. This happens when the game first
@@ -147,31 +143,31 @@ class GameInteraction
   end
 
   def display_updated_board_message(symbol_of_current_player, spot)
-    @writer.display_message("Player #{symbol_of_current_player} picked spot #{spot}!")
-    @writer.display_message("\n")
+    @writer.display_message(MessageGenerator.board_square_selection(symbol_of_current_player, spot))
+    @writer.display_message(MessageGenerator.line_spacer)
   end
 
   def display_undo_last_moves_message
-    @writer.display_text("Undo complete")
-    @writer.display_text(" for both players") if @player1.type == "Computer" || @player2.type == "Computer"
-    @writer.display_text("!\n\n")
+    if @player1.type == "Computer" || @player2.type == "Computer"
+      @writer.display_message(MessageGenerator.undo_completion_for_both_players)
+    else
+      @writer.display_message(MessageGenerator.undo_completion_for_one_player)
+    end
   end
 
   def display_thinking_process(symbol_of_current_player)
-    raise ArgumentError, "Cannot display_thinking_process because symbol_of_current_player is empty." if symbol_of_current_player == ""
-    message = "Player #{symbol_of_current_player}'s Turn: Player is thinking of next move"
-    @writer.display_text(message)
-    5.times do
-      @writer.display_text(".")
+    raise ArgumentError, MessageGenerator.argument_error("display_thinking_process", "symbol_of_current_player", "empty") if symbol_of_current_player == ""
+    @writer.display_text(MessageGenerator.thinking_process_for_computers_turn(symbol_of_current_player))
+    3.times do
+      @writer.display_text(MessageGenerator.thinking_process_incrementor)
       sleep(1) # seconds
     end
-    @writer.display_text("\n")
+    @writer.display_text(MessageGenerator.line_spacer)
   end
 
   def prompt_for_next_move
     player_symbol = @game_board.player_manager.current_player.symbol
-    @writer.display_message("Player #{player_symbol}'s Turn: Where do you want to move?")
-    @writer.display_message("Type a number that you see on the board.")
+    @writer.display_message(MessageGenerator.next_move_prompt(player_symbol))
   end
 
   # allow_undo: True if the user can type in the letter U to undo the last move, or False otherwise.
@@ -181,7 +177,7 @@ class GameInteraction
     valid_move = false
     expected_input_to_undo_move = "U"
     while(!valid_move)
-      @writer.display_message("Oops! I couldn't use that. Please try another key.") if input != ""
+      @writer.display_message(MessageGenerator.invalid_selection_error) if input != ""
       input = @reader.read_input_ignore_empty
       if allow_undo && input.upcase == expected_input_to_undo_move.upcase
           valid_move = true

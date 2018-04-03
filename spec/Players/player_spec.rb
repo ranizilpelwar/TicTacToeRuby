@@ -34,7 +34,7 @@ RSpec.describe "a player" do
     end
 
     it "cannot be an empty character" do
-      expect(symbol_valid?("")).to be false
+      expect{symbol_valid?("")}.to raise_error(ArgumentError)
     end
   end
 

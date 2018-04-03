@@ -9,7 +9,7 @@ module GamePlayValidator
   # 1) is_valid: True if the tile chosen on the board is a valid move that can be made in the game and false otherwise, and
   # 2) index_of_board: index on the board on which a move should be made. It is provided if is_valid is true. It is -1 otherwise.
   def self.evaluate_move(game_board, tile_on_board)
-    raise ArgumentError, "Cannot evaluate move because provided game_board is nil." if game_board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("evaluate_move", "game_board", "nil") if game_board.nil?
     is_valid_move = false
     index_of_board = -1
     is_digit = AvailableSpacesValidator.digit?(tile_on_board)
@@ -26,9 +26,9 @@ module GamePlayValidator
   end
 
   def self.winning_game?(player_symbol, board, available_spaces)
-    raise ArgumentError, "Cannot evaluate winning game because board is nil." if board.nil?
-    raise ArgumentError, "Cannot evaluate winning game because available_spaces is nil." if available_spaces.nil?
-    raise ArgumentError, "Cannot evaluate winning game because player_symbol is invalid." if !PlayerSymbolValidator.valid?(player_symbol)
+    raise ArgumentError, MessageGenerator.argument_error("determine winning_game", "board", "nil") if board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("determine winning_game", "available_spaces", "nil") if available_spaces.nil?
+    raise ArgumentError, MessageGenerator.argument_error("determine winning_game", "player_symbol", "invalid") if !PlayerSymbolValidator.valid?(player_symbol)
     found_best_move = false
     winning_spot = -1
     temp_board = board.each {  }

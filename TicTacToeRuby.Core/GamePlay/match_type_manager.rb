@@ -27,7 +27,7 @@ class MatchTypeManager
 
   # match_number: The number of the match, where 1 represents the first match displayed in the game (Human vs Human).
   def get_match_type(match_number)
-    raise ArgumentError, "Match number range is 1 - 3." if !valid?(match_number)
+    raise ArgumentError, MessageGenerator.argument_error("get_match_type", "match_number", "not within range [1-3]") if !valid?(match_number)
     index = match_number - 1
     match_type = @matches[index]
   end
@@ -35,5 +35,16 @@ class MatchTypeManager
   def valid?(match_number)
     max_match_number = get_total_available_matches
     valid = match_number >= 1 && match_number <= max_match_number
+  end
+
+  def get_match_numbers
+    array = []
+    number = 1
+    total = get_total_available_matches
+    total.times do 
+      array << number
+      number = number + 1
+    end
+    result = array
   end
 end

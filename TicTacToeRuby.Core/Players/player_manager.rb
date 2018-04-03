@@ -18,7 +18,7 @@ class PlayerManager
 
   # Returns the number of the player stored in Player Manager, where 1 represents player 1 and -1 indicates that the player could not be found.
   def get_player_number(player)
-    raise ArgumentError, "Provided player cannot be nil." if player.nil?
+    raise ArgumentError, MessageGenerator.argument_error("get_player_number", "player", "nil") if player.nil?
     number = 
       if player.equals?(@player1) 
         1

@@ -8,7 +8,6 @@ RSpec.describe "a player symbol validator" do
   end
 
   context "method called valid?" do
-    include_examples "valid symbol", "an empty string", "", false
     include_examples "valid symbol", "a single digit", "1", false
     include_examples "valid symbol", "a dual digit", "11", false
     include_examples "valid symbol", "an input with length greater than 1", "XX", false
@@ -17,5 +16,13 @@ RSpec.describe "a player symbol validator" do
     include_examples "valid symbol", "a percent character", "%", true
     include_examples "valid symbol", "a pound character", "#", true
     include_examples "valid symbol", "a space character", " ", false
+  
+    it "raises an ArgumentError when input is nil" do
+      expect{ PlayerSymbolValidator.valid?(nil) }.to raise_error(ArgumentError)
+    end
+
+    it "raises an ArgumentError when input is an empty string" do
+      expect{ PlayerSymbolValidator.valid?("") }.to raise_error(ArgumentError)
+    end
   end
 end
