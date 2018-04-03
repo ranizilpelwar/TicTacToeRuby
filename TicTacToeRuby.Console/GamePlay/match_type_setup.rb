@@ -16,19 +16,19 @@ class MatchTypeSetup
       input = reader.read_input_ignore_empty
       numeric_input = input.to_i
       valid = match_type_manager.valid?(numeric_input)
-      writer.display_message("Oops! I couldn't use that. Type a number from 1 to #{total_matches}.") unless valid
+      writer.display_message(MessageGenerator.invalid_selection_error) unless valid
     end 
     match_type = match_type_manager.get_match_type(numeric_input)
   end
 
   def self.prompt_for_match_type_selection(writer, match_type_manager)
-    writer.display_message("Who is playing? Please select one of the matches below:")
-    writer.display_message("\n")
+    writer.display_message(MessageGenerator.match_selection_prompt)
     type = 1
     match_type_manager.matches.each { |match|  
       player1_type_selection = match.player1_type.selected_option
       player2_type_selection = match.player2_type.selected_option
-      writer.display_message("#{type}. #{player1_type_selection} Vs #{player2_type_selection}")  
+      writer.display_text(MessageGenerator.option_number(type))
+      writer.display_message(MessageGenerator.match_option_description(player1_type_selection, player2_type_selection))
       type = type + 1
     }
   end

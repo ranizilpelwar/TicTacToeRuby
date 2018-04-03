@@ -110,6 +110,21 @@ module MessageGenerator
     message = message.gsub("[1]", player_symbol.to_s) if parameter_provided?(player_symbol)
     message = message.gsub("[2]", board_square.to_s) if parameter_provided?(board_square)
   end
+
+  def self.match_selection_prompt
+    message = get_data("application_text", "match_selection_prompt")
+  end
+
+  def self.match_option_description(player1_type, player2_type)
+    message = get_data("application_text", "match_option_description")
+    message = message.gsub("[1]", player1_type.to_s) if parameter_provided?(player1_type)
+    message = message.gsub("[2]", player2_type.to_s) if parameter_provided?(player2_type)
+  end
+
+  def self.option_number(number)
+    message = get_data("application_text", "option_number")
+    message = message.gsub("[1]", number.to_s) if parameter_provided?(number)
+  end
   
   def self.argument_error(method_name, argument_name, reason)
     message = get_data("application_text", "argument_error")
