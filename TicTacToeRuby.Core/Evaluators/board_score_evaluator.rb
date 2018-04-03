@@ -1,11 +1,9 @@
 module BoardScoreEvaluator
   def self.score_of_board(board, symbol_of_current_player, symbol_of_other_player)
-    raise ArgumentError, "Cannot evaluate score of board because board is nil." if board.nil?
-    raise ArgumentError, "Cannot evaluate score of board because symbol_of_current_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_current_player)
-    raise ArgumentError, "Cannot evaluate score of board because symbol_of_other_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_other_player)
-    
+    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_board", "board", "nil") if board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_board", "symbol_of_current_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_current_player)
+    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_board", "symbol_of_other_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_other_player)
     score = 0
-
     [
       [0, 1, 2],
       [3, 4, 5],
@@ -18,15 +16,14 @@ module BoardScoreEvaluator
     ].each do |row|
       score = score + score_of_line(board, row, symbol_of_current_player, symbol_of_other_player)
     end
-
     result = score
   end
 
   def self.score_of_line(board, indexes, symbol_of_current_player, symbol_of_other_player)
-    raise ArgumentError, "Cannot evaluate score of line because board is nil." if board.nil?
-    raise ArgumentError, "Cannot evaluate score of line because indexes is nil." if indexes.nil?
-    raise ArgumentError, "Cannot evaluate score of line because symbol_of_current_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_current_player)
-    raise ArgumentError, "Cannot evaluate score of line because symbol_of_other_player is invalid." if !PlayerSymbolValidator.valid?(symbol_of_other_player)
+    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "board", "nil") if board.nil?
+    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "indexes", "nil") if indexes.nil?
+    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "symbol_of_current_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_current_player)
+    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "symbol_of_other_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_other_player)
     
     count_for_current_player = 0
     count_for_other_player = 0
@@ -56,7 +53,7 @@ module BoardScoreEvaluator
         when 0
           score
         else
-          raise ArgumentError, "Count for current player cannot be a value other than 0-3."
+          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_current_player", "is not within range of 1-3")
         end
 
         case count_for_other_player
@@ -69,7 +66,7 @@ module BoardScoreEvaluator
         when 0
           score
         else
-          raise ArgumentError, "Count for other player cannot be a value other than 0-3."
+          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_other_player", "is not within range of 1-3")
         end
     end
   end
