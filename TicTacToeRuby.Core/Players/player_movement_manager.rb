@@ -34,4 +34,20 @@ class PlayerMovementManager
       @player2_last_move = updated_move
     end
   end
+
+  def undo_last_move(game_board)
+    raise ArgumentError, MessageGenerator.argument_error("undo_last_move", "game_board", "nil") if game_board.nil?
+    first_player_type = @match_type.player1_type.selected_option
+    second_player_type = @match_type.player2_type.selected_option
+    if (first_player_type == :Human && second_player_type == :Computer) || (first_player_type == :Computer && second_player_type == :Human)
+      game_board.revert_board(get_last_move_for_player(1))
+      game_board.revert_board(get_last_move_for_player(2))
+    elsif first_player_type == :Human && second_player_type == :Human
+      player_manager = game_board.player_manager
+      player_number = player_manager.get_player_number(player_manager.current_player)
+      game_board.revert_board(get_last_move_for_player(player_number))
+    else
+      raise ArgumentError, MessageGenerator.argument_error("undo_last_move", "match_type", "invalid")
+    end
+  end
 end
