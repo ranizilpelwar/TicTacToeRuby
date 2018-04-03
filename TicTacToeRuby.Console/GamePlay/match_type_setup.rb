@@ -23,6 +23,7 @@ class MatchTypeSetup
 
   def self.prompt_for_match_type_selection(writer, match_type_manager)
     writer.display_message(MessageGenerator.match_selection_prompt)
+    writer.display_message(MessageGenerator.line_spacer)
     type = 1
     match_type_manager.matches.each { |match|  
       player1_type_selection = match.player1_type.selected_option
