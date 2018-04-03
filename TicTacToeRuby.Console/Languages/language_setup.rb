@@ -7,8 +7,8 @@ require_relative '../Input/yaml_reader.rb'
 module LanguageSetup
 
   def self.set_localization(language_tag)
-    raise ArgumentError, "LanguageSetup cannot set localization as language_tag is nil." if language_tag.nil?
-    raise ArgumentError, "LanguageSetup cannot set localization as language_tag is not a valid value." if !(get_language_tags.include?(language_tag))
+    raise ArgumentError, MessageGenerator.argument_error("set_localization", "language_tag", "nil") if language_tag.nil?
+    raise ArgumentError, MessageGenerator.argument_error("set_localization", "language_tag", "an invalid value") if !(get_language_tags.include?(language_tag))
     @localization = language_tag
   end
 
@@ -26,7 +26,7 @@ module LanguageSetup
 
   def self.get_languages_hash
     file_path = MessageGenerator.generate_file_path("language_options", get_localization)
-    raise ArgumentError, "LanguageSetup cannot get languages as file path does not exist." if !(File.exist?(file_path))
+    raise ArgumentError, MessageGenerator.argument_error("get_languages_hash", "file_path", "non-existent") if !(File.exist?(file_path))
     options = YAMLReader.read_data(file_path, "languages")
   end
 

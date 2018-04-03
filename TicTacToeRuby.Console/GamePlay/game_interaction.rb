@@ -115,12 +115,10 @@ class GameInteraction
     player2_type = player2.type.selected_option
     @writer.display_message(MessageGenerator.players_intro(player1_symbol, player1_type, player2_symbol, player2_type))
     @writer.display_message("\n")
-    @writer.display_message("\n")
   end
 
   def show_the_board
     @writer.display_message(MessageGenerator.board_intro)
-    @writer.display_message("\n")
     @writer.display_board(@game_board.board)
     @writer.display_message("\n")
   end
