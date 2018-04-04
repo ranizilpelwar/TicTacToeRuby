@@ -10,7 +10,7 @@ module YAMLReader
     raise ArgumentError, MessageGenerator.argument_error("read_data", "file_path", "non-existent") if !(File.exist?(file_path))
     yaml_file = YAML.load_file(file_path)
     data = yaml_file[property]
-    raise ArgumentError, MessageGenerator.argument_error("read_data", "file content", "nil") if data.nil?
+    raise ArgumentError, MessageGenerator.argument_error("read_data", property.to_s, "missing") if data.nil?
     yaml_content = data
   end
 end
