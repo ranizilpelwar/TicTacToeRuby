@@ -13,24 +13,39 @@ require_relative 'match_type_setup.rb'
 require_relative '../Output/message_generator.rb'
 require_relative '../Validators/input_validator.rb'
 require_relative '../Languages/language_setup.rb'
+require_relative '../Languages/language_options_adapter.rb'
+require_relative '../Languages/language_setup.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+
 
 class GamePlaySetup
   attr_reader :writer, :reader, :game_interaction, :match_type_manager
 
   def initialize(writer, reader)
-    raise ArgumentError, MessageGenerator.argument_error("initialize", "writer", "nil") if writer.nil?
-    raise ArgumentError, MessageGenerator.argument_error("initialize", "reader", "nil") if reader.nil?
+    raise NilReferenceError, "writer" if writer.nil?
+    raise NilReferenceError, "reader" if reader.nil?
     @writer = writer
     @reader = reader
     setup
   end
 
   def setup
-    display_start_screen
+    language_config = LanguageOptionsAdapter.new
+    args = {writer: @writer, 
+            reader: @reader, 
+            language_config: language_config}
+    language_setup = LanguageSetup.new(args)
+    @writer.clear_screen
+    display_introductory_message
+    language_setup.display_language_config_option
+    display_match_options
     inquiry = language_configuration_requested?
     request_language_setup = inquiry.feedback
     if request_language_setup
-      configure_language 
+      @writer.clear_screen
+      language_setup.configure_language
+      @writer.clear_screen
+      setup
     else
       match_input = inquiry.input
       match_type = @match_type_manager.get_match_type(match_input.to_i)
@@ -40,14 +55,7 @@ class GamePlaySetup
     end
   end
 
-  def display_start_screen
-    display_introductory_message
-    display_language_config_option
-    display_match_options
-  end
-
   def display_introductory_message
-    @writer.clear_screen
     @writer.display_message(MessageGenerator.welcome)
     @writer.display_message(MessageGenerator.line_spacer)
   end
@@ -71,12 +79,13 @@ class GamePlaySetup
 
   def configure_language
     @writer.clear_screen
-    @writer.display_message(MessageGenerator.language_selection_prompt)
-    @writer.display_message(MessageGenerator.line_spacer)
-    @writer.display_message(MessageGenerator.language_options)
-    input = InputValidator.get_valid_selection(@writer, @reader, LanguageSetup.get_input_choices)
-    language_tag = LanguageSetup.get_language_tag(input)
-    LanguageSetup.set_localization(language_tag)
+
+    # @writer.display_message(MessageGenerator.language_selection_prompt)
+    # @writer.display_message(MessageGenerator.line_spacer)
+    # @writer.display_message(MessageGenerator.language_options)
+    # input = InputValidator.get_valid_selection(@writer, @reader, LanguageSetup.get_input_choices)
+    # language_tag = LanguageSetup.get_language_tag(input)
+    # LanguageSetup.set_localization(language_tag)
     @writer.clear_screen
     setup
   end
