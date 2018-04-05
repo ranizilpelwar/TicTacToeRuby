@@ -1,4 +1,5 @@
 require_relative '../Input/yaml_reader.rb'
+require_relative '../Languages/language_options_adapter.rb'
 
 module MessageGenerator
 
