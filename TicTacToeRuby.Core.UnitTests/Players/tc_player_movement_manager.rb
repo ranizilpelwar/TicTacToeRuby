@@ -2,6 +2,7 @@ require 'test/unit'
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class TestPlayerMovementManager < Test::Unit::TestCase
 
@@ -14,7 +15,7 @@ class TestPlayerMovementManager < Test::Unit::TestCase
 
   def test_initialize_raises_an_exception_when_type_of_match_is_nil
     type_of_match = nil
-    assert_raises(ArgumentError) { PlayerMovementManager.new(type_of_match) }
+    assert_raises(NilReferenceError) { PlayerMovementManager.new(type_of_match) }
   end
 
   def test_initialize_sets_last_move_of_player1_to_negative_one_when_type_of_match_is_given
@@ -29,16 +30,16 @@ class TestPlayerMovementManager < Test::Unit::TestCase
     assert_equal(@type_of_match, @player_movement_manager.match_type, "Match types should be the same")
   end
 
-  def test_get_last_move_for_player_raises_ArgumentError_when_player_number_is_zero
-    assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(0) }
+  def test_get_last_move_for_player_raises_InvalidValueError_when_player_number_is_zero
+    assert_raises(InvalidValueError) { @player_movement_manager.get_last_move_for_player(0) }
   end  
 
-  def test_get_last_move_for_player_raises_ArgumentError_when_player_number_is_negative
-    assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(-1) }
+  def test_get_last_move_for_player_raises_InvalidValueError_when_player_number_is_negative
+    assert_raises(InvalidValueError) { @player_movement_manager.get_last_move_for_player(-1) }
   end
 
-  def test_get_last_move_for_player_raises_ArgumentError_when_player_number_is_three
-    assert_raises(ArgumentError) { @player_movement_manager.get_last_move_for_player(3) }
+  def test_get_last_move_for_player_raises_InvalidValueError_when_player_number_is_three
+    assert_raises(InvalidValueError) { @player_movement_manager.get_last_move_for_player(3) }
   end
 
   def test_get_last_move_returns_last_move_for_player1_when_player_number_is_one
@@ -53,15 +54,6 @@ class TestPlayerMovementManager < Test::Unit::TestCase
     updated_move = 5
     @player_movement_manager.update_last_move_for_player(player_number, updated_move)
     assert_equal(updated_move, @player_movement_manager.get_last_move_for_player(player_number))
-  end
-
-  def test_raises_ArgumentError_when_move_is_negative_one
-    assert_raises(ArgumentError) { @player_movement_manager.raise_argument_error_for_invalid_move(-1) }
-  end
-
-  def test_an_exception_is_raised_when_move_is_greater_than_largest_index
-     largest_index = PlayerMovementManager::LARGEST_INDEX + 1
-     assert_raises(ArgumentError) { @player_movement_manager.raise_argument_error_for_invalid_move(largest_index) }
   end
 
   def test_last_move_is_updated_when_move_is_zero

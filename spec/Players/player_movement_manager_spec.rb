@@ -11,9 +11,9 @@ RSpec.describe "a player movement manager" do
   end
 
   context "initialization" do
-    it "raises an ArgumentError when type of match is nil" do
+    it "raises a NilReferenceError when type of match is nil" do
       type_of_match = nil
-      expect{ PlayerMovementManager.new(type_of_match) }.to raise_error(ArgumentError)
+      expect{ PlayerMovementManager.new(type_of_match) }.to raise_error(NilReferenceError)
     end
 
     it "sets last move of player1 to -1" do
@@ -30,16 +30,16 @@ RSpec.describe "a player movement manager" do
   end
 
   context "method called get_last_move_for_player" do
-    it "raises an ArgumentError when player number is 0" do
-      expect{@player_movement_manager.get_last_move_for_player(0)}.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when player number is 0" do
+      expect{@player_movement_manager.get_last_move_for_player(0)}.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when player number is -1" do
-      expect{@player_movement_manager.get_last_move_for_player(-1)}.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when player number is -1" do
+      expect{@player_movement_manager.get_last_move_for_player(-1)}.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when player number is 3" do
-      expect{@player_movement_manager.get_last_move_for_player(3)}.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when player number is 3" do
+      expect{@player_movement_manager.get_last_move_for_player(3)}.to raise_error(InvalidValueError)
     end
 
     it "returns last move for player1 when player number is set to 1" do
@@ -68,17 +68,6 @@ RSpec.describe "a player movement manager" do
       move = PlayerMovementManager::LARGEST_INDEX
       @player_movement_manager.update_last_move_for_player(player_number, move)
       expect(@player_movement_manager.get_last_move_for_player(player_number)).to eq(move)
-    end
-  end
-
-  context "method called raise_argument_error_for_invalid_move" do
-    it "raises an ArgumentError when the move is -1" do
-      expect{@player_movement_manager.raise_argument_error_for_invalid_move(-1)}.to raise_error(ArgumentError)
-    end
-
-    it "raises an ArgumentError when the move is greater than the largest index" do
-      largest_index = PlayerMovementManager::LARGEST_INDEX + 1
-      expect{@player_movement_manager.raise_argument_error_for_invalid_move(largest_index)}.to raise_error(ArgumentError)
     end
   end
 end

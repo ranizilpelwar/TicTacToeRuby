@@ -1,5 +1,6 @@
 require_relative 'match_type.rb'
 require_relative '../Players/player_type.rb'
+require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
 
 class MatchTypeManager
   attr_reader :matches
