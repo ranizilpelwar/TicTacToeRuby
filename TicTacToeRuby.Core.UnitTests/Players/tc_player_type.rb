@@ -22,7 +22,7 @@ class TestPlayerType < Test::Unit::TestCase
 
   def test_player_type_initialization_raises_PlayerTypeError_when_created_as_a_robot
 
-    assert_raises(PlayerTypeError) { PlayerType.new(:Robot) }
+    assert_raises(InvalidValueError) { PlayerType.new(:Robot) }
   end
 
   def test_valid_returns_true_when_human_is_entered_as_a_parameter

@@ -1,4 +1,4 @@
-require_relative '../Exceptions/player_type_error.rb'
+require_relative '../Exceptions/invalid_value_error.rb'
 require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
 
 class PlayerType
@@ -15,7 +15,7 @@ class PlayerType
     @selected_option = if PlayerType.valid?(type)
                           type
                         else
-                          raise PlayerTypeError.new(MessageGenerator.argument_error("initialize", "type", "invalid"))  
+                          raise InvalidValueError.new  
                         end
   end
 end
