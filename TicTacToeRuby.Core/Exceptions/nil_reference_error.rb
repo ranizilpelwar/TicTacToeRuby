@@ -1,0 +1,2 @@
+class NilReferenceError < StandardError
+end
