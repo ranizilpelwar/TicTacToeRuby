@@ -4,7 +4,7 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/player_type_error.rb'
 RSpec.describe "a player type" do
   context "initialization" do
     it "raises a PlayerTypeError when created as a robot" do
-      expect{PlayerType.new(:Robot)}.to raise_error(PlayerTypeError)
+      expect{PlayerType.new(:Robot)}.to raise_error(InvalidValueError)
     end
   end
 
