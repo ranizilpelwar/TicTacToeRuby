@@ -3,62 +3,42 @@ require_relative '../Output/message_generator.rb'
 require_relative '../Input/console_reader.rb'
 require_relative '../Validators/input_validator.rb'
 require_relative '../Input/yaml_reader.rb'
+require_relative '../Output/yaml_writer.rb'
 
-module LanguageSetup
+class LanguageSetup
 
-  def self.set_localization(language_tag)
-    raise ArgumentError, MessageGenerator.argument_error("set_localization", "language_tag", "nil") if language_tag.nil?
-    raise ArgumentError, MessageGenerator.argument_error("set_localization", "language_tag", "an invalid value") if !(get_language_tags.include?(language_tag))
-    @localization = language_tag
+  attr_reader :ui_writer, :ui_reader, :language_config
+  
+  def initialize(args)
+    @ui_writer = args[:writer]
+    @ui_reader = args[:reader]
+    @language_config = args[:language_config]
   end
 
-  def self.get_localization
-    @localization ||= YAMLReader.read_data("TicTacToeRuby.Console/Languages/global_settings.yaml", "selected_language_tag")
+  def display_language_config_option
+    @ui_writer.display_message(MessageGenerator.language_defaults_error) if !@language_config.valid?(@language_config.get_stored_default)
+    @ui_writer.display_message(MessageGenerator.language_configuration)
+    @ui_writer.display_message(MessageGenerator.line_spacer)
   end
 
-  def self.set_selected_language(writer, reader)
-    language_tag_options = get_language_tags
-    list_of_input_choices = get_input_choices
-    input = InputValidator.get_valid_selection(writer, reader, list_of_input_choices)
-    language_tag = language_tag_options[input.to_i - 1]['tag']
-    configure_language(language_tag)
+  def display_language_configuration_screen
+    @ui_writer.display_message(MessageGenerator.language_selection_prompt)
+    @ui_writer.display_message(MessageGenerator.line_spacer)
+    @ui_writer.display_message(MessageGenerator.language_options)
   end
 
-  def self.get_languages_hash
-    file_path = MessageGenerator.generate_file_path("language_options", get_localization)
-    raise ArgumentError, MessageGenerator.argument_error("get_languages_hash", "file_path", "non-existent") if !(File.exist?(file_path))
-    options = YAMLReader.read_data(file_path, "languages")
+  def get_user_selection
+    input = InputValidator.get_valid_selection(@ui_writer, @ui_reader, @language_config.get_input_choices)
+    language_tag = @language_config.get_language_tag_for(input)
+    result = language_tag
   end
 
-  def self.get_languages
-    options = get_languages_hash
-    languages = []
-    options.each do |language|
-      languages << language['description']
-    end
-    result = languages
+  def update_default_language(tag)
+    @language_config.set_default_language_tag(tag)
   end
 
-  def self.get_input_choices
-    options = get_languages_hash
-    count = options.size
-    valid_selections = [*1..count]
-    valid_selections = valid_selections.map(&:to_s)
-    result = valid_selections
-  end
-
-  def self.get_language_tags
-    options = get_languages_hash
-    tags = []
-    options.each do |language|
-      tags << language['tag']
-    end
-    result = tags
-  end
-
-  def self.get_language_tag(input_choice)
-    input = input_choice.to_i
-    options = get_languages_hash
-    tag = options[input - 1]['tag']
+  def configure_language
+    display_language_configuration_screen
+    update_default_language(get_user_selection)
   end
 end
