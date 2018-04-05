@@ -1,5 +1,5 @@
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
-require_relative '../../TicTacToeRuby.Core/Exceptions/player_type_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a player type" do
   context "initialization" do
