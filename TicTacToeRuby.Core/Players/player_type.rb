@@ -1,5 +1,4 @@
 require_relative '../Exceptions/invalid_value_error.rb'
-require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
 
 class PlayerType
   
