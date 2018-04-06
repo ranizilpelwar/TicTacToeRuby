@@ -3,7 +3,7 @@ require_relative '../../TicTacToeRuby.Core/Players/player.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type_manager.rb'
 
-Given("there is a human") do
+Given("there is a person who wants to play") do
   @type1 = PlayerType.new(:Human)
 end
 
@@ -32,15 +32,19 @@ Then("they play against each other") do
 	expect(@match_manager.get_match_type(1).player2_type.selected_option).to eq(:Human)
 end
 
-Given("there is no one to join the game") do
-	  pending # Write code here that turns the phrase above into concrete actions
+Given("there is no human to join the game") do
+	@type1 = PlayerType.new(:Computer)
+	@type2 = PlayerType.new(:Computer)
 end
 
 When("the game is played") do
-	  pending # Write code here that turns the phrase above into concrete actions
+	@player1 = Player.new(@type1, "X")
+	@player2 = Player.new(@type2, "Y")
+	@match_manager = MatchTypeManager.new
 end
 
 Then("both players are of type computer") do
-	  pending # Write code here that turns the phrase above into concrete actions
+	expect(@match_manager.get_match_type(3).player1_type.selected_option).to eq(:Computer)
+	expect(@match_manager.get_match_type(3).player2_type.selected_option).to eq(:Computer)
 end
 

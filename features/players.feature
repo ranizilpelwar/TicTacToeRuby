@@ -3,17 +3,20 @@ Feature: Setting up players for the game
 	A player can be a human or a computer	
   A player cannot be anything else
 
-Scenario: Select Players
-	Given there is a human
-	When the person plays the game
-	Then the second player is a computer
+Scenario: A game can be played with one person
+Scenario: A game can be played with two people 
+	Scenario: A game can be played with no one
 
-	Given there are two people that want to play
-	When they play the game
-	Then they play against each other
+Scenario: A game can not be played by a dog
+Given there are <number> persons who wants to play
+When the <number> persons play the game
+Then the <first> player is a <type1>
+And the <second> player is a <type2> 
 
-	Given there is no one to join the game
-	When the game is played
-	Then both players are of type computer
-
-
+	Scenario: Someone wants to play a game
+		Given there is a <type>
+		When the <type> wants to play
+		Then they <expectation>
+		A game can be played by a human
+		A game can be played by a computer
+		A game can be played by a dog
