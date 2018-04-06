@@ -29,8 +29,8 @@ RSpec.describe "a game board" do
   end
 
   context "method called update board" do
-    it "raises an ArgumentError when the game piece is nil" do
-      expect{ @game_board.update_board(0, nil) }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when the game piece is nil" do
+      expect{ @game_board.update_board(0, nil) }.to raise_error(NilReferenceError)
     end
 
     it "raises an ArgumentError when the index is the length of the board" do
