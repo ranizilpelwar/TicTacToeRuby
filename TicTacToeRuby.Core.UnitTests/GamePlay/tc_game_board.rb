@@ -1,6 +1,7 @@
 require 'test/unit'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../Players/mock_player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 class TestGameBoard < Test::Unit::TestCase
 
@@ -29,8 +30,8 @@ class TestGameBoard < Test::Unit::TestCase
       "Expected game board's player manager to match the provided one.")
   end
 
-  def test_update_board_raises_argument_error_when_game_piece_is_nil
-    assert_raises(ArgumentError) do @game_board.update_board(0, nil) end
+  def test_update_board_raises_nil_reference_error_when_game_piece_is_nil
+    assert_raises(NilReferenceError) do @game_board.update_board(0, nil) end
   end
 
   def test_update_board_raises_argument_error_when_index_is_length_of_board
