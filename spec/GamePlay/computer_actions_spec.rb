@@ -2,6 +2,8 @@ require_relative '../../TicTacToeRuby.Core/GamePlay/computer_actions.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/computer_actions.rb'
 require_relative '../../TicTacToeRuby.Core.UnitTests/Players/mock_player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "get best move" do
   let(:best_max_move) { -20000 }
@@ -13,20 +15,20 @@ RSpec.describe "get best move" do
     @computer_actions = ComputerActions.new(@game_board)
   end
 
-  it "raises an argument error when board is nil" do
+  it "raises a nil reference error when board is nil" do
     new_board = [ "X", "O", "X",
                   "X", "5", "O",
                   "O", "X", "X" ]
     create_computer_actions(new_board)
-    expect { @computer_actions.get_best_move(nil, "X", 0, best_max_move, best_min_move) }.to raise_error(ArgumentError)
+    expect { @computer_actions.get_best_move(nil, "X", 0, best_max_move, best_min_move) }.to raise_error(NilReferenceError)
   end
 
-  it "raises an argument error when player symbol is not valid" do
+  it "raises an invalid value error when player symbol is a space character" do
     new_board = [ "X", "O", "X",
                   "X", "5", "O",
                   "O", "X", "X" ]
     create_computer_actions(new_board)
-    expect { @computer_actions.get_best_move(nil, " ", 0, best_max_move, best_min_move) }.to raise_error(ArgumentError)
+    expect { @computer_actions.get_best_move(new_board, " ", 0, best_max_move, best_min_move) }.to raise_error(InvalidValueError)
   end
 
   it "returns index of negative one when there are no next moves to make" do
@@ -83,7 +85,7 @@ RSpec.describe "get best move" do
   end
 
   describe "multiple available moves" do
-    include_examples "multiple moves", 1, ["X", "O", "3", "X", "5", "O", "O", "O", "X"], "O", 4
+    include_examples "multiple moves", 1, ["X", "O", "3", "X", "5", "O", "O", "O", "X" ], "O", 4
     include_examples "multiple moves", 2, ["1", "O", "3", "4", "5", "O", "7", "O", "X" ], "O", 4
     include_examples "multiple moves", 3, ["1", "O", "3", "O", "5", "O", "7", "O", "X" ], "O", 4
     include_examples "multiple moves", 4, ["1", "X", "3", "X", "5", "O", "7", "X", "O" ], "O", 2

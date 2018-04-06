@@ -5,12 +5,14 @@ require_relative '../Validators/available_spaces_validator.rb'
 require_relative '../Validators/game_over_validator.rb'
 require_relative '../Validators/player_symbol_validator.rb'
 require_relative '../Evaluators/board_score_evaluator.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class ComputerActions
   attr_reader :current_player, :other_player, :game_board
 
   def initialize(game_board)
-    raise ArgumentError, MessageGenerator.argument_error("initialize", "game_board", "nil") if game_board.nil?
+    raise NilReferenceError, "game_board" if game_board.nil?
     @game_board = game_board
     @player_manager = @game_board.player_manager
     @current_player = @player_manager.current_player.symbol
@@ -22,8 +24,8 @@ class ComputerActions
   end
 
   def get_best_move(board, player_symbol, depth, best_max_value, best_min_value)
-    raise ArgumentError, MessageGenerator.argument_error("get_best_move", "board", "nil") if board.nil?
-    raise ArgumentError, MessageGenerator.argument_error("get_best_move", "player_symbol", "invalid") if !PlayerSymbolValidator.valid?(player_symbol)
+    raise NilReferenceError, "board" if board.nil?
+    raise InvalidValueError, "player_symbol" if !PlayerSymbolValidator.valid?(player_symbol)
     next_moves = AvailableSpacesValidator.get_available_spaces(board)
     tile = ""
     current_score = 0
