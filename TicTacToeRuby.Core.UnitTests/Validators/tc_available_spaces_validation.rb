@@ -1,10 +1,11 @@
 require 'test/unit'
 require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 class TestAvailableSpacesValidation < Test::Unit::TestCase
-  def test_get_available_spaces_raises_an_error_when_board_is_nil
-    assert_raises(ArgumentError) do AvailableSpacesValidator.get_available_spaces(nil) end
+  def test_get_available_spaces_raises_a_nil_reference_error_when_board_is_nil
+    assert_raises(NilReferenceError) do AvailableSpacesValidator.get_available_spaces(nil) end
   end
 
   def test_alpha_character_is_not_a_valid_digit
