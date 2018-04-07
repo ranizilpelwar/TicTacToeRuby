@@ -1,5 +1,6 @@
 require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 RSpec.describe "a tie game validator" do
   
@@ -10,8 +11,8 @@ RSpec.describe "a tie game validator" do
   end
   
   context "method called tie_game?" do
-    it "raises an ArgumentError when provided board is nil" do
-      expect{TieGameValidator.tie_game?(nil)}.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when provided board is nil" do
+      expect{TieGameValidator.tie_game?(nil)}.to raise_error(NilReferenceError)
     end
 
     include_examples "tie_game?", "there are no moves played", GameBoard.create_board, false
