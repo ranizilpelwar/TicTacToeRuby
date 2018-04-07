@@ -10,15 +10,15 @@ class PlayerMovementManager
 
 # Type of Match being played determines which player moves are reverted (one or both).
   def initialize(type_of_match)
-    raise NilReferenceError if type_of_match == nil
+    raise NilReferenceError, "type_of_match" if type_of_match == nil
       @player1_last_move = -1
       @player2_last_move = -1
       @match_type = type_of_match
   end
 
   def raise_error_for_invalid_player_number(player_number)
-    raise NilReferenceError if player_number.nil?
-    raise InvalidValueError if player_number != 1 && player_number != 2
+    raise NilReferenceError, "player_number" if player_number.nil?
+    raise InvalidValueError, "player_number" if player_number != 1 && player_number != 2
   end
 
   def get_last_move_for_player(player_number)
@@ -35,7 +35,7 @@ class PlayerMovementManager
   end
 
   def undo_last_move(game_board)
-    raise NilReferenceError if game_board.nil?
+    raise NilReferenceError, "game_board" if game_board.nil?
     first_player_type = @match_type.player1_type.selected_option
     second_player_type = @match_type.player2_type.selected_option
     if (first_player_type == :Human && second_player_type == :Computer) || (first_player_type == :Computer && second_player_type == :Human)
@@ -46,7 +46,7 @@ class PlayerMovementManager
       player_number = player_manager.get_player_number(player_manager.current_player)
       game_board.revert_board(get_last_move_for_player(player_number))
     else
-      raise InvalidValueError
+      raise InvalidValueError, "game_board"
     end
   end
 end
