@@ -6,6 +6,8 @@ require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 require_relative '../../TicTacToeRuby.Console/GamePlay/game_interaction.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class TestGameInteraction < Test::Unit::TestCase
   
@@ -20,29 +22,29 @@ class TestGameInteraction < Test::Unit::TestCase
     @match_type = MatchType.new(:Computer, :Human)
   end
 
-  def test_raise_argument_error_when_writer_is_nil
-    assert_raises(ArgumentError) do 
+  def test_raise_nil_reference_error_when_writer_is_nil
+    assert_raises(NilReferenceError) do 
       last_moves_are_recorded = false
       GameInteraction.new(nil, @reader, @game_board, last_moves_are_recorded, @match_type)
     end
   end
 
-  def test_raise_argument_error_when_reader_is_nil
-    assert_raises(ArgumentError) do 
+  def test_raise_nil_reference_error_when_reader_is_nil
+    assert_raises(NilReferenceError) do 
       last_moves_are_recorded = false
       GameInteraction.new(@writer, nil, @game_board, last_moves_are_recorded, @match_type)
     end
   end
 
-  def test_raise_argument_error_when_game_board_is_nil
-    assert_raises(ArgumentError) do 
+  def test_raise_nil_reference_error_when_game_board_is_nil
+    assert_raises(NilReferenceError) do 
       last_moves_are_recorded = false
       GameInteraction.new(@writer, @reader, nil, last_moves_are_recorded, @match_type)
     end
   end
 
-  def test_raise_argument_error_when_match_type_is_nil
-    assert_raises(ArgumentError) do 
+  def test_raise_nil_reference_error_when_match_type_is_nil
+    assert_raises(NilReferenceError) do 
       last_moves_are_recorded = false
       GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, nil)
     end
@@ -104,10 +106,10 @@ class TestGameInteraction < Test::Unit::TestCase
     assert(game_interaction.can_undo_moves?)
   end
 
-  def test_play_next_turn_raises_argument_error_when_current_player_is_nil
+  def test_play_next_turn_raises_nil_reference_error_when_current_player_is_nil
     last_moves_are_recorded = false
     game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
-    assert_raises(ArgumentError) do
+    assert_raises(NilReferenceError) do
       game_interaction.play_next_turn(nil)
     end
   end

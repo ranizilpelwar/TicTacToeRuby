@@ -3,6 +3,9 @@ require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/game_play_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
+
 class GameInteraction
 
   # Used to pass in the constraints for the GetComputerSpot method. Represents the Alpha in the Alpha-Beta 
@@ -16,10 +19,10 @@ class GameInteraction
   attr_reader :game_board, :writer, :reader, :player1, :player2, :player_movement_manager, :record_last_moves
 
   def initialize(writer, reader, game_board, last_moves_are_recorded, match_type)
-    raise ArgumentError, MessageGenerator.argument_error("initialize", "writer", "nil") if writer.nil?
-    raise ArgumentError, MessageGenerator.argument_error("initialize", "reader", "nil") if reader.nil?
-    raise ArgumentError, MessageGenerator.argument_error("initialize", "game_board", "nil") if game_board.nil?
-    raise ArgumentError, MessageGenerator.argument_error("initialize", "match_type", "nil") if match_type.nil?
+    raise NilReferenceError, "writer" if writer.nil?
+    raise NilReferenceError, "reader" if reader.nil?
+    raise NilReferenceError, "game_board" if game_board.nil?
+    raise NilReferenceError, "match_type" if match_type.nil?
     @writer = writer
     @reader = reader
     @game_board = game_board
@@ -46,7 +49,7 @@ class GameInteraction
   end
 
   def play_next_turn(current_player)
-    raise ArgumentError, MessageGenerator.argument_error("play_next_turn", "current_player", "nil") if current_player.nil?
+    raise NilReferenceError, "current_player" if current_player.nil?
     symbol_of_current_player = current_player.symbol
     type_of_current_player = current_player.type.selected_option
     spot = -10
@@ -156,7 +159,7 @@ class GameInteraction
   end
 
   def display_thinking_process(symbol_of_current_player)
-    raise ArgumentError, MessageGenerator.argument_error("display_thinking_process", "symbol_of_current_player", "empty") if symbol_of_current_player == ""
+    raise InvalidValueError, "symbol_of_current_player" if symbol_of_current_player == ""
     @writer.display_text(MessageGenerator.thinking_process_for_computers_turn(symbol_of_current_player))
     3.times do
       @writer.display_text(MessageGenerator.thinking_process_incrementor)
