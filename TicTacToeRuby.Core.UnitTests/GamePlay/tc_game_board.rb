@@ -12,8 +12,8 @@ class TestGameBoard < Test::Unit::TestCase
     @game_board = GameBoard.new(@player_manager, @board)
   end
 
-  def test_initialize_will_raise_an_ArgumentError_when_player_manager_is_nil
-    assert_raises(ArgumentError) do GameBoard.new(nil) end
+  def test_initialize_will_raise_a_nil_reference_error_when_player_manager_is_nil
+    assert_raises(NilReferenceError) do GameBoard.new(nil) end
   end
 
   def test_create_board_will_create_a_nine_element_board
@@ -34,16 +34,16 @@ class TestGameBoard < Test::Unit::TestCase
     assert_raises(NilReferenceError) do @game_board.update_board(0, nil) end
   end
 
-  def test_update_board_raises_argument_error_when_index_is_length_of_board
-    assert_raises(ArgumentError) do @game_board.update_board(9, "X") end
+  def test_update_board_raises_an_invalid_value_error_when_index_is_length_of_board
+    assert_raises(InvalidValueError) do @game_board.update_board(9, "X") end
   end
 
-  def test_update_board_raises_argument_error_when_index_is_greater_than_length_of_board
-    assert_raises(ArgumentError) do @game_board.update_board(11, "X") end
+  def test_update_board_raises_an_invalid_value_error_when_index_is_greater_than_length_of_board
+    assert_raises(InvalidValueError) do @game_board.update_board(11, "X") end
   end
 
-  def test_update_board_raises_argument_error_when_index_is_negative
-    assert_raises(ArgumentError) do @game_board.update_board(-1, "X") end
+  def test_update_board_raises_an_invalid_value_error_when_index_is_negative
+    assert_raises(InvalidValueError) do @game_board.update_board(-1, "X") end
   end
 
   def test_expected_spot_on_board_is_updated_with_provided_symbol

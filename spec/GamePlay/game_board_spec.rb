@@ -1,5 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core.UnitTests/Players/mock_player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a game board" do  
   before(:example) do
@@ -15,8 +17,8 @@ RSpec.describe "a game board" do
   end
 
   context "initialization" do
-    it "raises an ArgumentError when player manager is nil" do
-      expect{ GameBoard.new(nil) }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when player manager is nil" do
+      expect{ GameBoard.new(nil, @player_manager) }.to raise_error(NilReferenceError)
     end
 
     it "sets the board to the provided parameter" do
@@ -33,16 +35,16 @@ RSpec.describe "a game board" do
       expect{ @game_board.update_board(0, nil) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when the index is the length of the board" do
-      expect{ @game_board.update_board(9, "X") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when the index is the length of the board" do
+      expect{ @game_board.update_board(9, "X") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when the index is greater than the length of the board" do
-      expect { @game_board.update_board(11, "X") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when the index is greater than the length of the board" do
+      expect { @game_board.update_board(11, "X") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when the index is negative" do
-      expect { @game_board.update_board(-1, "X") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when the index is negative" do
+      expect { @game_board.update_board(-1, "X") }.to raise_error(InvalidValueError)
     end
 
     it "updates a location on the board with the provided symbol" do
@@ -62,16 +64,16 @@ RSpec.describe "a game board" do
   end
 
   context "method called revert board" do
-    it "raises an ArgumentError when the index is the length of the board" do
-      expect{ @game_board.revert_board(9, "X") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when the index is the length of the board" do
+      expect{ @game_board.revert_board(9) }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when the index is greater than the length of the board" do
-      expect{ @game_board.revert_board(11, "X") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when the index is greater than the length of the board" do
+      expect{ @game_board.revert_board(11) }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when the index is negative" do
-      expect{ @game_board.revert_board(-1, "X") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when the index is negative" do
+      expect{ @game_board.revert_board(-1) }.to raise_error(InvalidValueError)
     end
 
     it "reverts only the provided location on the board" do
