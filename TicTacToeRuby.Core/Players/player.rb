@@ -7,8 +7,8 @@ class Player
   attr_reader :type, :symbol
 
   def initialize(type, symbol)
-    raise NilReferenceError if type.nil?
-    raise InvalidValueError if !PlayerSymbolValidator.valid?(symbol) 
+    raise NilReferenceError, "type" if type.nil?
+    raise InvalidValueError, "symbol" if !PlayerSymbolValidator.valid?(symbol) 
     @type = type
     @symbol = symbol
   end

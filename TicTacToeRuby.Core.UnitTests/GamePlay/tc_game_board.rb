@@ -13,7 +13,7 @@ class TestGameBoard < Test::Unit::TestCase
   end
 
   def test_initialize_will_raise_a_nil_reference_error_when_player_manager_is_nil
-    assert_raises(NilReferenceError) do GameBoard.new(nil) end
+    assert_raises(NilReferenceError) do GameBoard.new(nil, @player_manager) end
   end
 
   def test_create_board_will_create_a_nine_element_board

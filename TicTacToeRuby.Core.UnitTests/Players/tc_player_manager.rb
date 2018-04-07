@@ -44,8 +44,8 @@ class TestPlayerManager < Test::Unit::TestCase
     assert_equal(-1, @player_manager.get_player_number(player))
   end
 
-  def test_get_player_number_raises_an_argument_error_when_player_is_nil
-    assert_raises(ArgumentError) do
+  def test_get_player_number_raises_a_nil_reference_error_when_player_is_nil
+    assert_raises(NilReferenceError) do
       @player_manager.get_player_number(nil)
     end
   end

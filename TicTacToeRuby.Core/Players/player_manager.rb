@@ -1,8 +1,12 @@
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+
 class PlayerManager
 
   attr_reader :player1, :player2, :current_player
 
   def initialize(player1, player2)
+    raise NilReferenceError, "player1" if player1.nil?
+    raise NilReferenceError, "player2" if player2.nil?
     @player1 = player1
     @player2 = player2
     @current_player = @player1
@@ -18,7 +22,7 @@ class PlayerManager
 
   # Returns the number of the player stored in Player Manager, where 1 represents player 1 and -1 indicates that the player could not be found.
   def get_player_number(player)
-    raise ArgumentError, MessageGenerator.argument_error("get_player_number", "player", "nil") if player.nil?
+    raise NilReferenceError, "player" if player.nil?
     number = 
       if player.equals?(@player1) 
         1
