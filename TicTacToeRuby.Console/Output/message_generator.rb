@@ -1,5 +1,7 @@
 require_relative '../Input/yaml_reader.rb'
 require_relative '../Languages/language_options_adapter.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 module MessageGenerator
 
@@ -15,8 +17,8 @@ module MessageGenerator
   end
 
   def self.generate_file_path(file_name, language_tag)
-    raise ArgumentError, argument_error("generate_file_path", "file_name", "nil") if file_name.nil?
-    raise ArgumentError, argument_error("generate_file_path", "file_name", "empty") if file_name == ""
+    raise NilReferenceError, "file_name" if file_name.nil?
+    raise InvalidValueError, "file_name" if file_name == ""
     file_path = get_directory + file_name + "." + language_tag + ".yaml"
   end
 
