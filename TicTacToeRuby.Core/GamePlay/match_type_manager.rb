@@ -1,6 +1,7 @@
 require_relative 'match_type.rb'
 require_relative '../Players/player_type.rb'
 require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class MatchTypeManager
   attr_reader :matches
@@ -28,7 +29,7 @@ class MatchTypeManager
 
   # match_number: The number of the match, where 1 represents the first match displayed in the game (Human vs Human).
   def get_match_type(match_number)
-    raise ArgumentError, MessageGenerator.argument_error("get_match_type", "match_number", "not within range [1-3]") if !valid?(match_number)
+    raise InvalidValueError, "match_number" if !valid?(match_number)
     index = match_number - 1
     match_type = @matches[index]
   end

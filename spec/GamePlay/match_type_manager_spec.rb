@@ -1,6 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type_manager.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a match type manager" do
   context "intialization" do
@@ -22,14 +23,14 @@ RSpec.describe "a match type manager" do
   end
 
   context "method called get_match_type" do
-    it "raises an ArgumentError when the match number is zero" do
+    it "raises an InvalidValueError when the match number is zero" do
       match_type_manager = MatchTypeManager.new
-      expect{ match_type_manager.get_match_type(0) }.to raise_error(ArgumentError)
+      expect{ match_type_manager.get_match_type(0) }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when the match number is four" do
+    it "raises an InvalidValueError when the match number is four" do
       match_type_manager = MatchTypeManager.new
-      expect{ match_type_manager.get_match_type(4) }.to raise_error(ArgumentError)
+      expect{ match_type_manager.get_match_type(4) }.to raise_error(InvalidValueError)
     end
 
     it "returns a Human vs Human match type when match number is set to one" do

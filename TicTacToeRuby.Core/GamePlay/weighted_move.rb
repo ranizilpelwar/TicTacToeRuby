@@ -6,8 +6,8 @@ class WeightedMove
   attr_accessor :index, :score
 
   def initialize(index, score)
-    raise NilReferenceError if index.nil?
-    raise NilReferenceError if score.nil?
+    raise NilReferenceError, "index" if index.nil?
+    raise NilReferenceError, "score" if score.nil?
     @index = index
     @score = score
   end
