@@ -1,4 +1,6 @@
 require_relative '../../TicTacToeRuby.Console/Output/yaml_writer.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a yaml writer" do
   context "method called write_data" do
@@ -12,60 +14,60 @@ RSpec.describe "a yaml writer" do
       expect(actual_value).to eq(value)
     end
 
-    it "raises an ArgumentError when file_path is nil" do
+    it "raises a NilReferenceError when file_path is nil" do
       file_path = nil
       property = "test_property"
       value = DateTime.now.to_s
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(ArgumentError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when property is nil" do
+    it "raises a NilReferenceError when property is nil" do
       file_path = "spec/TestFiles/testing.en.yaml"
       property = nil
       value = DateTime.now.to_s
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(ArgumentError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when value is nil" do
+    it "raises a NilReferenceError when value is nil" do
       file_path = "spec/TestFiles/testing.en.yaml"
       property = "test_property"
       value = nil
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(ArgumentError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when file_path is empty" do
+    it "raises an InvalidValueError when file_path is empty" do
       file_path = ""
       property = "test_property"
       value = DateTime.now.to_s
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(ArgumentError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when property is empty" do
+    it "raises an InvalidValueError when property is empty" do
       file_path = "spec/TestFiles/testing.en.yaml"
       property = ""
       value = DateTime.now.to_s
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(ArgumentError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when value is empty" do
+    it "raises an InvalidValueError when value is empty" do
       file_path = "spec/TestFiles/testing.en.yaml"
       property = "test_property"
       value = ""
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(ArgumentError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when file is non-existent" do
+    it "raises an InvalidValueError when file is non-existent" do
       file_path = "spec/TestFiles/testing1.en.yaml"
       property = "test_property"
       value = DateTime.now.to_s
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(ArgumentError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(InvalidValueError)
     end
 
-    it "raises a StandardError when nothing is written to the file" do
+    it "raises an InvalidValueError when nothing is written to the file" do
       file_path = "spec/TestFiles/testing.en.yaml"
       property = "test_property"
       value = ""
-      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(StandardError)
+      expect{ YAMLWriter.write_data(file_path, property, value) }.to raise_error(InvalidValueError)
     end
   end
 end
