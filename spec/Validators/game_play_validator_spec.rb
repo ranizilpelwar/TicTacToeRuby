@@ -1,6 +1,8 @@
 require_relative '../../TicTacToeRuby.Core/Validators/game_play_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core.UnitTests/Players/mock_player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a game play validator" do
   
@@ -19,8 +21,8 @@ RSpec.describe "a game play validator" do
   end
 
   context "method called evaluate_move" do
-    it "raises an ArgumentError when game board is nil" do
-      expect{ GamePlayValidator.evaluate_move(nil, "1") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when game board is nil" do
+      expect{ GamePlayValidator.evaluate_move(nil, "1") }.to raise_error(NilReferenceError)
     end
 
     it "returns two elements" do
@@ -40,18 +42,18 @@ RSpec.describe "a game play validator" do
   end
 
   context "method called winning_game?" do
-    it "raises an ArgumentError when game board is nil" do
+    it "raises a NilReferenceError when game board is nil" do
       available_spaces = [0, 1]
-      expect{ GamePlayValidator.winning_game?("X", nil, available_spaces) }.to raise_error(ArgumentError)
+      expect{ GamePlayValidator.winning_game?("X", nil, available_spaces) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when available spaces is nil" do
-      expect{ GamePlayValidator.winning_game?("X", @game_board.board, nil) }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when available spaces is nil" do
+      expect{ GamePlayValidator.winning_game?("X", @game_board.board, nil) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when player symbol is invalid" do
+    it "raises an InvalidValueError when player symbol is invalid" do
       available_spaces = [0, 1]
-      expect{ GamePlayValidator.winning_game?("1", @game_board.board, available_spaces) }.to raise_error(ArgumentError)
+      expect{ GamePlayValidator.winning_game?("1", @game_board.board, available_spaces) }.to raise_error(InvalidValueError)
     end
 
     it "returns two elements" do

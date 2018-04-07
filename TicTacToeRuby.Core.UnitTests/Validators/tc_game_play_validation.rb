@@ -2,6 +2,8 @@ require 'test/unit'
 require_relative '../../TicTacToeRuby.Core/Validators/game_play_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../Players/mock_player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class GamePlayValidation < Test::Unit::TestCase
   
@@ -15,8 +17,8 @@ class GamePlayValidation < Test::Unit::TestCase
     @game_board = GameBoard.new(player_manager, board)
   end
 
-  def test_evaluate_move_raises_an_argument_error_when_game_board_is_nil
-    assert_raises(ArgumentError) do GamePlayValidator.evaluate_move(nil, "1") end
+  def test_evaluate_move_raises_a_nil_reference_error_when_game_board_is_nil
+    assert_raises(NilReferenceError) do GamePlayValidator.evaluate_move(nil, "1") end
   end
 
   def test_evaluate_move_returns_two_elements
@@ -50,18 +52,18 @@ class GamePlayValidation < Test::Unit::TestCase
     assert_equal(0, result.index_of_board, "Unoccupied tile should set index in result set to expected value.")
   end
 
-  def test_winning_game_raises_an_argument_error_when_game_board_is_nil
+  def test_winning_game_raises_a_nil_reference_error_when_game_board_is_nil
     available_spaces = [0, 1]
-    assert_raises(ArgumentError) do GamePlayValidator.winning_game?("X", nil, available_spaces) end
+    assert_raises(NilReferenceError) do GamePlayValidator.winning_game?("X", nil, available_spaces) end
   end
 
-  def test_winning_game_raises_an_argument_error_when_available_spaces_is_nil
-    assert_raises(ArgumentError) do GamePlayValidator.winning_game?("X", @game_board.board, nil) end
+  def test_winning_game_raises_a_nil_reference_error_when_available_spaces_is_nil
+    assert_raises(NilReferenceError) do GamePlayValidator.winning_game?("X", @game_board.board, nil) end
   end
 
-  def test_winning_game_raises_an_argument_error_when_player_symbol_is_invalid
+  def test_winning_game_raises_an_invalid_value_error_when_player_symbol_is_invalid
     available_spaces = [0, 1]
-    assert_raises(ArgumentError) do GamePlayValidator.winning_game?("1", @game_board.board, available_spaces) end
+    assert_raises(InvalidValueError) do GamePlayValidator.winning_game?("1", @game_board.board, available_spaces) end
   end
 
   def test_winning_game_returns_two_elements

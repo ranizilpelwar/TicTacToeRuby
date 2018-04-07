@@ -2,6 +2,8 @@ require_relative '../GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Validators/player_symbol_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 module GamePlayValidator
 
@@ -9,7 +11,7 @@ module GamePlayValidator
   # 1) is_valid: True if the tile chosen on the board is a valid move that can be made in the game and false otherwise, and
   # 2) index_of_board: index on the board on which a move should be made. It is provided if is_valid is true. It is -1 otherwise.
   def self.evaluate_move(game_board, tile_on_board)
-    raise ArgumentError, MessageGenerator.argument_error("evaluate_move", "game_board", "nil") if game_board.nil?
+    raise NilReferenceError, "game_board" if game_board.nil?
     is_valid_move = false
     index_of_board = -1
     is_digit = AvailableSpacesValidator.digit?(tile_on_board)
@@ -26,9 +28,9 @@ module GamePlayValidator
   end
 
   def self.winning_game?(player_symbol, board, available_spaces)
-    raise ArgumentError, MessageGenerator.argument_error("determine winning_game", "board", "nil") if board.nil?
-    raise ArgumentError, MessageGenerator.argument_error("determine winning_game", "available_spaces", "nil") if available_spaces.nil?
-    raise ArgumentError, MessageGenerator.argument_error("determine winning_game", "player_symbol", "invalid") if !PlayerSymbolValidator.valid?(player_symbol)
+    raise NilReferenceError, "board" if board.nil?
+    raise NilReferenceError, "available_spaces" if available_spaces.nil?
+    raise InvalidValueError, "player_symbol" if !PlayerSymbolValidator.valid?(player_symbol)
     found_best_move = false
     winning_spot = -1
     temp_board = board.each {  }
