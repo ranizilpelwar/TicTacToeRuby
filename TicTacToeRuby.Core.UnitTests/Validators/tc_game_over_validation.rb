@@ -1,10 +1,12 @@
 require 'test/unit'
 require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class TestGameOverValidation < Test::Unit::TestCase
-  def test_game_over_raises_argument_error_when_board_is_nil
-    assert_raises(ArgumentError) do GameOverValidator.game_over?(nil) end 
+  def test_game_over_raises_nil_reference_error_when_board_is_nil
+    assert_raises(NilReferenceError) do GameOverValidator.game_over?(nil) end 
   end
 
   def test_game_is_over_when_first_row_on_board_contains_matching_tiles
@@ -57,13 +59,13 @@ class TestGameOverValidation < Test::Unit::TestCase
     assert(!GameOverValidator.game_over?(board), "Expected game over to be false.")
   end
 
-  def test_win_for_player_raises_argument_error_when_provided_board_is_nil
-    assert_raises(ArgumentError) do GameOverValidator.win_for_player?("X", nil) end 
+  def test_win_for_player_raises_nil_reference_error_when_provided_board_is_nil
+    assert_raises(NilReferenceError) do GameOverValidator.win_for_player?("X", nil) end 
   end
 
-  def test_win_for_player_raises_argument_error_when_provided_player_symbol_is_invalid
+  def test_win_for_player_raises_invalid_value_error_when_provided_player_symbol_is_invalid
     board = GameBoard.create_board
-    assert_raises(ArgumentError) do GameOverValidator.win_for_player?("1", board) end 
+    assert_raises(InvalidValueError) do GameOverValidator.win_for_player?("1", board) end 
   end
 
   def test_win_for_player_returns_false_on_brand_new_unplayed_board

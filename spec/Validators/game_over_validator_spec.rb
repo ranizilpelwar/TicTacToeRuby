@@ -1,5 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/Validators/game_over_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a game over validator" do
   
@@ -10,8 +12,8 @@ RSpec.describe "a game over validator" do
   end
 
   context "method called game_over?" do
-    it "raises an ArgumentError when board is nil" do
-      expect{ GameOverValidator.game_over?(nil) }.to raise_error(ArgumentError)
+    it "raises an NilReferenceError when board is nil" do
+      expect{ GameOverValidator.game_over?(nil) }.to raise_error(NilReferenceError)
     end
   
     include_examples "game_over?", "first row contains matching tiles", ["X", "X", "X", "X", "4", "5", "6", "7", "8", "9"], true
@@ -33,12 +35,12 @@ RSpec.describe "a game over validator" do
   end
 
   context "method called win_for_player?" do
-    it "raises an ArgumentError when board is nil" do
-      expect{ GameOverValidator.win_for_player?("X", nil)}.to raise_error(ArgumentError)
+    it "raises an NilReferenceError when board is nil" do
+      expect{ GameOverValidator.win_for_player?("X", nil)}.to raise_error(NilReferenceError)
     end
     
-    it "raises an ArgumentError when player symbol is invalid" do
-      expect{ GameOverValidator.win_for_player?("1", GameBoard.create_board)}.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when player symbol is invalid" do
+      expect{ GameOverValidator.win_for_player?("1", GameBoard.create_board)}.to raise_error(InvalidValueError)
     end
 
     include_examples "win_for_player?", "first row contains matching tiles", "X", ["X", "X", "X", "X", "4", "5", "6", "7", "8", "9"], true
