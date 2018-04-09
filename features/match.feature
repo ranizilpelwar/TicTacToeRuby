@@ -5,11 +5,11 @@ Feature: Setting up the match type
 
 	Scenario: A Human can play against a Human
 		Given a Human wants to play the game
-		When the first match type is selected
+		When match option 1 is selected
 		Then the second player is a Human
 
 	Scenario: A Human can play against a Computer
 		Given a Human wants to play the game
-		When the second match type is selected
+		When match option 2 is selected
 		Then the second player is a Computer
 
