@@ -1,6 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/Players/player.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 RSpec.describe "a player manager" do
   before(:example) do
@@ -61,8 +62,8 @@ RSpec.describe "a player manager" do
       expect(@player_manager.get_player_number(player)).to eq(-1)
     end
 
-    it "raises an ArgumentError when player is nil" do
-      expect{@player_manager.get_player_number(nil)}.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when player is nil" do
+      expect{@player_manager.get_player_number(nil)}.to raise_error(NilReferenceError)
     end
   end
 end

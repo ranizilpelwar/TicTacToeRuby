@@ -1,8 +1,11 @@
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
+
 module BoardScoreEvaluator
   def self.score_of_board(board, symbol_of_current_player, symbol_of_other_player)
-    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_board", "board", "nil") if board.nil?
-    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_board", "symbol_of_current_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_current_player)
-    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_board", "symbol_of_other_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_other_player)
+    raise NilReferenceError, "board" if board.nil?
+    raise InvalidValueError, "symbol_of_current_player" if !PlayerSymbolValidator.valid?(symbol_of_current_player)
+    raise InvalidValueError, "symbol_of_other_player" if !PlayerSymbolValidator.valid?(symbol_of_other_player)
     score = 0
     [
       [0, 1, 2],
@@ -20,10 +23,10 @@ module BoardScoreEvaluator
   end
 
   def self.score_of_line(board, indexes, symbol_of_current_player, symbol_of_other_player)
-    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "board", "nil") if board.nil?
-    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "indexes", "nil") if indexes.nil?
-    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "symbol_of_current_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_current_player)
-    raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "symbol_of_other_player", "invalid") if !PlayerSymbolValidator.valid?(symbol_of_other_player)
+    raise NilReferenceError, "board" if board.nil?
+    raise NilReferenceError, "indexes" if indexes.nil?
+    raise InvalidValueError, "symbol_of_current_player" if !PlayerSymbolValidator.valid?(symbol_of_current_player)
+    raise InvalidValueError, "symbol_of_other_player" if !PlayerSymbolValidator.valid?(symbol_of_other_player)
     
     count_for_current_player = 0
     count_for_other_player = 0
@@ -53,7 +56,7 @@ module BoardScoreEvaluator
         when 0
           score
         else
-          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_current_player", "not within range of 1-3")
+          raise InvalidValueError, "not within range of 1-3"
         end
 
         case count_for_other_player
@@ -66,7 +69,7 @@ module BoardScoreEvaluator
         when 0
           score
         else
-          raise ArgumentError, MessageGenerator.argument_error("calculate score_of_line", "count_for_other_player", "not within range of 1-3")
+          raise InvalidValueError, "not within range of 1-3"
         end
     end
   end

@@ -6,6 +6,8 @@ require_relative '../../TicTacToeRuby.Core/GamePlay/match_type.rb'
 require_relative '../../TicTacToeRuby.Console/GamePlay/game_interaction.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_movement_manager.rb'
 require_relative '../GamePlay/doubles.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.configure do |config|
   config.include Doubles
@@ -22,20 +24,20 @@ RSpec.describe "a game interaction" do
   end
 
   context "initialization" do
-    it "raises ArgumentError when writer is nil" do
-      expect{ GameInteraction.new(nil, @reader, @game_board, false, @match_type) }.to raise_error(ArgumentError)
+    it "raises NilReferenceError when writer is nil" do
+      expect{ GameInteraction.new(nil, @reader, @game_board, false, @match_type) }.to raise_error(NilReferenceError)
     end
 
-    it "raises ArgumentError when reader is nil" do
-      expect{ GameInteraction.new(@writer, nil, @game_board, false, @match_type) }.to raise_error(ArgumentError)
+    it "raises NilReferenceError when reader is nil" do
+      expect{ GameInteraction.new(@writer, nil, @game_board, false, @match_type) }.to raise_error(NilReferenceError)
     end
 
-    it "raises ArgumentError when game board is nil" do
-      expect{ GameInteraction.new(@writer, @reader, nil, false, @match_type) }.to raise_error(ArgumentError)
+    it "raises NilReferenceError when game board is nil" do
+      expect{ GameInteraction.new(@writer, @reader, nil, false, @match_type) }.to raise_error(NilReferenceError)
     end
 
-    it "raises ArgumentError when match type is nil" do
-      expect{ GameInteraction.new(@writer, @reader, @game_board, false, nil) }.to raise_error(ArgumentError)
+    it "raises NilReferenceError when match type is nil" do
+      expect{ GameInteraction.new(@writer, @reader, @game_board, false, nil) }.to raise_error(NilReferenceError)
     end
 
     it "has a nil PlayerMovementManager when last moves is false" do
@@ -101,10 +103,10 @@ RSpec.describe "a game interaction" do
   end
 
   describe "method called play_next_turn" do
-    it "raises an ArgumentError when current player is nil" do
+    it "raises an NilReferenceError when current player is nil" do
       last_moves_are_recorded = false
       game_interaction = GameInteraction.new(@writer, @reader, @game_board, last_moves_are_recorded, @match_type)
-      expect{ game_interaction.play_next_turn(nil) }.to raise_error(ArgumentError)
+      expect{ game_interaction.play_next_turn(nil) }.to raise_error(NilReferenceError)
     end
   end
 end

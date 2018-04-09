@@ -1,16 +1,18 @@
 require 'yaml'
 require_relative '../Languages/language_setup.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 module YAMLReader
   def self.read_data(file_path, property)
-    raise ArgumentError, MessageGenerator.argument_error("read_data", "file_path", "nil") if file_path.nil?
-    raise ArgumentError, MessageGenerator.argument_error("read_data", "property", "nil") if property.nil?
-    raise ArgumentError, MessageGenerator.argument_error("read_data", "file_path", "empty") if file_path == ""
-    raise ArgumentError, MessageGenerator.argument_error("read_data", "property", "empty") if property == ""
-    raise ArgumentError, MessageGenerator.argument_error("read_data", "file_path", "non-existent") if !(File.exist?(file_path))
+    raise NilReferenceError, "file_path" if file_path.nil?
+    raise NilReferenceError, "property" if property.nil?
+    raise InvalidValueError, "file_path" if file_path == ""
+    raise InvalidValueError, "property" if property == ""
+    raise InvalidValueError, "file_path" if !(File.exist?(file_path))
     yaml_file = YAML.load_file(file_path)
     data = yaml_file[property]
-    raise ArgumentError, MessageGenerator.argument_error("read_data", property.to_s, "missing") if data.nil?
+    raise InvalidValueError, property.to_s if data.nil?
     yaml_content = data
   end
 end

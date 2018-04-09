@@ -1,10 +1,11 @@
 require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 RSpec.describe "an available spaces validator" do
   context "method called get_available_spaces" do
-    it "raises an ArgumentError when the board is nil" do
-      expect{ AvailableSpacesValidator.get_available_spaces(nil) }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when the board is nil" do
+      expect{ AvailableSpacesValidator.get_available_spaces(nil) }.to raise_error(NilReferenceError)
     end
 
     it "returns one element when there is only one available spot on the board" do

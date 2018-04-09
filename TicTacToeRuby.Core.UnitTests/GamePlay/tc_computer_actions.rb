@@ -3,6 +3,7 @@ require_relative '../../TicTacToeRuby.Core/GamePlay/computer_actions.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/computer_actions.rb'
 require_relative '../Players/mock_player_manager.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 class TestComputerActions < Test::Unit::TestCase
   BEST_MAX_MOVE = -20000
@@ -16,22 +17,22 @@ class TestComputerActions < Test::Unit::TestCase
     @computer_actions = ComputerActions.new(@game_board)
   end
 
-  def test_get_best_move_raises_argument_error_when_board_is_nil
+  def test_get_best_move_raises_a_nil_reference_error_when_board_is_nil
     new_board = [ "X", "O", "X",
                   "X", "5", "O",
                   "O", "X", "X" ]
     create_computer_actions(new_board)
-    assert_raises(ArgumentError) do
+    assert_raises(NilReferenceError) do
       @computer_actions.get_best_move(nil, "X", 0, BEST_MAX_MOVE, BEST_MIN_MOVE)
     end
   end
 
-  def test_get_best_move_raises_argument_error_when_player_symbol_is_not_valid
+  def test_get_best_move_raises_a_nil_reference_error_when_player_symbol_is_not_valid
     new_board = [ "X", "O", "X",
                   "X", "5", "O",
                   "O", "X", "X" ]
     create_computer_actions(new_board)
-    assert_raises(ArgumentError) do
+    assert_raises(NilReferenceError) do
       @computer_actions.get_best_move(nil, " ", 0, BEST_MAX_MOVE, BEST_MIN_MOVE)
     end
   end

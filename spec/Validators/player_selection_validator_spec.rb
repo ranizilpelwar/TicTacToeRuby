@@ -14,28 +14,28 @@ RSpec.describe "a player selection validator" do
     include_examples "match symbol entries", "a lowercase value for player 1", "a", "A", "B", true
     include_examples "match symbol entries", "a lowercase value for player 2", "b", "A", "B", true
   
-    it "raises an ArgumentError when input is nil" do
-      expect{ PlayerSelectionValidator.valid?(nil, "X", "Y") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when input is nil" do
+      expect{ PlayerSelectionValidator.valid?(nil, "X", "Y") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when player_symbol_one is nil" do
-      expect{ PlayerSelectionValidator.valid?("input", nil, "X") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when player_symbol_one is nil" do
+      expect{ PlayerSelectionValidator.valid?("input", nil, "X") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when player_symbol_two is nil" do
-      expect{ PlayerSelectionValidator.valid?("input", "X", nil) }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when player_symbol_two is nil" do
+      expect{ PlayerSelectionValidator.valid?("input", "X", nil) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when input is an empty string" do
-      expect{ PlayerSelectionValidator.valid?("", "X", "Y") }.to raise_error(ArgumentError)
+    it "raises a InvalidValueError when input is an empty string" do
+      expect{ PlayerSelectionValidator.valid?("", "X", "Y") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when player_symbol_one is an empty string" do
-      expect{ PlayerSelectionValidator.valid?("input", "", "X") }.to raise_error(ArgumentError)
+    it "raises a InvalidValueError when player_symbol_one is an empty string" do
+      expect{ PlayerSelectionValidator.valid?("input", "", "X") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when player_symbol_two is an empty string" do
-      expect{ PlayerSelectionValidator.valid?("input", "X", "") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when player_symbol_two is an empty string" do
+      expect{ PlayerSelectionValidator.valid?("input", "X", "") }.to raise_error(InvalidValueError)
     end
   end
 end

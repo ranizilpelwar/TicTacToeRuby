@@ -122,8 +122,8 @@ class GamePlaySetup
   end
 
   def setup_game_interaction(game_board, match_type)
-    raise ArgumentError, MessageGenerator.argument_error("setup_game_interaction", "game_board", "nil") if game_board.nil?
-    raise ArgumentError, MessageGenerator.argument_error("setup_game_interaction", "match_type", "nil") if match_type.nil?
+    raise NilReferenceError, "game_board" if game_board.nil?
+    raise NilReferenceError, "match_type" if match_type.nil?
     record_last_moves = match_type.player1_type.selected_option == :Human || match_type.player2_type.selected_option == :Human
     game_interaction = GameInteraction.new(@writer, @reader, game_board, record_last_moves, match_type)
   end

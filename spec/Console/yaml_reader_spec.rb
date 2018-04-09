@@ -1,15 +1,17 @@
 require_relative '../../TicTacToeRuby.Console/Input/yaml_reader.rb'
 require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a YAML Reader" do 
 
   context "method called generate_file_path" do
-    it "raises an ArgumentError when file is nil" do
-      expect{ MessageGenerator.generate_file_path(nil, "en") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when file is nil" do
+      expect{ MessageGenerator.generate_file_path(nil, "en") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when file is empty" do
-      expect{ MessageGenerator.generate_file_path("", "en") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when file is empty" do
+      expect{ MessageGenerator.generate_file_path("", "en") }.to raise_error(InvalidValueError)
     end
 
     it "returns a constructed string reprenting a file path" do
@@ -31,28 +33,28 @@ RSpec.describe "a YAML Reader" do
   end
 
   context "method called read_data" do
-    it "raises an ArgumentError when file is nil" do
-      expect{ YAMLReader.read_data(nil, "welcome") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when file is nil" do
+      expect{ YAMLReader.read_data(nil, "welcome") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when file is empty" do
-      expect{ YAMLReader.read_data(nil, "welcome") }.to raise_error(ArgumentError)
+    it "raises an NilReferenceError when file is empty" do
+      expect{ YAMLReader.read_data(nil, "welcome") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when property is nil" do
-      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/application_text.en.yaml", nil) }.to raise_error(ArgumentError)
+    it "raises an NilReferenceError when property is nil" do
+      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/application_text.en.yaml", nil) }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when property is empty" do
-      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/application_text.en.yaml", "") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when property is empty" do
+      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/application_text.en.yaml", "") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when an invalid file name is supplied" do
-      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/fake_file_name.yaml", "welcome_message") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when an invalid file name is supplied" do
+      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/fake_file_name.yaml", "welcome_message") }.to raise_error(InvalidValueError)
     end
     
-    it "raises an ArgumentError when an invalid property name is supplied" do
-      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/application_text.en.yaml", "fake_property") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when an invalid property name is supplied" do
+      expect{ YAMLReader.read_data("TicTacToeRuby.Console/Languages/application_text.en.yaml", "fake_property") }.to raise_error(InvalidValueError)
     end
 
     it "returns the text stored in the yaml file when a valid file and property name is supplied" do

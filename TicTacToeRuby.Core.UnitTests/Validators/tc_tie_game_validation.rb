@@ -1,10 +1,11 @@
 require 'test/unit'
 require_relative '../../TicTacToeRuby.Core/Validators/tie_game_validator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 class TestTieGameValidation < Test::Unit::TestCase
   def test_tie_game_raises_error_when_provided_board_is_nil
-    assert_raises(ArgumentError) do TieGameValidator.tie_game?(nil) end
+    assert_raises(NilReferenceError) do TieGameValidator.tie_game?(nil) end
   end
 
   def test_tie_game_returns_false_on_brand_new_unplayed_board

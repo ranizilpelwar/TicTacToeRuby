@@ -34,7 +34,7 @@ RSpec.describe "a player" do
     end
 
     it "cannot be an empty character" do
-      expect{symbol_valid?("")}.to raise_error(ArgumentError)
+      expect{symbol_valid?("")}.to raise_error(InvalidValueError)
     end
   end
 
@@ -83,12 +83,12 @@ RSpec.describe "a player" do
   end
 
   describe "intialization" do
-    it "raises an ArgumentError when an invalid symbol is passed in" do
-      expect{ Player.new(:Human, " ") }.to raise_error(ArgumentError)
+    it "raises an InvalidValueError when an invalid symbol is passed in" do
+      expect{ Player.new(:Human, " ") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when type is nil" do
-      expect{ Player.new(nil, " ") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when type is nil" do
+      expect{ Player.new(nil, " ") }.to raise_error(NilReferenceError)
     end
   end
 

@@ -1,20 +1,22 @@
 require_relative '../../TicTacToeRuby.Core/Evaluators/board_score_evaluator.rb'
 require_relative '../../TicTacToeRuby.Core/GamePlay/game_board.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 RSpec.describe "a board score evaluator" do
   context "method called score_of_board" do
-    it "raises an ArgumentError when board is nil" do
-      expect{ BoardScoreEvaluator.score_of_board(nil, "X", "Y") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when board is nil" do
+      expect{ BoardScoreEvaluator.score_of_board(nil, "X", "Y") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when symbol of current player is invalid" do
+    it "raises an InvalidValueError when symbol of current player is invalid" do
       board = GameBoard.create_board
-      expect{ BoardScoreEvaluator.score_of_board(board, "1", "Y") }.to raise_error(ArgumentError)
+      expect{ BoardScoreEvaluator.score_of_board(board, "1", "Y") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when symbol of other player is invalid" do
+    it "raises an InvalidValueError when symbol of other player is invalid" do
       board = GameBoard.create_board
-      expect{ BoardScoreEvaluator.score_of_board(board, "X", "1") }.to raise_error(ArgumentError)
+      expect{ BoardScoreEvaluator.score_of_board(board, "X", "1") }.to raise_error(InvalidValueError)
     end
   end
 
@@ -26,23 +28,23 @@ RSpec.describe "a board score evaluator" do
   end
 
   context "method called score_of_line" do
-    it "raises an ArgumentError when board is nil" do
-      expect{ BoardScoreEvaluator.score_of_line(nil, [], "X", "Y") }.to raise_error(ArgumentError)
+    it "raises a NilReferenceError when board is nil" do
+      expect{ BoardScoreEvaluator.score_of_line(nil, [], "X", "Y") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when indexes is nil" do
+    it "raises a NilReferenceError when indexes is nil" do
       board = GameBoard.create_board
-      expect{ BoardScoreEvaluator.score_of_line(board, nil, "X", "Y") }.to raise_error(ArgumentError)
+      expect{ BoardScoreEvaluator.score_of_line(board, nil, "X", "Y") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an ArgumentError when symbol of current player is invalid" do
+    it "raises an InvalidValueError when symbol of current player is invalid" do
       board = GameBoard.create_board
-      expect{ BoardScoreEvaluator.score_of_line(board, [], "1", "Y") }.to raise_error(ArgumentError)
+      expect{ BoardScoreEvaluator.score_of_line(board, [], "1", "Y") }.to raise_error(InvalidValueError)
     end
 
-    it "raises an ArgumentError when symbol of other player is invalid" do
+    it "raises an InvalidValueError when symbol of other player is invalid" do
       board = GameBoard.create_board
-      expect{ BoardScoreEvaluator.score_of_line(board, [], "X", "1") }.to raise_error(ArgumentError)
+      expect{ BoardScoreEvaluator.score_of_line(board, [], "X", "1") }.to raise_error(InvalidValueError)
     end
 
     include_examples "score of line", 1, ["O", "O", "O", "O", "5", "O", "7", "O", "X"], [0, 1, 2], 100

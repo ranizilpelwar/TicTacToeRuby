@@ -1,10 +1,11 @@
 require 'test/unit'
 require_relative '../../TicTacToeRuby.Core/Validators/player_symbol_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class TestPlayerSymbolValidation < Test::Unit::TestCase
   def test_an_empty_string_is_not_a_valid_player_symbol
     input = ""
-    assert_raise ArgumentError do PlayerSymbolValidator.valid?(input) end
+    assert_raise InvalidValueError do PlayerSymbolValidator.valid?(input) end
   end
 
   def test_a_single_digit_value_is_not_a_valid_player_symbol
