@@ -17,3 +17,11 @@ When("a computer wants to play the game") do
   @type = :Computer
   @player_type = PlayerType.new(@type)
 end
+
+When("a dog wants to play the game") do
+  @type = :Dog
+end
+
+Then("they cannot") do
+  expect{ @player_type = PlayerType.new(@type) }.to raise_error(InvalidValueError)
+end
