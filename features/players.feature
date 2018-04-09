@@ -6,9 +6,9 @@ Scenario Outline: A player can be a human or a computer
 		
 	Examples: 
 			|type    |expectation|
-			|human   |can        |
-			|computer|can        |
-			|dog     |cannot     |
+			|Human   |can        |
+			|Computer|can        |
+			|Dog     |cannot     |
 
 	Scenario Outline: A player can customize the symbol used during game play
 		When a <character> is selected
@@ -18,8 +18,10 @@ Scenario Outline: A player can be a human or a computer
 			|character|expectation|
 			|X        |can        |
 			|a        |can        |
+		  |*        |can        |
 			|$        |can        |
       |#        |can        |
 		  |1        |cannot     |
 		  |11       |cannot     |
-		  |xx       |cannot     | 
+			|xx       |cannot     |
+		  |abc      |cannot     |

@@ -11,7 +11,7 @@ class PlayerType
   end
 
   def initialize(type)
-    raise InvalidValueError if !PlayerType.valid?(type)
+    raise InvalidValueError, "type = #{type}" if !PlayerType.valid?(type)
     @selected_option = type
   end
 end
