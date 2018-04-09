@@ -10,7 +10,7 @@ Scenario Outline: A player can be a human or a computer
 			|computer|can        |
 			|dog     |cannot     |
 
-	Scenario Outline: A player can setup the symbol used during game play
+	Scenario Outline: A player can customize the symbol used during game play
 		When a <character> is selected
 		Then it <expectation> be used
 
