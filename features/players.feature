@@ -2,7 +2,7 @@ Feature: Setting up players for a game
 
 Scenario Outline: A player can be a human or a computer
   When a <type> wants to play the game
-  Then they <expectation>
+  Then it <expectation>
 		
 	Examples: 
 			|type    |expectation|

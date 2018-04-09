@@ -8,7 +8,7 @@ When("a human wants to play the game") do
   @player_type = PlayerType.new(@type)
 end
 
-Then("they can") do
+Then("it can") do
   @player = Player.new(@player_type, "X")
   expect(@player_type.selected_option).to eq(@type)
 end
@@ -22,7 +22,7 @@ When("a dog wants to play the game") do
   @type = :Dog
 end
 
-Then("they cannot") do
+Then("it cannot") do
   expect{ @player_type = PlayerType.new(@type) }.to raise_error(InvalidValueError)
 end
 
