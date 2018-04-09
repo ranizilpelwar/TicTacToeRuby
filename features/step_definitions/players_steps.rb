@@ -25,3 +25,20 @@ end
 Then("they cannot") do
   expect{ @player_type = PlayerType.new(@type) }.to raise_error(InvalidValueError)
 end
+
+When(/a ([^0-9\s]{1}) is selected/) do |character|
+  @character = character
+  @player = Player.new(PlayerType.new(:Human), character)
+end
+
+Then("it can be used") do
+  expect(@player.symbol.upcase).to eq(@character.upcase)
+end
+
+When(/an? ([0-9\s]{1}) is selected/) do |character|
+  @character = character
+end
+
+Then("it cannot be used") do
+  expect{ @player = Player.new(PlayerType.new(:Human), @character)}.to raise_error(InvalidValueError)
+end
