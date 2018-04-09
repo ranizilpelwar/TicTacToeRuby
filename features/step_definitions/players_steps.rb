@@ -39,6 +39,10 @@ When(/an? ([0-9\s]{1}) is selected/) do |character|
   @character = character
 end
 
+When(/an? (.{2,}) is selected/) do |character|
+  @character = character
+end
+
 Then("it cannot be used") do
   expect{ @player = Player.new(PlayerType.new(:Human), @character)}.to raise_error(InvalidValueError)
 end

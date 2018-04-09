@@ -18,5 +18,8 @@ Scenario Outline: A player can be a human or a computer
 			|character|expectation|
 			|X        |can        |
 			|a        |can        |
-			|1        |cannot     |
-
+			|$        |can        |
+      |#        |can        |
+		  |1        |cannot     |
+		  |11       |cannot     |
+		  |xx       |cannot     | 
