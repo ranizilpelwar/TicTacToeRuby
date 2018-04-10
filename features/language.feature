@@ -18,4 +18,3 @@ Feature: Configuring the game language
 		When user is on the language configuration screen
 		Then user is displayed language choices of Ingles and Espanol
 
-

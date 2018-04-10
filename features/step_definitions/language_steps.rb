@@ -15,5 +15,7 @@ Then("user is displayed an option to configure the language") do
 end
 
 Given("default language setting is corrupt") do
-  @language_adapter_with_bad_global = LanguageOptionsAdapter.new("TicTacToeRuby/features/test files/bad global settings/")
+  @language_adapter_with_bad_global = LanguageOptionsAdapter.new("../TicTacToeRuby/features/test_files/bad_global_settings/")
 end
+
+
