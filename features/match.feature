@@ -13,3 +13,7 @@ Feature: Setting up the match type
 		When match option 2 is selected
 		Then the second player is a Computer
 
+	Scenario: A Computer can play against a Computer
+		Given only a Computer is available to play
+		When match option 3 is selected
+		Then the second player is a Computer

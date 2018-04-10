@@ -13,6 +13,11 @@ When(/a (Human|Computer) wants to play the game/) do |type|
   @player_type = PlayerType.new(@type)
 end
 
+Given("only a Computer is available to play") do
+  @type = :Computer
+  @player_type = PlayerType.new(@type)
+end
+
 When("a Dog wants to play the game") do
   @type = :Dog
 end
