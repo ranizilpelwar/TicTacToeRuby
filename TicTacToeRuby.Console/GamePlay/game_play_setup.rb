@@ -19,17 +19,18 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 
 class GamePlaySetup
-  attr_reader :writer, :reader, :game_interaction, :match_type_manager
+  attr_reader :writer, :reader, :game_interaction, :match_type_manager, :language_directory
 
-  def initialize(writer, reader)
+  def initialize(writer, reader, language_directory)
     raise NilReferenceError, "writer" if writer.nil?
     raise NilReferenceError, "reader" if reader.nil?
     @writer = writer
     @reader = reader
+    @language_directory = language_directory
   end
 
   def setup
-    language_config = LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/")
+    language_config = LanguageOptionsAdapter.new(@language_directory)
     args = {writer: @writer, 
             reader: @reader, 
             language_config: language_config}
