@@ -15,3 +15,8 @@ Then(/the second player is a (Human|Computer)/) do |type2|
   @player_type2_actual = @match_type.player2_type.selected_option
   expect(@player_type2_actual).to eq(@player_type2_expected)
 end
+
+Then("there are three total matches available to select from") do
+  match_manager = MatchTypeManager.new
+  expect(match_manager.get_total_available_matches).to eq(3)
+end

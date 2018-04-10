@@ -17,3 +17,7 @@ Feature: Setting up the match type
 		Given only a Computer is available to play
 		When match option 3 is selected
 		Then the second player is a Computer
+
+	Scenario: There are 3 total matches to select from
+		Given a Human wants to play the game
+		Then there are three total matches available to select from
