@@ -1,4 +1,6 @@
+require_relative '../../TicTacToeRuby.Core/Players/player.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
+require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class PlayerManager
 
@@ -7,6 +9,7 @@ class PlayerManager
   def initialize(player1, player2)
     raise NilReferenceError, "player1" if player1.nil?
     raise NilReferenceError, "player2" if player2.nil?
+    raise InvalidValueError, "duplicate symbols" if player1.symbol == player2.symbol
     @player1 = player1
     @player2 = player2
     @current_player = @player1
