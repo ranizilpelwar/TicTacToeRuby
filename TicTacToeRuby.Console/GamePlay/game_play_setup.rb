@@ -26,11 +26,10 @@ class GamePlaySetup
     raise NilReferenceError, "reader" if reader.nil?
     @writer = writer
     @reader = reader
-    setup
   end
 
   def setup
-    language_config = LanguageOptionsAdapter.new
+    language_config = LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/")
     args = {writer: @writer, 
             reader: @reader, 
             language_config: language_config}

@@ -7,11 +7,12 @@ class LanguageOptionsAdapter
 
   DEFAULT_LANGUAGE_TAG = "en"
 
-  GLOBAL_SETTINGS = "TicTacToeRuby.Console/Languages/global_settings.yaml"
+  GLOBAL_SETTINGS_FILE = "global_settings.yaml"
 
-  attr_reader :language
+  attr_reader :language, :directory
 
-  def initialize
+  def initialize(directory_path)
+    @directory = directory_path
     tag = get_stored_default
     tag = DEFAULT_LANGUAGE_TAG if !valid?(tag)
     @language = Language.new(tag)
@@ -22,22 +23,22 @@ class LanguageOptionsAdapter
   end
   
   def get_stored_default
-    YAMLReader.read_data(GLOBAL_SETTINGS, "selected_language_tag")
+    YAMLReader.read_data(@directory + GLOBAL_SETTINGS_FILE, "selected_language_tag")
   end
 
   def valid?(tag)
-    file_path = "TicTacToeRuby.Console/Languages/language_options." + tag + ".yaml"
+    file_path = @directory + "language_options." + tag + ".yaml"
     File.exist?(file_path)
   end
 
   def set_default_language_tag(tag)
     raise InvalidValueError, "tag" if !valid?(tag)
-    YAMLWriter.write_data(GLOBAL_SETTINGS, "selected_language_tag", tag)
+    YAMLWriter.write_data(@directory + GLOBAL_SETTINGS_FILE, "selected_language_tag", tag)
     @language.tag = tag
   end
 
   def get_languages_hash
-    file_path = "TicTacToeRuby.Console/Languages/language_options." + get_language_tag + ".yaml"
+    file_path = @directory + "language_options." + get_language_tag + ".yaml"
     YAMLReader.read_data(file_path, "languages")
   end
 

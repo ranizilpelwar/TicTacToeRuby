@@ -12,7 +12,7 @@ module MessageGenerator
   end
 
   def self.get_language_config
-    @language_config = LanguageOptionsAdapter.new if @language_config.nil? || @language_config.get_stored_default != @language_config.get_language_tag
+    @language_config = LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/") if @language_config.nil? || @language_config.get_stored_default != @language_config.get_language_tag
     result = @language_config
   end
 
