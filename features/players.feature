@@ -31,13 +31,18 @@ Scenario Outline: A player can be a human or a computer
 
 	Scenario: Two players can't have the same symbol
 		Given a new game is started
-		And player 1 is setup with symbol "Y"
-		When player 2 is setup with symbol "Y"
+		And player 1 is set up with symbol "Y"
+		When player 2 is set up with symbol "Y"
 		Then player setup displays an error
 
 	Scenario: Two players can have different symbols
 		Given a new game is started
-		And player 1 is setup with symbol "Y"
-		When player 2 is setup with symbol "X"
+		And player 1 is set up with symbol "Y"
+		When player 2 is set up with symbol "X"
 		Then player setup is successful
 
+	Scenario: Two players can't have the same symbol regardless of case
+		Given a new game is started
+		And player 1 is set up with symbol "Y"
+		When player 2 is set up with symbol "y"
+		Then player setup displays an error

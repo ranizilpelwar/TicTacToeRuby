@@ -6,7 +6,7 @@ Given("a new game is started") do
   @players = []
 end
 
-Given("player {int} is setup with symbol {string}") do |int, string|
+Given("player {int} is set up with symbol {string}") do |int, string|
   player = Player.new(PlayerType.new(:Human), string)
   @players << player
 end

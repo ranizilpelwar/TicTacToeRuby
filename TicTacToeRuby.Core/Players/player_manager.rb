@@ -9,7 +9,7 @@ class PlayerManager
   def initialize(player1, player2)
     raise NilReferenceError, "player1" if player1.nil?
     raise NilReferenceError, "player2" if player2.nil?
-    raise InvalidValueError, "duplicate symbols" if player1.symbol == player2.symbol
+    raise InvalidValueError, "duplicate symbols" if player1.symbol.upcase == player2.symbol.upcase
     @player1 = player1
     @player2 = player2
     @current_player = @player1
