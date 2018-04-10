@@ -16,6 +16,13 @@ end
 
 Given("default language setting is corrupt") do
   @language_adapter_with_bad_global = LanguageOptionsAdapter.new("../TicTacToeRuby/features/test_files/bad_global_settings/")
+  @messages = []
+  @writer = double(:display_message => @messages << "written")
+  args = { :writer => @writer, :reader => MockConsoleReader.new("L"), :language_config => @language_adapter_with_bad_global }
+  @language_setup_with_bad_global = LanguageSetup.new(args)
 end
 
-
+Then("user is displayed an error message indicating the default language setting should be configured manually") do
+  @language_setup_with_bad_global.display_language_config_option
+  expect(@messages[0] == "written").to be true
+end
