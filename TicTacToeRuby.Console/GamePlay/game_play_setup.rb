@@ -79,13 +79,6 @@ class GamePlaySetup
 
   def configure_language
     @writer.clear_screen
-
-    # @writer.display_message(MessageGenerator.language_selection_prompt)
-    # @writer.display_message(MessageGenerator.line_spacer)
-    # @writer.display_message(MessageGenerator.language_options)
-    # input = InputValidator.get_valid_selection(@writer, @reader, LanguageSetup.get_input_choices)
-    # language_tag = LanguageSetup.get_language_tag(input)
-    # LanguageSetup.set_localization(language_tag)
     @writer.clear_screen
     setup
   end

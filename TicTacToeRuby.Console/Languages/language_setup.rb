@@ -16,9 +16,13 @@ class LanguageSetup
   end
 
   def display_language_config_option
-    @ui_writer.display_message(MessageGenerator.language_defaults_error) if !@language_config.valid?(@language_config.get_stored_default)
+    display_language_config_error if !@language_config.valid?(@language_config.get_stored_default)
     @ui_writer.display_message(MessageGenerator.language_configuration)
     @ui_writer.display_message(MessageGenerator.line_spacer)
+  end
+
+  def display_language_config_error
+    @ui_writer.display_message(MessageGenerator.language_defaults_error)
   end
 
   def display_language_configuration_screen
