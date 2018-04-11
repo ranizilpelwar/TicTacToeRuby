@@ -20,3 +20,9 @@ Then("the user is displayed the language choices as {string} and {string}") do |
   expect(choices[0]).to eq(language1)
   expect(choices[1]).to eq(language2)
 end
+
+Then("the user is displayed a numeric list of language choices") do
+  choices = @language_adapter_with_default_language_selected.get_input_choices
+  expect(choices[0]).to eq("1")
+  expect(choices[1]).to eq("2")
+end

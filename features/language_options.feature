@@ -1,7 +1,7 @@
 Feature: Display language options based on default language selected
 	As a game admin
 	I want to display the list of languages available in the game
-	And display those languages in the language that is selected at the time
+	And display those languages options in the language that is selected at the time
 	To improve the readability of those choices
 
   Scenario: Display language choices in English when selected language is English
@@ -14,3 +14,7 @@ Feature: Display language options based on default language selected
     When the user is on the language configuration screen
     Then the user is displayed the language choices as "Inglés" and "Español"
 
+	Scenario: Display bulleted numeric list of language options from which to choose
+		Given default language is "Spanish"
+		When the user is on the language configuration screen
+		Then the user is displayed a numeric list of language choices
