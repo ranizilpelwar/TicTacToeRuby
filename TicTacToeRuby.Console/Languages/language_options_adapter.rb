@@ -78,5 +78,6 @@ class LanguageOptionsAdapter
     options = get_all_languages
     result = options.find{|languages| languages["description"] == language}
     tag = result["tag"]
+    return tag
   end
 end
