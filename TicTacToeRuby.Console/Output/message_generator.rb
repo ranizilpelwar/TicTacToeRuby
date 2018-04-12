@@ -12,7 +12,7 @@ module MessageGenerator
   end
 
   def self.get_language_config
-    @language_config = LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/") if @language_config.nil? || @language_config.stored_default_tag != @language_config.get_language_tag
+    @language_config = LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/") if @language_config.nil? || @language_config.stored_default_tag != @language_config.default_language_tag
     result = @language_config
   end
 
@@ -23,7 +23,7 @@ module MessageGenerator
   end
 
   def self.get_data(file_name, property)
-    data = YAMLReader.read_data(generate_file_path(file_name, get_language_config.get_language_tag), property)
+    data = YAMLReader.read_data(generate_file_path(file_name, get_language_config.default_language_tag), property)
   end
 
   def self.welcome

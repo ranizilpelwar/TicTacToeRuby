@@ -18,7 +18,7 @@ class LanguageOptionsAdapter
     @language = Language.new(tag)
   end
 
-  def get_language_tag
+  def default_language_tag
     result = @language.tag.to_s
   end
   
@@ -39,7 +39,7 @@ class LanguageOptionsAdapter
   end
 
   def all_languages
-    file_path = @directory + "language_options." + get_language_tag + ".yaml"
+    file_path = @directory + "language_options." + default_language_tag + ".yaml"
     YAMLReader.read_data(file_path, "languages")
   end
 
@@ -59,7 +59,7 @@ class LanguageOptionsAdapter
     valid_selections = valid_selections.map(&:to_s)
   end
 
-  def get_language_tags
+  def language_tags
     options = all_languages
     tags = []
     options.each do |language|
@@ -68,13 +68,13 @@ class LanguageOptionsAdapter
     result = tags
   end
 
-  def get_language_tag_for_input_choice(input_choice)
+  def language_tag_for_input_choice(input_choice)
     input = input_choice.to_i
     options = all_languages
     tag = options[input - 1]['tag']
   end
 
-  def get_language_tag_for_description(language)
+  def language_tag_for_description(language)
     options = all_languages
     result = options.find{|languages| languages["description"] == language}
     tag = result["tag"]

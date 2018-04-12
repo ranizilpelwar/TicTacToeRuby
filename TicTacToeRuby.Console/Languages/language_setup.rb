@@ -33,7 +33,7 @@ class LanguageSetup
 
   def get_user_selection
     input = InputValidator.get_valid_selection(@ui_writer, @ui_reader, @language_config.get_input_choices)
-    language_tag = @language_config.get_language_tag_for_input_choice(input)
+    language_tag = @language_config.language_tag_for_input_choice(input)
     result = language_tag
   end
 

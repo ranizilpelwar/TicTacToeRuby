@@ -12,9 +12,9 @@ RSpec.describe "a language options adapter" do
     end
   end
 
-  context "method called get_language_tags" do
+  context "method called language_tags" do
     it "returns the expected number of language tags" do
-      expect(LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/").get_language_tags.size).to eq(2)
+      expect(LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/").language_tags.size).to eq(2)
     end
   end
 end
