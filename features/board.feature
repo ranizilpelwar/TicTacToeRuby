@@ -7,9 +7,16 @@ To provide a visual indicator of the game play and status
   When the board is displayed
 	Then the board should have 9 total squares
 
-	Scenario: A numeric indicator is displayed on each square of the board
-
-	Scenario: The numbers 1-9 are displayed on the board by default
+	Scenario: At the start of the game, each square of the board displays a number from 1 thru 9
+  When the board is displayed at the start of the game
+	Then square 1 displays the number 1
+	And square 2 displays the number 2
+	And square 3 displays the number 3
+	And square 4 displays the number 4
+	And square 5 displays the number 5
+	And square 6 displays the number 6
+	And square 7 displays the number 7
+	And square 8 displays the number 8
 
 	Scenario: A unoccupied square on the board can be updated with a player symbol
 
