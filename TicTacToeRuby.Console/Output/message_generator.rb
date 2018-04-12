@@ -40,7 +40,7 @@ module MessageGenerator
 
   def self.language_options
     options = get_language_config.all_languages
-    input_choices = get_language_config.get_input_choices
+    input_choices = get_language_config.input_choices
     count = input_choices.size
     message = ""
     iterator = 1

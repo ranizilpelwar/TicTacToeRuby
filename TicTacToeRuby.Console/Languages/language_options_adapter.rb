@@ -52,7 +52,7 @@ class LanguageOptionsAdapter
     result = languages
   end
 
-  def get_input_choices
+  def input_choices
     options = all_languages
     count = options.size
     valid_selections = [*1..count]

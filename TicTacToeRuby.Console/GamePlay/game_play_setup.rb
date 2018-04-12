@@ -84,8 +84,7 @@ class GamePlaySetup
   end
 
   def get_language_selection
-    list_of_input_choices = LanguageSetup.get_input_choices
-    input = InputValidator.get_valid_selection(writer, reader, list_of_input_choices)
+    input = InputValidator.get_valid_selection(writer, reader, LanguageSetup.input_choices)
   end
 
   def display_match_options
