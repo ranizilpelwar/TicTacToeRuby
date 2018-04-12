@@ -13,7 +13,7 @@ When("the user is on the language configuration screen") do
 end
 
 Then("the user is displayed the language choices as {string} and {string}") do |language1, language2|
-  choices = @language_adapter_with_default_language_selected.get_language_descriptions
+  choices = @language_adapter_with_default_language_selected.language_descriptions
   expect(choices[0]).to eq(language1)
   expect(choices[1]).to eq(language2)
 end

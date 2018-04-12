@@ -43,7 +43,7 @@ class LanguageOptionsAdapter
     YAMLReader.read_data(file_path, "languages")
   end
 
-  def get_language_descriptions
+  def language_descriptions
     options = all_languages
     languages = []
     options.each do |language|
