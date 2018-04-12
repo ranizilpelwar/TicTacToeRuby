@@ -13,7 +13,7 @@ class LanguageOptionsAdapter
 
   def initialize(directory_path)
     @directory = directory_path
-    tag = get_stored_default
+    tag = stored_default_tag
     tag = DEFAULT_LANGUAGE_TAG if !valid?(tag)
     @language = Language.new(tag)
   end
@@ -22,7 +22,7 @@ class LanguageOptionsAdapter
     result = @language.tag.to_s
   end
   
-  def get_stored_default
+  def stored_default_tag
     path = @directory + GLOBAL_SETTINGS_FILE
     YAMLReader.read_data(path, "selected_language_tag")
   end

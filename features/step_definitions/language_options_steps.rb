@@ -30,7 +30,7 @@ When("the user selects {string} as a language option") do |string|
 end
 
 Then("the default language stored in global settings is updated to {string}") do |string| 
-  actual_tag = @language_adapter_with_default_language_selected.get_stored_default
+  actual_tag = @language_adapter_with_default_language_selected.stored_default_tag
 	expected_tag = @language_adapter_with_default_language_selected.get_language_tag_for_description(string)
 	expect(actual_tag).to eq(expected_tag)
 end

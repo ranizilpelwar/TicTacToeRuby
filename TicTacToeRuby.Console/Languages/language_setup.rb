@@ -16,7 +16,7 @@ class LanguageSetup
   end
 
   def display_language_config_option
-    display_language_config_error if !@language_config.valid?(@language_config.get_stored_default)
+    display_language_config_error if !@language_config.valid?(@language_config.stored_default_tag)
     @ui_writer.display_message(MessageGenerator.language_configuration)
     @ui_writer.display_message(MessageGenerator.line_spacer)
   end
