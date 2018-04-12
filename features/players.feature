@@ -2,7 +2,9 @@ Feature: Setting up players for a game
 	As the game admin
 	I want to be able to configure the players
 	So that they can customize the game play experience
-	
+	A player can be a Human or a Computer
+	A player can choose a single non-digit, non-space character as a symbol.
+
 Scenario Outline: A player can be a human or a computer
   When a <type> wants to play the game
   Then it <expectation>
@@ -14,8 +16,8 @@ Scenario Outline: A player can be a human or a computer
 			|Dog     |cannot     |
 
 	Scenario Outline: A player can customize the symbol used during game play
-		When a <character> is selected
-		Then it <expectation> be used
+		When <character> is selected as a symbol
+		Then it <expectation> be used as a symbol
 
 	Examples: 
 			|character|expectation|

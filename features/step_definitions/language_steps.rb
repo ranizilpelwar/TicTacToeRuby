@@ -14,7 +14,7 @@ Then("user is displayed an option to configure the language") do
   expect(@messages[0] == "written").to be true
 end
 
-Given("default language setting is an invalid value") do
+Given("default language setting is stored as an invalid value") do
   @language_adapter_with_bad_global = LanguageOptionsAdapter.new("../TicTacToeRuby/features/test_files/bad_global_settings/")
   @messages = []
   @writer = double(:display_message => @messages << "written")

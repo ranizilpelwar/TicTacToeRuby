@@ -26,23 +26,23 @@ Then("it cannot") do
   expect{ @player_type = PlayerType.new(@type) }.to raise_error(InvalidValueError)
 end
 
-When(/a ([^0-9\s]{1}) is selected/) do |character|
+When(/(\A[^0-9\s]{1}) is selected as a symbol\Z/) do |character|
   @character = character
   @player = Player.new(PlayerType.new(:Human), character)
 end
 
-Then("it can be used") do
+Then("it can be used as a symbol") do
   expect(@player.symbol.upcase).to eq(@character.upcase)
 end
 
-When(/an? ([0-9\s]{1}) is selected/) do |character|
+When(/(\A[0-9\s]{1}) is selected as a symbol\Z/) do |character|
   @character = character
 end
 
-When(/an? (.{2,}) is selected/) do |character|
+When(/^(.{2,}) is selected as a symbol$/) do |character|
   @character = character
 end
 
-Then("it cannot be used") do
+Then("it cannot be used as a symbol") do
   expect{ @player = Player.new(PlayerType.new(:Human), @character)}.to raise_error(InvalidValueError)
 end
