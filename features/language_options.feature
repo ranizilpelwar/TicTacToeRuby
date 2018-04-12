@@ -18,3 +18,9 @@ Feature: Display language options based on default language selected
 		Given default language is "Spanish"
 		When the user is on the language configuration screen
 		Then the user is displayed a numeric list of language choices
+
+	Scenario: Update default language when a language option is selected
+		Given default language is "Spanish"
+		And the user is on the language configuration screen
+		When the user selects "Inglés" as a language option
+		Then the default language stored in global settings is updated to "English"

@@ -1,6 +1,6 @@
 Feature: Configuring the game language
 
-	Scenario: The language option is displayed at the start of the game
+	Scenario: The language configuration option is displayed at the start of the game
 		Given user is at the start screen
 		Then user is displayed an option to configure the language
 

@@ -23,7 +23,8 @@ class LanguageOptionsAdapter
   end
   
   def get_stored_default
-    YAMLReader.read_data(@directory + GLOBAL_SETTINGS_FILE, "selected_language_tag")
+    path = @directory + GLOBAL_SETTINGS_FILE
+    YAMLReader.read_data(path, "selected_language_tag")
   end
 
   def valid?(tag)
@@ -67,9 +68,15 @@ class LanguageOptionsAdapter
     result = tags
   end
 
-  def get_language_tag_for(input_choice)
+  def get_language_tag_for_input_choice(input_choice)
     input = input_choice.to_i
     options = get_languages_hash
     tag = options[input - 1]['tag']
+  end
+
+  def get_language_tag_for_description(language)
+    options = get_languages_hash
+    result = options.find{|languages| languages["description"] == language}
+    tag = result["tag"]
   end
 end
