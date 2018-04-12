@@ -9,7 +9,7 @@ end
 
 When("the user is on the language configuration screen") do
 	@language_adapter_with_default_language_selected = LanguageOptionsAdapter.new(@directory_path_for_default_language)
-	@language_adapter_with_default_language_selected.set_default_language_tag(@starting_default_tag)
+	@language_adapter_with_default_language_selected.default_language_tag!(@starting_default_tag)
 end
 
 Then("the user is displayed the language choices as {string} and {string}") do |language1, language2|
@@ -26,7 +26,7 @@ end
 
 When("the user selects {string} as a language option") do |string|
   tag = @language_adapter_with_default_language_selected.language_tag_for_description(string)
-	@language_adapter_with_default_language_selected.set_default_language_tag(tag)
+	@language_adapter_with_default_language_selected.default_language_tag!(tag)
 end
 
 Then("the default language stored in global settings is updated to {string}") do |string| 

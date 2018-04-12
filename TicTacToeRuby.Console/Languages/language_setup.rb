@@ -38,7 +38,7 @@ class LanguageSetup
   end
 
   def update_default_language(tag)
-    @language_config.set_default_language_tag(tag)
+    @language_config.default_language_tag!(tag)
   end
 
   def configure_language
