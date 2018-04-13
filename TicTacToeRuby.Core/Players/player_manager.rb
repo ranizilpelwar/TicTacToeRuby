@@ -27,12 +27,31 @@ class PlayerManager
   def get_player_number(player)
     raise NilReferenceError, "player" if player.nil?
     number = 
-      if player.equals?(@player1) 
-        1
-      elsif player.equals?(@player2) 
-        2
-      else 
-        -1
+    if player.equals?(@player1) 
+      1
+    elsif player.equals?(@player2) 
+      2
+    else 
+      -1
     end
+  end
+
+  def player(player_number)
+    player = 
+    if player_number == 1
+      player1
+    elsif player_number == 2 
+      player2
+    else 
+      raise InvalidValueError, "player_number"
+    end
+  end
+
+  def symbol(player_number)
+    player(player_number).symbol
+  end
+
+  def type(player_number)
+    player(player_number).type.selected_option.to_s
   end
 end

@@ -16,7 +16,7 @@ class GameInteraction
   # pruning process of the minimax algorithm.
   BEST_MIN_MOVE = 20000
 
-  attr_reader :game_board, :writer, :reader, :player1, :player2, :player_movement_manager, :record_last_moves
+  attr_reader :game_board, :writer, :reader, :player_manager, :player_movement_manager, :record_last_moves
 
   def initialize(writer, reader, game_board, last_moves_are_recorded, match_type)
     raise NilReferenceError, "writer" if writer.nil?
@@ -26,9 +26,9 @@ class GameInteraction
     @writer = writer
     @reader = reader
     @game_board = game_board
-    player_manager = game_board.player_manager
-    @player1 = player_manager.player1
-    @player2 = player_manager.player2
+    @player_manager = game_board.player_manager
+    # @player1 = player_manager.player1
+    # @player2 = player_manager.player2
     @record_last_moves = last_moves_are_recorded
     @player_movement_manager = PlayerMovementManager.new(match_type) if @record_last_moves
   end
@@ -112,11 +112,11 @@ class GameInteraction
   end
 
   def show_the_players
-    player1_symbol = player1.symbol
-    player1_type = player1.type.selected_option
-    player2_symbol = player2.symbol
-    player2_type = player2.type.selected_option
-    @writer.display_message(MessageGenerator.players_intro(player1_symbol, player1_type, player2_symbol, player2_type))
+    # player1_symbol = player1.symbol
+    # player1_type = player1.type.selected_option
+    # player2_symbol = player2.symbol
+    # player2_type = player2.type.selected_option
+    @writer.display_message(MessageGenerator.players_intro(@player_manager.symbol(1), @player_manager.type(1), @player_manager.symbol(2), @player_manager.type(2)))
     @writer.display_message(MessageGenerator.line_spacer)
   end
 
@@ -151,7 +151,7 @@ class GameInteraction
   end
 
   def display_undo_last_moves_message
-    if @player1.type == "Computer" || @player2.type == "Computer"
+    if @player_manager.type(1) == "Computer" || @player_manager.type(2) == "Computer"
       @writer.display_message(MessageGenerator.undo_completion_for_both_players)
     else
       @writer.display_message(MessageGenerator.undo_completion_for_one_player)
