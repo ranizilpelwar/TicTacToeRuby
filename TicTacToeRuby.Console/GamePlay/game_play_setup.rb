@@ -75,12 +75,6 @@ class GamePlaySetup
     result = Struct.new(:feedback, :input).new(feedback, input)
   end
 
-  def configure_language
-    @writer.clear_screen
-    @writer.clear_screen
-    setup
-  end
-
   def get_language_selection
     input = InputValidator.get_valid_selection(writer, reader, LanguageSetup.input_choices)
   end
