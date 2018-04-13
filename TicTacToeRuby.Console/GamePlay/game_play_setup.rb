@@ -19,7 +19,7 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 
 class GamePlaySetup
-  attr_reader :writer, :reader, :game_interaction, :match_type_manager, :language_directory
+  attr_reader :writer, :reader, :game_interaction, :match_type_manager, :language_directory, :language_setup
 
   def initialize(writer, reader, language_directory)
     raise NilReferenceError, "writer" if writer.nil?
@@ -27,24 +27,22 @@ class GamePlaySetup
     @writer = writer
     @reader = reader
     @language_directory = language_directory
+    args = {writer: @writer, 
+            reader: @reader, 
+            language_config: LanguageOptionsAdapter.new(@language_directory)}
+    @language_setup = LanguageSetup.new(args)
   end
 
   def setup
-    language_config = LanguageOptionsAdapter.new(@language_directory)
-    args = {writer: @writer, 
-            reader: @reader, 
-            language_config: language_config}
-    language_setup = LanguageSetup.new(args)
     @writer.clear_screen
     display_introductory_message
-    language_setup.display_language_config_option
+    @language_setup.display_language_config_option
     display_match_options
     inquiry = language_configuration_requested?
     request_language_setup = inquiry.feedback
     if request_language_setup
       @writer.clear_screen
-      language_setup.configure_language
-      @writer.clear_screen
+      @language_setup.configure_language
       setup
     else
       match_input = inquiry.input
