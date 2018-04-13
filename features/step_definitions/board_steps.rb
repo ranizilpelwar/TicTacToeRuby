@@ -14,6 +14,14 @@ require_relative '../../TicTacToeRuby.Core.UnitTests/Players/mock_player_manager
 		expect(@game_board.board[square.to_i - 1]).to eq(value.to_s)
 	end
 
-Given("square {int} on the board is unoccupied") do |int|
-	  pending # Write code here that turns the phrase above into concrete actions
-end
+	Given("square {int} on the board is unoccupied") do |int|
+		@game_board.revert_board(int - 1)
+	end
+
+	When("the player selects square {int}") do |int|
+  	pending # Write code here that turns the phrase above into concrete actions
+	end
+
+	Then("square {int} is updated to display the player's symbol") do |int|
+  	pending # Write code here that turns the phrase above into concrete actions
+	end
