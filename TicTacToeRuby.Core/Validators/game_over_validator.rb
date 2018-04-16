@@ -13,7 +13,7 @@ module GameOverValidator
               board[1] == board[4] && board[4] == board[7] ||
               board[2] == board[5] && board[5] == board[8] ||
               board[0] == board[4] && board[4] == board[8] ||
-              board[2] == board[4] && board[4] == board[6];
+              board[2] == board[4] && board[4] == board[6]
   end
 
   def self.win_for_player?(player_symbol, board)
