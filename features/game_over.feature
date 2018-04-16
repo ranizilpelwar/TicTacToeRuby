@@ -15,12 +15,14 @@ Feature: A game is over when someone wins or its a tie
 	Scenario: Game ends in a win for a player that has 3 squares in a column
 		When there are three squares in a single column on the board, all occupied by player symbol "X"
 		Then the player with a symbol "X" has won the game
+		And the game is over
 
 	Scenario: Game ends in a win for a player that has 3 squares in a left-to-right diagonal
 		When there are three squares in a left-to-right diagonal on the board, all occupied by a player symbol "X"
 		Then the player with a symbol "X" has won the game
-		
+		And the game is over
+
   Scenario: Game ends in a win for a player that has 3 squares in a right-to-left diagonal
 		When there are three squares in a right-to-left	diagonal on the board, all occupied by a player symbol "X"
 		Then the player with a symbol "X" has won the game
-	
+	  And the game is over
