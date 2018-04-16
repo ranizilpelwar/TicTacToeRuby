@@ -48,3 +48,10 @@ Scenario Outline: A player can be a human or a computer
 		And player 1 is set up with symbol "Y"
 		When player 2 is set up with symbol "y"
 		Then player setup displays an error
+
+	Scenario: The game allows the user to select which player goes first
+		Given a new game is started
+		And player 1 is set up with symbol "Y"
+		And player 2 is set up with symbol "X"
+		When user selects player with symbol "X" to go first
+		Then that player can go first in the game

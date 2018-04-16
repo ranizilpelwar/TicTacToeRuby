@@ -19,3 +19,13 @@ Then("player setup is successful") do
   player_manager = PlayerManager.new(@players[0], @players[1])
   expect(!player_manager.nil?).to be true
 end
+
+When("user selects player with symbol {string} to go first") do |string|
+  @selection_for_first_player = string
+end
+
+Then("that player can go first in the game") do
+	expect(PlayerSelectionValidator.valid?(@selection_for_first_player, @players[0].symbol, @players[1].symbol)).to be true
+end
+
+
