@@ -18,10 +18,12 @@ require_relative '../../TicTacToeRuby.Core.UnitTests/Players/mock_player_manager
 		@game_board.revert_board(int - 1)
 	end
 
-	When("the player selects square {int}") do |int|
-  	pending # Write code here that turns the phrase above into concrete actions
+	When("player with symbol {string} selects square {int}") do |string, int|
+    index = int.to_i - 1	
+		@game_board.update_board(index, string)
 	end
 
-	Then("square {int} is updated to display the player's symbol") do |int|
-  	pending # Write code here that turns the phrase above into concrete actions
+	Then("square {int} is updated to display the symbol {string}") do |int, string|
+  	index = int.to_i - 1
+		expect(@game_board.tile(index)).to eq(string)		
 	end
