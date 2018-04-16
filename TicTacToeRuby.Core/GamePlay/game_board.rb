@@ -27,4 +27,9 @@ class GameBoard
     tile = index + 1
     @board[index] = tile.to_s
   end
+
+  def tile(index)
+    raise InvalidValueError, "index" if index >= board.length || index < 0
+    board[index]
+  end
 end
