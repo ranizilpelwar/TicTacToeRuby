@@ -31,3 +31,7 @@ require_relative '../../TicTacToeRuby.Core.UnitTests/Players/mock_player_manager
 	  @game_board.update_board(index, string)	
 	end
 
+	Then("the system indicates that the given square cannot be selected") do
+		expect(@evaluated_result.is_valid_move).to eq(false)	
+	end
+

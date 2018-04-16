@@ -29,7 +29,7 @@ Feature: Provide a board on which to play
 		Given the board is displayed
 		And square 1 on the board is occupied by a player with a symbol of "X"
 	  When player with symbol "X" selects square 1
-	  Then an error message is displayed indicating that the given square cannot be selected
+	  Then the system indicates that the given square cannot be selected
 
 
 	Scenario: An occupied square on the board can be unselected by a player
