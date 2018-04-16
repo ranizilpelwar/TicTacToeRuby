@@ -22,8 +22,8 @@ To provide a visual indicator of the game play and status
 	Scenario: A unoccupied square on the board can be updated with a player symbol
 	Given the board is displayed
   And square 1 on the board is unoccupied
-	When the player selects square 1
-	Then square 1 is updated to display the player's symbol
+	When player with symbol "X" selects square 1
+	Then square 1 is updated to display the symbol "X"
 
   Scenario: An occupied square on the board cannot be updated with a player symbol
   Given square 1 on the board is occupied by player symbol "X"
