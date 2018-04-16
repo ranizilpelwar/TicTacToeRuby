@@ -53,5 +53,12 @@ Scenario Outline: A player can be a human or a computer
 		Given a new game is started
 		And player 1 is set up with symbol "Y"
 		And player 2 is set up with symbol "X"
-		When user selects player with symbol "X" to go first
+		When the user selects player with symbol "X" to go first
 		Then that player can go first in the game
+
+	Scenario: The game doesn't allow the wrong user to be selected to go first
+		Given a new game is started
+		And player 1 is set up with symbol "Y"
+		And player 2 is set up with symbol "X"
+		When the user selects player with symbol "A" to go first
+		Then that player cannot go first in the game
