@@ -25,13 +25,17 @@ Feature: Provide a board on which to play
 	  When player with symbol "X" selects square 1
 	  Then square 1 can be updated to display the symbol "X"
 
-  Scenario: An occupied square on the board cannot be updated with a player symbol
+  Scenario: An occupied square on the board cannot be updated again by the same player symbol
 		Given the board is displayed
 		And square 1 on the board is occupied by a player with a symbol of "X"
 	  When player with symbol "X" selects square 1
 	  Then the system indicates that the given square cannot be selected
 
-
+  Scenario: An occupied square on the board cannot be updated again by a different player symbol
+		Given the board is displayed
+		And square 1 on the board is occupied by a player with a symbol of "X"
+	  When player with symbol "Y" selects square 1
+	  Then the system indicates that the given square cannot be selected
 	Scenario: An occupied square on the board can be unselected by a player
 
 		
