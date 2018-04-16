@@ -19,11 +19,15 @@ require_relative '../../TicTacToeRuby.Core.UnitTests/Players/mock_player_manager
 	end
 
 	When("player with symbol {string} selects square {int}") do |string, int|
-    index = int.to_i - 1	
-		@game_board.update_board(index, string)
+		@evaluated_result = GamePlayValidator.evaluate_move(@game_board, int.to_s)	
 	end
 
-	Then("square {int} is updated to display the symbol {string}") do |int, string|
-  	index = int.to_i - 1
-		expect(@game_board.tile(index)).to eq(string)		
+	Then("square {int} can be updated to display the symbol {string}") do |int, string|
+		expect(@evaluated_result.is_valid_move).to eq(true)		
 	end
+
+	Given("square {int} on the board is occupied by a player with a symbol of {string}") do |int, string|
+		index = int.to_i - 1
+	  @game_board.update_board(index, string)	
+	end
+
