@@ -9,7 +9,7 @@ Feature: The game calculates the player's next move when the player is a Compute
 		Given a game is being played with a computer player
 		And selecting square 5 can result in a win for the computer player
 		When the computer player makes a move
-		Then the move matches square 5 on the board
+		Then the computer's next move matches square 5 on the board
 
 
 

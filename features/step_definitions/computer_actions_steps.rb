@@ -16,7 +16,7 @@ When("the computer player makes a move") do
   @actual_computer_move = @computer_actions.get_best_move(@new_board, @computer_player_symbol, @depth, @best_max_move, @best_min_move)
 end
 
-Then("the move matches square {int} on the board") do |int|
+Then("the computer's next move matches square {int} on the board") do |int|
   index = int - 1 
 	expect(@actual_computer_move.index).to eq(index)
 end
