@@ -164,7 +164,7 @@ class GameInteraction
   end
 
   def prompt_for_next_move
-    player_symbol = @game_board.player_manager.current_player.symbol
+    player_symbol = @player_manager.current_player.symbol
     @writer.display_message(MessageGenerator.next_move_prompt(player_symbol))
   end
 
