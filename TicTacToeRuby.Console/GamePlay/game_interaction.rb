@@ -191,7 +191,7 @@ class GameInteraction
 
   def get_computers_spot
     depth = 5 # The most # of actions that can be taken before a tie or win can occur in the game.
-    computer_action = ComputerActions.new(@game_board)
+    computer_action = ComputerActions.new(@game_board, @player_manager)
     player_symbol = @player_manager.current_player.symbol
     spot = computer_action.get_best_move(@game_board.board, player_symbol, depth, BEST_MAX_MOVE, BEST_MIN_MOVE).index
   end
