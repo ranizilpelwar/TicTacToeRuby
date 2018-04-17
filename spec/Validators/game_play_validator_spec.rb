@@ -7,11 +7,10 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 RSpec.describe "a game play validator" do
   
   before(:example) do
-    player_manager = MockPlayerManager.new
     board = [ "0", "1", "2",
               "3", "X", "5",
               "O", "X", "O" ]
-    @game_board = GameBoard.new(player_manager, board)
+    @game_board = GameBoard.new(board)
   end
   
   shared_examples "evaluate_move" do |description, value, expected|
