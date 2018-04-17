@@ -27,13 +27,13 @@ Given("selecting square {int} is the only spot left") do |int|
 	@computer_actions = ComputerActions.new(@game_board)
 end
 
-Given("there are multiple moves to make but square {int} can result in a win") do |int|
+Given("there are multiple moves to make but one square can result in a win") do
   @new_board = [ "X", "O", "X", "X", "5", "O", "O", "O", "X" ]
   @game_board = GameBoard.new(@player_manager, @new_board)
 	@computer_actions = ComputerActions.new(@game_board)
 end
 
-Given("there are multiple moves to make on the [{string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} ] but one square can result in a win") do |square1, square2, square3, square4, square5, square6, square7, square8, square9|
+Given(/there are multiple moves to make on the board \[\"([0-9A-z]{1})\", \"([0-9A-z]{1})\", \"([0-9A-z]{1})\", \"([0-9A-z]{1})\", \"([0-9A-z]{1})\", \"([0-9A-z]{1})\", \"([0-9A-z]{1})\", \"([0-9A-z]{1})\", \"([0-9A-z]{1})\" \] but one square can result in a (?:win|block)/) do |square1, square2, square3, square4, square5, square6, square7, square8, square9|
   @new_board = [ square1, square2, square3, square4, square5, square6, square7, square8, square9]
   @game_board = GameBoard.new(@player_manager, @new_board)
 	@computer_actions = ComputerActions.new(@game_board)
