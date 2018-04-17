@@ -18,15 +18,16 @@ class GameInteraction
 
   attr_reader :game_board, :writer, :reader, :player_manager, :player_movement_manager, :record_last_moves
 
-  def initialize(writer, reader, game_board, last_moves_are_recorded, match_type)
+  def initialize(writer, reader, game_board, player_manager, last_moves_are_recorded, match_type)
     raise NilReferenceError, "writer" if writer.nil?
     raise NilReferenceError, "reader" if reader.nil?
     raise NilReferenceError, "game_board" if game_board.nil?
+    raise NilReferenceError, "player_manager" if player_manager.nil?
     raise NilReferenceError, "match_type" if match_type.nil?
     @writer = writer
     @reader = reader
     @game_board = game_board
-    @player_manager = game_board.player_manager
+    @player_manager = player_manager
     @record_last_moves = last_moves_are_recorded
     @player_movement_manager = PlayerMovementManager.new(match_type) if @record_last_moves
   end
@@ -35,13 +36,13 @@ class GameInteraction
     @writer.clear_screen
     show_the_players
     show_the_board
-    current_player = @game_board.player_manager.current_player
+    current_player = @player_manager.current_player
     prompt_to_continue if current_player.type.selected_option != :Human
     continue_playing = true
     while continue_playing
       play_next_turn(current_player)
       continue_playing = !GameOverValidator.game_over?(@game_board.board) && !TieGameValidator.tie_game?(@game_board.board)
-      current_player = @game_board.player_manager.update_current_player if continue_playing
+      current_player = @player_manager.update_current_player if continue_playing
     end
     display_game_over_messages
   end
@@ -98,7 +99,7 @@ class GameInteraction
     if TieGameValidator.tie_game?(@game_board.board)
       @writer.display_message(MessageGenerator.tie_game)
     else
-      winning_symbol = @game_board.player_manager.current_player.symbol
+      winning_symbol = @player_manager.current_player.symbol
       @writer.display_message(MessageGenerator.player_won(winning_symbol))
     end
     @writer.display_message(MessageGenerator.line_spacer)
@@ -135,7 +136,7 @@ class GameInteraction
   end
 
   def record_last_move(player, spot)
-    player_number = @game_board.player_manager.get_player_number(player)
+    player_number = @player_manager.get_player_number(player)
     @player_movement_manager.update_last_move_for_player(player_number, spot)
   end
 
@@ -191,7 +192,7 @@ class GameInteraction
   def get_computers_spot
     depth = 5 # The most # of actions that can be taken before a tie or win can occur in the game.
     computer_action = ComputerActions.new(@game_board)
-    player_symbol = @game_board.player_manager.current_player.symbol
+    player_symbol = @player_manager.current_player.symbol
     spot = computer_action.get_best_move(@game_board.board, player_symbol, depth, BEST_MAX_MOVE, BEST_MIN_MOVE).index
   end
 end
