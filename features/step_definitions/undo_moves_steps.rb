@@ -6,8 +6,8 @@ When("the game is setup") do
 	@directory_path_for_default_language = "../TicTacToeRuby/features/test_files/"
 	@directory_path_for_default_language = @directory_path_for_default_language + "default_language_" + language.downcase + "/"
 	@game_play_setup = GamePlaySetup.new(@writer, @reader, @directory_path_for_default_language)
-	@game_board = GameBoard.new(GameBoard.create_board, @player_manager)
-	@game_interaction = @game_play_setup.setup_game_interaction(@game_board, @match_type)
+	@game_board = GameBoard.new(GameBoard.create_board)
+	@game_interaction = @game_play_setup.setup_game_interaction(@game_board, @player_manager, @match_type)
 end
 
 Then("there is no option to undo moves during game play") do
