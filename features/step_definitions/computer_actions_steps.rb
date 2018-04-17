@@ -1,6 +1,6 @@
 Given("a game is being played with a computer player") do
   @player_manager = MockPlayerManager.new
-	@computer_player_symbol = "X"
+	@computer_player_symbol = @player_manager.player1.symbol
   @best_max_move = -20000
 	@best_min_move = 20000
 	@depth = 5
