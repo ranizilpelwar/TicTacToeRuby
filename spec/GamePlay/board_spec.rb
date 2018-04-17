@@ -3,7 +3,7 @@ require_relative '../../TicTacToeRuby.Core/Validators/available_spaces_validator
 
 RSpec.describe "a Tic Tac Toe board" do
   before(:each) do
-    @game = game_board
+    @game = GameBoard.new(GameBoard.create_board)
   end
 
   it "is a grid with nine squares" do
@@ -33,12 +33,7 @@ RSpec.describe "a Tic Tac Toe board" do
     grid_value = grid[index]
     raise "grid_value = #{grid_value} but expected it to be #{original_value}" if grid_value != original_value
   end
- 
-  def game_board 
-    player_manager = double()
-    GameBoard.new(player_manager, GameBoard.create_board)
-  end
-  
+   
   def grid 
     @game.board
   end
