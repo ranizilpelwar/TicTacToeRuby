@@ -5,15 +5,10 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 class TestGameBoard < Test::Unit::TestCase
 
-  attr_reader :game_board, :board, :player_manager
+  attr_reader :game_board, :board
   def setup
     @board = GameBoard.create_board
-    @player_manager = MockPlayerManager.new
-    @game_board = GameBoard.new(@player_manager, @board)
-  end
-
-  def test_initialize_will_raise_a_nil_reference_error_when_player_manager_is_nil
-    assert_raises(NilReferenceError) do GameBoard.new(nil, @player_manager) end
+    @game_board = GameBoard.new(@board)
   end
 
   def test_create_board_will_create_a_nine_element_board
@@ -23,11 +18,6 @@ class TestGameBoard < Test::Unit::TestCase
 
   def test_initialize_will_set_the_board_to_the_provided_parameter
     assert_equal(@board, @game_board.board, "Expected game board's board to match provided board.")
-  end
-
-  def test_initialize_will_set_the_player_manager_to_the_provided_parameter
-    assert_equal(@player_manager, @game_board.player_manager, 
-      "Expected game board's player manager to match the provided one.")
   end
 
   def test_update_board_raises_nil_reference_error_when_game_piece_is_nil
