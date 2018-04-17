@@ -8,8 +8,8 @@ end
 
 Given("selecting square 5 can result in a win for the computer player") do
   @new_board = [ "X", "O", "X", "X", "5", "O", "O", "O", "X" ]
-  @game_board = GameBoard.new(@player_manager, @new_board)
-	@computer_actions = ComputerActions.new(@game_board)
+  @game_board = GameBoard.new(@new_board)
+	@computer_actions = ComputerActions.new(@game_board, @player_manager)
 end
 
 When("the computer player makes a move") do
@@ -23,20 +23,20 @@ end
 
 Given("selecting square {int} is the only spot left") do |int|
 	@new_board = [ "X", "O", "X", "X", "5", "O", "O", "X", "X" ]
-  @game_board = GameBoard.new(@player_manager, @new_board)
-	@computer_actions = ComputerActions.new(@game_board)
+  @game_board = GameBoard.new(@new_board)
+	@computer_actions = ComputerActions.new(@game_board, @player_manager)
 end
 
 Given("there are multiple moves to make but one square can result in a win") do
   @new_board = [ "X", "O", "X", "X", "5", "O", "O", "O", "X" ]
-  @game_board = GameBoard.new(@player_manager, @new_board)
-	@computer_actions = ComputerActions.new(@game_board)
+  @game_board = GameBoard.new(@new_board)
+	@computer_actions = ComputerActions.new(@game_board, @player_manager)
 end
 
 Given(/there are multiple moves to make on the board \[\"([0-9A-z])\", \"([0-9A-z])\", \"([0-9A-z])\", \"([0-9A-z])\", \"([0-9A-z])\", \"([0-9A-z])\", \"([0-9A-z])\", \"([0-9A-z])\", \"([0-9A-z])\" \] but one square can result in a (?:win|block)/) do |square1, square2, square3, square4, square5, square6, square7, square8, square9|
   @new_board = [ square1, square2, square3, square4, square5, square6, square7, square8, square9]
-  @game_board = GameBoard.new(@player_manager, @new_board)
-	@computer_actions = ComputerActions.new(@game_board)
+  @game_board = GameBoard.new(@new_board)
+	@computer_actions = ComputerActions.new(@game_board, @player_manager)
 end
 
 
