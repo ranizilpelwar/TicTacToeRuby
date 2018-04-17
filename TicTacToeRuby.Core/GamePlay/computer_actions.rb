@@ -11,12 +11,12 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 class ComputerActions
   attr_reader :current_player, :other_player, :game_board
 
-  def initialize(game_board)
+  def initialize(game_board, player_manager)
     raise NilReferenceError, "game_board" if game_board.nil?
+    raise NilReferenceError, "player_manager" if player_manager.nil?
     @game_board = game_board
-    @player_manager = @game_board.player_manager
-    @current_player = @player_manager.current_player.symbol
-    @other_player = @player_manager.get_next_player.symbol
+    @current_player = player_manager.current_player.symbol
+    @other_player = player_manager.get_next_player.symbol
   end
 
   def reset_board_tile(board, move, tile)
