@@ -13,8 +13,8 @@ class TestComputerActions < Test::Unit::TestCase
 
   def create_computer_actions(new_board)
     players = MockPlayerManager.new
-    @game_board = GameBoard.new(players, new_board)
-    @computer_actions = ComputerActions.new(@game_board)
+    @game_board = GameBoard.new(new_board)
+    @computer_actions = ComputerActions.new(@game_board, players)
   end
 
   def test_get_best_move_raises_a_nil_reference_error_when_board_is_nil
