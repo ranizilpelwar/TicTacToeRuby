@@ -6,8 +6,7 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 RSpec.describe "a game board" do  
   before(:example) do
     @board = GameBoard.create_board
-    @player_manager = MockPlayerManager.new
-    @game_board = GameBoard.new(@player_manager, @board)
+    @game_board = GameBoard.new(@board)
   end
 
   context "method called create board" do
@@ -17,16 +16,8 @@ RSpec.describe "a game board" do
   end
 
   context "initialization" do
-    it "raises a NilReferenceError when player manager is nil" do
-      expect{ GameBoard.new(nil, @player_manager) }.to raise_error(NilReferenceError)
-    end
-
     it "sets the board to the provided parameter" do
       expect(@game_board.board).to eq(@board)
-    end
-
-    it "sets the player manager to the provided parameter" do
-      expect(@game_board.player_manager).to eq(@player_manager)
     end
   end
 
