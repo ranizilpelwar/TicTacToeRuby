@@ -10,11 +10,10 @@ class GamePlayValidation < Test::Unit::TestCase
   attr_reader :game_board
 
   def setup
-    player_manager = MockPlayerManager.new
     board = [ "0", "1", "2",
               "3", "X", "5",
               "O", "X", "O" ]
-    @game_board = GameBoard.new(player_manager, board)
+    @game_board = GameBoard.new(board)
   end
 
   def test_evaluate_move_raises_a_nil_reference_error_when_game_board_is_nil
