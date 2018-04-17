@@ -48,8 +48,8 @@ class GamePlaySetup
       match_input = inquiry.input
       match_type = @match_type_manager.get_match_type(match_input.to_i)
       player_manager = setup_players(match_type)
-      game_board = setup_board(player_manager)
-      @game_interaction = setup_game_interaction(game_board, match_type)
+      game_board = setup_board
+      @game_interaction = setup_game_interaction(game_board, player_manager, match_type)
     end
   end
 
@@ -101,15 +101,16 @@ class GamePlaySetup
     result = player_manager
   end
 
-  def setup_board(player_manager)
-    game_board = GameBoard.new(player_manager, GameBoard.create_board)
+  def setup_board
+    game_board = GameBoard.new(GameBoard.create_board)
   end
 
-  def setup_game_interaction(game_board, match_type)
+  def setup_game_interaction(game_board, player_manager, match_type)
     raise NilReferenceError, "game_board" if game_board.nil?
+    raise NilReferenceError, "player_manager" if player_manager.nil?
     raise NilReferenceError, "match_type" if match_type.nil?
     record_last_moves = match_type.player1_type.selected_option == :Human || match_type.player2_type.selected_option == :Human
-    game_interaction = GameInteraction.new(@writer, @reader, game_board, record_last_moves, match_type)
+    game_interaction = GameInteraction.new(@writer, @reader, game_board, player_manager, record_last_moves, match_type)
   end
 
   def play
