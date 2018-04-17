@@ -27,8 +27,6 @@ class GameInteraction
     @reader = reader
     @game_board = game_board
     @player_manager = game_board.player_manager
-    # @player1 = player_manager.player1
-    # @player2 = player_manager.player2
     @record_last_moves = last_moves_are_recorded
     @player_movement_manager = PlayerMovementManager.new(match_type) if @record_last_moves
   end
@@ -112,10 +110,6 @@ class GameInteraction
   end
 
   def show_the_players
-    # player1_symbol = player1.symbol
-    # player1_type = player1.type.selected_option
-    # player2_symbol = player2.symbol
-    # player2_type = player2.type.selected_option
     @writer.display_message(MessageGenerator.players_intro(@player_manager.symbol(1), @player_manager.type(1), @player_manager.symbol(2), @player_manager.type(2)))
     @writer.display_message(MessageGenerator.line_spacer)
   end
