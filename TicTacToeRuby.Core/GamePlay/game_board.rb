@@ -4,11 +4,11 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 class GameBoard
-  attr_reader :player_manager, :board
+  attr_reader :board
 
-  def initialize(player_manager, board)
-    raise NilReferenceError, "player_manager" if player_manager.nil?
-    @player_manager = player_manager
+  def initialize(board)
+    raise NilReferenceError, "board" if board.nil?
+    raise InvalidValueError, "board" if board.size == 0
     @board = board
   end
 
