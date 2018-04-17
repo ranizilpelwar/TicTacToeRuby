@@ -10,9 +10,9 @@ RSpec.describe "get best move" do
   let(:best_min_move) {  20000 }
 
   def create_computer_actions(new_board)
-    players = MockPlayerManager.new
-    @game_board = GameBoard.new(players, new_board)
-    @computer_actions = ComputerActions.new(@game_board)
+    player_manager = MockPlayerManager.new
+    @game_board = GameBoard.new(new_board)
+    @computer_actions = ComputerActions.new(@game_board, player_manager)
   end
 
   it "raises a nil reference error when board is nil" do
