@@ -59,7 +59,7 @@ class GameInteraction
       spot = get_human_spot(can_undo_moves?)
       undo_is_selected = spot == -1
       if undo_is_selected
-        @player_movement_manager.undo_last_move(@game_board)
+        @player_movement_manager.undo_last_move(@game_board, @player_manager)
         @writer.clear_screen
         show_the_players
         display_undo_last_moves_message
