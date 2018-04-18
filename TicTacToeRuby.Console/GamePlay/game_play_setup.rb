@@ -36,7 +36,7 @@ class GamePlaySetup
   def setup
     @writer.clear_screen
     display_introductory_message
-    @language_setup.display_language_config_option
+    display_language_config_option
     display_match_options
     inquiry = language_configuration_requested?
     request_language_setup = inquiry.feedback
@@ -53,6 +53,10 @@ class GamePlaySetup
     end
   end
 
+  def display_language_config_option
+    @language_setup.display_language_config_option
+  end
+
   def display_introductory_message
     @writer.display_message(MessageGenerator.welcome)
     @writer.display_message(MessageGenerator.line_spacer)
@@ -60,16 +64,16 @@ class GamePlaySetup
 
   def language_configuration_requested?
     language_selections = ["L", "l"]
-    input_choices = []
-    input_choices.push(*language_selections)
+    valid_input_choices = []
+    valid_input_choices.push(*language_selections)
     match_numbers = @match_type_manager.get_match_numbers
     match_numbers = match_numbers.map(&:to_s)
-    input_choices.push(*match_numbers)
+    valid_input_choices.push(*match_numbers)
     #input = InputValidator.get_valid_selection(@writer, @reader, input_choices)
     input = ""
     loop do
       input = reader.read_input_ignore_empty
-      valid = InputValidator.valid?(input, input_choices)
+      valid = InputValidator.valid?(input, valid_input_choices)
       break if valid
       writer.display_message(MessageGenerator.invalid_selection_error)
     end
