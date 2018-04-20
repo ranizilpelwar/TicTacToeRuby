@@ -17,4 +17,14 @@ class ConsoleReader
     end while input == "" && attempts < 5
     return input
   end
+
+  def read_and_validate(callback, valid_input_choices)
+    input = ""
+    5.times do
+      input = read_input_ignore_empty
+      valid = callback.call(input, valid_input_choices)
+      break if valid
+    end
+    input
+  end
 end

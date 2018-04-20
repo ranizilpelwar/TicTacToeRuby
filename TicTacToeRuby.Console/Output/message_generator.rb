@@ -141,6 +141,14 @@ module MessageGenerator
     message = get_data("application_text", "option_number")
     message = message.gsub("[1]", number.to_s) if parameter_provided?(number)
   end
+
+  def self.title_of_player_setup_screen
+    message = get_data("application_text", "title_of_player_setup_screen")
+  end
+
+  def self.title_of_match_setup_screen
+    message = get_data("application_text", "title_of_match_setup_screen")
+  end
   
   def self.argument_error(method_name, argument_name, reason)
     message = get_data("application_text", "argument_error")
@@ -155,6 +163,11 @@ module MessageGenerator
 
   def self.invalid_selection_error
     message = get_data("application_text", "invalid_selection_error")
+  end
+
+  def self.invalid_selection_error_for(property)
+    message = get_data("application_text", "invalid_selection_error_for")
+    message = message.gsub("[1]", property)
   end
 
   def self.line_spacer

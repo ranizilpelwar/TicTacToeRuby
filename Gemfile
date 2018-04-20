@@ -4,3 +4,4 @@ source "https://rubygems.org"
 
 gem "cucumber", '3.1.0'
 gem "rspec"
+gem "fakefs"
