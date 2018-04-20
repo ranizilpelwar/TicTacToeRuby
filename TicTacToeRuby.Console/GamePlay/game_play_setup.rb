@@ -69,8 +69,7 @@ class GamePlaySetup
     match_numbers = @match_type_manager.get_match_numbers
     match_numbers = match_numbers.map(&:to_s)
     valid_input_choices.push(*match_numbers)
-    #input = InputValidator.get_valid_selection(@writer, @reader, input_choices)
-    input = reader.read_and_validate(InputValidator.valid?, valid_input_choices)
+    input = reader.read_and_validate(InputValidator.valid?, valid_input_choices, writer, MessageGenerator.invalid_selection_error)
     feedback = language_selections.include? input
     result = Struct.new(:feedback, :input).new(feedback, input)
   end

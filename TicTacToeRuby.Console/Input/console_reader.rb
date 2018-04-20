@@ -1,3 +1,5 @@
+
+require_relative '../Output/message_generator.rb'
 class ConsoleReader
   
   # This will read the input from the user without storing the Enter key input that the user types at the end.
@@ -18,11 +20,12 @@ class ConsoleReader
     return input
   end
 
-  def read_and_validate(callback, valid_input_choices)
+  def read_and_validate(callback, valid_input_choices, writer, message)
     input = ""
     5.times do
       input = read_input_ignore_empty
       valid = callback.call(input, valid_input_choices)
+      writer.display_message(message) if !valid
       break if valid
     end
     input
