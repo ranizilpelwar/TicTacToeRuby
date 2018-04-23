@@ -149,6 +149,10 @@ module MessageGenerator
   def self.title_of_match_setup_screen
     message = get_data("application_text", "title_of_match_setup_screen")
   end
+
+  def self.title_of_language_options_screen
+    message = get_data("application_text", "title_of_language_options_screen")
+  end
   
   def self.argument_error(method_name, argument_name, reason)
     message = get_data("application_text", "argument_error")
