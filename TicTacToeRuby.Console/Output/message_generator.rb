@@ -1,5 +1,5 @@
 require_relative '../Input/yaml_reader.rb'
-require_relative '../Languages/language_options_adapter.rb'
+require_relative '../../TicTacToeRuby.Core/Languages/language_options_adapter.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 

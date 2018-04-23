@@ -1,4 +1,4 @@
-require_relative '../../TicTacToeRuby.Console/Languages/language_options_adapter.rb'
+require_relative '../../TicTacToeRuby.Core/Languages/language_options_adapter.rb'
 
 RSpec.describe "a language options adapter" do
   context "method called input_choices" do
