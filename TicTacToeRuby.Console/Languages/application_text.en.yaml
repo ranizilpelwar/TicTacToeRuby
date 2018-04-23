@@ -22,7 +22,6 @@ match_selection_prompt: "Who is playing? Please select one of the matches below:
 match_option_description: "[1] Vs [2]"
 option_number: "[1]. "
 title_of_player_setup_screen: "Player Setup"
-title_of_match_setup_screen: "Match Setup"
 title_of_language_options_screen: "Language Setup"
 argument_error: "Cannot [1] because [2] is [3]."
 uniqueness_error: "Oops! I can't use the same one. Try again."

@@ -12,10 +12,6 @@ def initialize(args)
     @match_type_manager = args[:match_type_manager]
   end
 
-  def display_screen_title
-    @writer.display_message(MessageGenerator.title_of_match_setup_screen)
-  end
-
   def display_prompt
     @writer.display_message(MessageGenerator.match_selection_prompt)
     @writer.display_message(MessageGenerator.line_spacer)
