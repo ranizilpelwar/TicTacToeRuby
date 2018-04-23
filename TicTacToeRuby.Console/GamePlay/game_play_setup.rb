@@ -29,16 +29,12 @@ class GamePlaySetup
     @reader = reader
     @language_directory = language_directory
     @language_config = LanguageOptionsAdapter.new(@language_directory)
-    args = {writer: @writer, 
-            reader: @reader, 
-            language_config: @language_config}
-    @language_setup = LanguageSetup.new(args)
   end
 
   def setup
     @writer.clear_screen
     display_introductory_message
-    display_language_config_option
+    display_language_config
     display_match_options
     inquiry = language_configuration_requested?
     request_language_setup = inquiry.feedback
@@ -56,8 +52,18 @@ class GamePlaySetup
     end
   end
 
-  def display_language_config_option
-    @language_setup.display_language_config_option
+  def display_language_config
+        
+    @language_setup = @language_setup.nil? ? new_language_setup : @language_setup
+    @language_setup.display_prompt
+    @language_setup.display_options
+  end
+
+  def new_language_setup
+    args = {writer: @writer, 
+            reader: @reader, 
+            language_config: @language_config}
+    @language_setup = LanguageSetup.new(args)
   end
 
   def display_introductory_message
@@ -66,8 +72,8 @@ class GamePlaySetup
   end
 
   def language_configuration_requested?
-    language_selections = ["L", "l"]
     valid_input_choices = []
+    language_selections = @language_setup.config_options
     valid_input_choices.push(*language_selections)
     match_numbers = @match_type_manager.get_match_numbers
     match_numbers = match_numbers.map(&:to_s)
