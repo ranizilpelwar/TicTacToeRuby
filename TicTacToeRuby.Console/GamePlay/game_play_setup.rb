@@ -17,7 +17,7 @@ require_relative '../Languages/language_options_adapter.rb'
 require_relative '../Languages/language_setup.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 require_relative '../Languages/language_options_setup.rb'
-
+require_relative '../GamePlay/match_type_setup.rb'
 
 class GamePlaySetup
   attr_reader :writer, :reader, :game_interaction, :match_type_manager, :language_directory, :language_setup, :language_config
@@ -35,7 +35,7 @@ class GamePlaySetup
     @writer.clear_screen
     display_introductory_message
     display_language_config
-    display_match_options
+    display_match_types
     inquiry = language_configuration_requested?
     request_language_setup = inquiry.feedback
     if request_language_setup
@@ -72,7 +72,7 @@ class GamePlaySetup
 
   def language_configuration_requested?
     valid_input_choices = []
-    language_selections = @language_setup.config_options
+    language_selections = @language_setup.input_choices
     valid_input_choices.push(*language_selections)
     match_numbers = @match_type_manager.get_match_numbers
     match_numbers = match_numbers.map(&:to_s)
@@ -82,9 +82,12 @@ class GamePlaySetup
     result = Struct.new(:feedback, :input).new(feedback, input)
   end
 
-  def display_match_options
+  def display_match_types
     @match_type_manager = MatchTypeManager.new
-    MatchTypeSetup.prompt_for_match_type_selection(writer, @match_type_manager)
+    args = {:reader => @reader, :writer => @writer, :match_type_manager => @match_type_manager}
+    @match_type_setup = MatchTypeSetup.new(args)
+    @match_type_setup.display_prompt
+    @match_type_setup.display_options
   end
 
   def setup_players(match_type)

@@ -6,30 +6,32 @@ require_relative '../Input/console_reader.rb'
 
 class MatchTypeSetup
 
-def initialize(writer, reader)
-    @writer = writer
-    @reader = reader
-    @match_type_manager = MatchTypeManager.new
+def initialize(args)
+    @reader = args[:reader]
+    @writer = args[:writer]
+    @match_type_manager = args[:match_type_manager]
   end
 
   def display_screen_title
     @writer.display_message(MessageGenerator.title_of_match_setup_screen)
   end
 
+  def display_prompt
+    @writer.display_message(MessageGenerator.match_selection_prompt)
+    @writer.display_message(MessageGenerator.line_spacer)
+  end
+
   def display_options
-    writer.display_message(MessageGenerator.match_selection_prompt)
-    writer.display_message(MessageGenerator.line_spacer)
     type = 1
-    match_type_manager.matches.each { |match|  
+    @match_type_manager.matches.each { |match|  
       player1_type_selection = match.player1_type.selected_option
       player2_type_selection = match.player2_type.selected_option
-      writer.display_text(MessageGenerator.option_number(type))
-      writer.display_message(MessageGenerator.match_option_description(player1_type_selection, player2_type_selection))
+      @writer.display_text(MessageGenerator.option_number(type))
+      @writer.display_message(MessageGenerator.match_option_description(player1_type_selection, player2_type_selection))
       type = type + 1
     }
   end
 
-  # should this just be private?
   def input_choices
     choices = @match_type_manager.get_match_numbers
   end
