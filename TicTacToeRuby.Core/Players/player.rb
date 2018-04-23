@@ -16,4 +16,8 @@ class Player
   def equals?(player)
     isEqual = @type == player.type && @symbol == player.symbol
   end
+
+  def type
+    @type.selected_option
+  end
 end
