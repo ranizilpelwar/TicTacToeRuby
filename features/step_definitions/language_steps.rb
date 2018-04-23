@@ -17,23 +17,13 @@ Then("user is displayed an option to configure the language") do
 end
 
 Given("default language setting is stored as an invalid value") do
-  include FakeFS::SpecHelpers
-  #allow(YAMLReader).to receive(:read_data).and_return("ex")
+  allow(YAMLReader).to receive(:read_data).and_return("ex")
   real_file_sandbox = '../test_files/bad_global_settings/test/'
-  file = 'global_settings.yaml'
-  #FileUtils.rm_rf(real_file_sandbox)
-  FileUtils.mkdir_p(real_file_sandbox)
-  #FileUtils.chmod(0777, real_file_sandbox)
-  FakeFS.activate!
-  config = File.expand_path(real_file_sandbox, file)
-  fs = FakeFS::FileSystem
-  fs.clone(File.expand_path(File.dirname(__FILE__))).inspect
   @language_adapter_with_bad_global = LanguageOptionsAdapter.new(real_file_sandbox)
   @messages = []
   @writer = double(:display_message => @messages << "written")
   args = { :writer => @writer, :reader => MockConsoleReader.new("L"), :language_config => @language_adapter_with_bad_global }
   @language_setup_with_bad_global = LanguageSetup.new(args)
-  FakeFS.deactivate!
 end
 
 Then("user is displayed a language configuration error message") do
