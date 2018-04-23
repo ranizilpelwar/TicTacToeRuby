@@ -35,4 +35,13 @@ class LanguageSetup
   def error_message
     MessageGenerator.language_defaults_error
   end
+
+  def language_configuration_requested?(additional_choices_shown)
+    valid_input_choices = []
+    valid_input_choices.push(*additional_choices_shown)
+    valid_input_choices.push(*input_choices)
+    input = reader.read_and_validate(InputValidator.valid?, valid_input_choices, writer, MessageGenerator.invalid_selection_error)
+    feedback = input_choices.include? input
+    result = Struct.new(:feedback, :input).new(feedback, input)
+  end
 end

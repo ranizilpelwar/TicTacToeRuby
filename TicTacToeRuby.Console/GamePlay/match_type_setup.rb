@@ -33,7 +33,7 @@ def initialize(args)
   end
 
   def input_choices
-    choices = @match_type_manager.get_match_numbers
+    choices = @match_type_manager.get_match_numbers.map(&:to_s)
   end
 
   def valid_selection?(selected_input)

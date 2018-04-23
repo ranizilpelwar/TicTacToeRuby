@@ -71,15 +71,8 @@ class GamePlaySetup
   end
 
   def language_configuration_requested?
-    valid_input_choices = []
-    language_selections = @language_setup.input_choices
-    valid_input_choices.push(*language_selections)
-    match_numbers = @match_type_manager.get_match_numbers
-    match_numbers = match_numbers.map(&:to_s)
-    valid_input_choices.push(*match_numbers)
-    input = reader.read_and_validate(InputValidator.valid?, valid_input_choices, writer, MessageGenerator.invalid_selection_error)
-    feedback = language_selections.include? input
-    result = Struct.new(:feedback, :input).new(feedback, input)
+    match_numbers = @match_type_setup.input_choices
+    @language_setup.language_configuration_requested?(match_numbers)
   end
 
   def display_match_types
