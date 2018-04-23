@@ -44,7 +44,6 @@ class GamePlaySetup
     request_language_setup = inquiry.feedback
     if request_language_setup
       @writer.clear_screen
-      #@language_setup.configure_language
       @language_options = LanguageOptionsSetup.new(@reader, @writer, @language_config)
       @language_options.display_and_configure!
       setup
