@@ -18,3 +18,8 @@ Feature: Configuring the game language
   Given user is at the start screen
   When the user types the letter "l"
   Then the system identifies that the user requested the language to be configured
+
+  Scenario: Another key does not trigger the system to configure the language
+  Given user is at the start screen
+  When the user types the letter "x"
+  Then the system properly identifies that the user did not request the language to be configured

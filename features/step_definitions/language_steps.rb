@@ -41,3 +41,9 @@ Then("the system identifies that the user requested the language to be configure
   inquiry = @language_setup.language_configuration_requested?([])
   expect(inquiry.feedback).to be true
 end
+
+Then("the system properly identifies that the user did not request the language to be configured") do
+  inquiry = @language_setup.language_configuration_requested?([])
+  expect(inquiry.feedback).to be false
+end
+
