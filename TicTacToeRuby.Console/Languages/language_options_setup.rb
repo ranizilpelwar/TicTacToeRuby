@@ -25,10 +25,6 @@ class LanguageOptionsSetup
   end
 
   def user_selection
-    error_message = MessageGenerator.invalid_selection_error
-    error_message = error_message + MessageGenerator.line_spacer
-    error_message = error_message + MessageGenerator.language_selection_prompt 
-    error_message = error_message + MessageGenerator.line_spacer
     input = @reader.read_and_validate(InputValidator.valid?, @language_adapter.input_choices, @writer, error_message)
     language_tag = @language_adapter.language_tag_for_input_choice(input)
   end
@@ -42,5 +38,12 @@ class LanguageOptionsSetup
     display_prompt
     display_options
     update_language!(user_selection)
+  end
+
+  def error_message
+    error_message = MessageGenerator.invalid_selection_error
+    error_message = error_message + MessageGenerator.line_spacer
+    error_message = error_message + MessageGenerator.language_selection_prompt 
+    error_message = error_message + MessageGenerator.line_spacer
   end
 end

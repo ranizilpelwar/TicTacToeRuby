@@ -19,7 +19,7 @@ class LanguageSetup
   end
 
   def display_prompt
-    @writer.display_message(MessageGenerator.language_defaults_error) if !@language_config.valid?(@language_config.stored_default_tag)
+    @writer.display_message(error_message) if !@language_config.valid?(@language_config.stored_default_tag)
     @writer.display_text(MessageGenerator.language_configuration_prompt)
   end
 
@@ -30,5 +30,9 @@ class LanguageSetup
 
   def config_options
     language_selections = ["L", "l"]
+  end
+
+  def error_message
+    MessageGenerator.language_defaults_error
   end
 end

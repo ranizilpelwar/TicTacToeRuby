@@ -7,12 +7,12 @@ require 'fakefs/spec_helpers'
 
 Given("user is at the start screen") do
   @messages = []
-  @writer = double(:display_message => @messages << "written")
+  @writer = double(:display_message => @messages << "written", :display_text => @messages << "written")
   @game_play_setup = GamePlaySetup.new(@writer, MockConsoleReader.new("L"), "TicTacToeRuby.Console/Languages/")
 end
 
 Then("user is displayed an option to configure the language") do
-  @game_play_setup.display_language_config_option
+  @game_play_setup.display_language_config
   expect(@messages[0] == "written").to be true
 end
 
@@ -27,6 +27,6 @@ Given("default language setting is stored as an invalid value") do
 end
 
 Then("user is displayed a language configuration error message") do
-  @language_setup_with_bad_global.display_language_config_error
+  @language_setup_with_bad_global.error_message
   expect(@messages[0] == "written").to be true
 end

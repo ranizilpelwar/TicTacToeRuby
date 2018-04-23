@@ -53,7 +53,6 @@ class GamePlaySetup
   end
 
   def display_language_config
-        
     @language_setup = @language_setup.nil? ? new_language_setup : @language_setup
     @language_setup.display_prompt
     @language_setup.display_options
