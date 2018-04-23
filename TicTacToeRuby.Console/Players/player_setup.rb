@@ -19,11 +19,6 @@ class PlayerSymbolSetup
     # return an array of strings
   end
 
-  def valid_selection?(selected_input)
-    # match against regex pattern
-    # should be in business logic layer - use this method as a wrapper
-  end
-
   def display_invalid_input_message
 
   end

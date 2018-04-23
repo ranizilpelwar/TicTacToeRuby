@@ -36,12 +36,6 @@ def initialize(args)
     choices = @match_type_manager.get_match_numbers.map(&:to_s)
   end
 
-  def valid_selection?(selected_input)
-    # match against regex pattern
-    # validation should be in business logic layer - use this method as a wrapper
-    @match_type_manager.valid?(selected_input)
-  end
-
   def display_invalid_input_message
     @writer.display_message(MessageGenerator.invalid_selection_error_for("match type"))
   end
