@@ -17,12 +17,9 @@ RSpec.describe "a game" do
     expect(match_manager.get_total_available_matches).to eq(3)
   end
 
-  it "allows the user to chose the game type" do
-    writer = writer_double
-    reader = reader_double("1")
-    match_type_manager = match_type_manager_double
-    match_type = MatchTypeSetup.get_valid_match_type(writer, reader, match_type_manager)
-    expect(match_type).to_not be_nil
+  it "allows the user to chose from three types of matches" do
+    match_type_manager = MatchTypeManager.new
+    expect(match_type_manager.get_total_available_matches).to eq(3)
   end
 
   it "is against two players" do
