@@ -11,5 +11,5 @@ Feature: Configuring the game language
 
   Scenario: User can type the letter L to configure the language
   Given user is at the start screen
-  When the user types the letter L
+  When the user types the letter "L"
   Then the system identifies that the user requested the language to be configured

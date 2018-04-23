@@ -33,8 +33,8 @@ Then("user is displayed a language configuration error message") do
   expect(@messages[0] == "written").to be true
 end
 
-When("the user types the letter L") do
-  allow(@reader).to receive(:read_and_validate).and_return("L")
+When("the user types the letter {string}") do |string|
+  allow(@reader).to receive(:read_and_validate).and_return(string)
 end
 
 Then("the system identifies that the user requested the language to be configured") do
