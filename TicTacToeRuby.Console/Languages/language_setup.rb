@@ -25,24 +25,4 @@ class LanguageSetup
     @ui_writer.display_message(MessageGenerator.language_defaults_error)
   end
 
-  def display_language_configuration_screen
-    @ui_writer.display_message(MessageGenerator.language_selection_prompt)
-    @ui_writer.display_message(MessageGenerator.line_spacer)
-    @ui_writer.display_message(MessageGenerator.language_options)
-  end
-
-  def get_user_selection
-    input = @ui_reader.read_and_validate(InputValidator.valid?, @language_config.input_choices, @ui_writer, MessageGenerator.invalid_selection_error)
-    language_tag = @language_config.language_tag_for_input_choice(input)
-    result = language_tag
-  end
-
-  def update_default_language(tag)
-    @language_config.default_language_tag!(tag)
-  end
-
-  def configure_language
-    display_language_configuration_screen
-    update_default_language(get_user_selection)
-  end
 end
