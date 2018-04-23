@@ -28,7 +28,7 @@ class LanguageSetup
     @writer.display_message(MessageGenerator.line_spacer)
   end
 
-  def config_options
+  def input_choices
     language_selections = ["L", "l"]
   end
 
