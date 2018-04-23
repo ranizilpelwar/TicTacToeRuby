@@ -42,13 +42,15 @@ module MessageGenerator
     options = get_language_config.all_languages
     input_choices = get_language_config.input_choices
     count = input_choices.size
-    message = ""
+    all_options = []
     iterator = 1
     count.times do
+      message = ""
       message = message + iterator.to_s + ". " + options[iterator-1]['description'] + "\n"
+      all_options << message
       iterator = iterator + 1
     end
-     message = message + "\n"
+    all_options
   end
 
   def self.player_symbol_prompt(player_number)
