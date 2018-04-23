@@ -1,6 +1,6 @@
 welcome: "¡Bienvenido a Tic Tac Toe! ¡Juguemos!"
-language_configuration_prompt: "Usted gustaría cambiar los idiomas? "
-language_configuration_option: "Si es así, presione L."
+language_configuration_prompt: "Si desea cambiar los idiomas: "
+language_configuration_option: "Presione L"
 language_selection_prompt: "¿Qué idioma quieres usar?"
 player_symbol_prompt: "Vamos a configurar el número de jugador [1]! Presiona una tecla que el jugador [1] puede usar en el juego. Puede ser una letra o un simbolo."
 continue_prompt: "Pulse cualquier tecla para continuar..."
