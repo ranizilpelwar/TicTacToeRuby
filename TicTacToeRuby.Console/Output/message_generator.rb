@@ -30,8 +30,12 @@ module MessageGenerator
     message = get_data("application_text", "welcome")
   end
 
-  def self.language_configuration
-    message = get_data("application_text", "language_configuration")
+  def self.language_configuration_prompt
+    message = get_data("application_text", "language_configuration_prompt")
+  end
+
+  def self.language_configuration_option
+    message = get_data("application_text", "language_configuration_option")
   end
 
   def self.language_selection_prompt
