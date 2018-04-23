@@ -49,4 +49,8 @@ class MatchTypeManager
     end
     result = array
   end
+
+  def input_choices
+    choices = get_match_numbers.map(&:to_s)
+  end
 end
