@@ -8,3 +8,8 @@ Feature: Configuring the game language
 		Given default language setting is stored as an invalid value
 		When user is at the start screen
 		Then user is displayed a language configuration error message
+
+  Scenario: User can type the letter L to configure the language
+  Given user is at the start screen
+  When the user types the letter L
+  Then the system identifies that the user requested the language to be configured

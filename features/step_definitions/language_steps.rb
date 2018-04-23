@@ -8,7 +8,8 @@ require 'fakefs/spec_helpers'
 Given("user is at the start screen") do
   @messages = []
   @writer = double(:display_message => @messages << "written", :display_text => @messages << "written")
-  args = {:writer => @writer, :reader => double(), :language_config => double()}
+  @reader = double()
+  args = {:writer => @writer, :reader => @reader, :language_config => double()}
   @language_setup = LanguageSetup.new(args)
 end
 
@@ -30,4 +31,13 @@ end
 Then("user is displayed a language configuration error message") do
   @language_setup_with_bad_global.error_message
   expect(@messages[0] == "written").to be true
+end
+
+When("the user types the letter L") do
+  allow(@reader).to receive(:read_and_validate).and_return("L")
+end
+
+Then("the system identifies that the user requested the language to be configured") do
+  inquiry = @language_setup.language_configuration_requested?([])
+  expect(inquiry.feedback).to be true
 end
