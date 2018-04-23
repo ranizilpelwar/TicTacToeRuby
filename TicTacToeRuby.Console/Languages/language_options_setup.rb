@@ -33,7 +33,7 @@ class LanguageOptionsSetup
     language_tag = @language_adapter.language_tag_for_input_choice(input)
   end
 
-  def update!(language_tag)
+  def update_language!(language_tag)
     @language_adapter.default_language_tag!(language_tag)
   end
 
@@ -41,6 +41,6 @@ class LanguageOptionsSetup
     display_screen_title
     display_prompt
     display_options
-    update!(user_selection)
+    update_language!(user_selection)
   end
 end
