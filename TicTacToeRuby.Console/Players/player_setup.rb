@@ -24,7 +24,7 @@ class PlayerSetup
   end
 
   def error_message
-    PlayerSymbolSetup.error_message
+    MessageGenerator.invalid_selection_error
   end
 
   def display_invalid_input_message
@@ -33,6 +33,7 @@ class PlayerSetup
 
   def user_selection
     input = @reader.read_and_validate(PlayerSymbolValidator.validate_by, input_choices, @writer, error_message)
+    input = input.upcase
   end
 
   def display_and_configure!(match_type)
@@ -60,7 +61,8 @@ class PlayerSetup
 
   def get_player_symbols
     prompt_for_player_symbol(1)
-    symbol_one = PlayerSymbolSetup.get_symbol_for_player(@writer, @reader)
+    #symbol_one = PlayerSymbolSetup.get_symbol_for_player(@writer, @reader)
+    symbol_one = user_selection
     prompt_for_player_symbol(2)
     symbol_two = get_unique_symbol_for_player2(symbol_one)
     symbols = [symbol_one, symbol_two]
@@ -69,8 +71,8 @@ class PlayerSetup
   def get_unique_symbol_for_player2(symbol_one)
     same_value = true
     while same_value
-      symbol_two = PlayerSymbolSetup.get_symbol_for_player(@writer, @reader)
-      same_value = symbol_one.eql? symbol_two
+      symbol_two = user_selection
+      same_value = PlayerSymbolValidator.equal?(symbol_one, symbol_two)
       @writer.display_message(MessageGenerator.uniqueness_error) unless !same_value
     end
     result = symbol_two

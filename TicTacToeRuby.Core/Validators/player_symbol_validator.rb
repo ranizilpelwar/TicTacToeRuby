@@ -3,9 +3,11 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 module PlayerSymbolValidator
+
+  SYMBOL_PATTERN = /\A[^0-9\s]{1}\z/
+
   def self.valid?(input)
-    pattern = /\A[^0-9\s]{1}\z/
-    validate_by.(input, pattern)
+    validate_by.(input, SYMBOL_PATTERN)
   end
 
   def self.validate_by
@@ -15,5 +17,11 @@ module PlayerSymbolValidator
       match_data = valid_choices_regex_pattern.match(input)
       match_data != nil
     end
+  end
+
+  def self.equal?(symbol_one, symbol_two)
+    symbol_one = symbol_one.upcase
+    symbol_two = symbol_two.upcase
+    symbol_one.eql? symbol_two
   end
 end
