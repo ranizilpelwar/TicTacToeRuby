@@ -57,9 +57,17 @@ module MessageGenerator
     all_options
   end
 
+  def self.player_setup_prompt
+    message = get_data("application_text", "player_setup_prompt")
+  end
+
   def self.player_symbol_prompt(player_number)
     message = get_data("application_text", "player_symbol_prompt")
     message = message.gsub("[1]", player_number.to_s)
+  end
+
+  def self.player_symbol_option
+    message = get_data("application_text", "player_symbol_option")
   end
 
   def self.undo_last_move_option
