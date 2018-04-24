@@ -1,6 +1,6 @@
 require_relative '../../TicTacToeRuby.Console/Input/console_reader.rb'
 require_relative '../../TicTacToeRuby.Console/Output/console_writer.rb'
-require_relative '../../TicTacToeRuby.Console/Validators/input_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/input_validator.rb'
 
 RSpec.describe ConsoleReader do
   describe "#read_and_validate" do
