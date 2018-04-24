@@ -54,3 +54,16 @@ end
 Then("user_selection returns a {string}") do |symbol|
   expect(@player_setup.user_selection).to eq(symbol)
 end
+
+Given("player one's symbol is {string}") do |symbol|
+  @symbol_one = symbol
+end
+
+When("a user types in a {string} first and then a {string}") do |symbol1, symbol2|
+  allow(@player_setup).to receive(:user_selection).and_return("X", "Y")
+end
+
+Then("get_unique_symbol_for_player2 returns a {string}") do |symbol|
+  expect(@player_setup.get_unique_symbol_for_player2(@symbol_one)).to eq(symbol)
+end
+

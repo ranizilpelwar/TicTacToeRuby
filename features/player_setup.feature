@@ -13,3 +13,9 @@ Scenario: user_selection returns an uppercased symbol when the input is valid
 Given a PlayerSetup is initialized
 When a user types in a "x"
 Then user_selection returns a "X"
+
+Scenario: get_unique_symbol_for_player2 returns a symbol that is different than the first symbol
+Given a PlayerSetup is initialized
+And player one's symbol is "x"
+When a user types in a "x" first and then a "y"
+Then get_unique_symbol_for_player2 returns a "Y"
