@@ -1,6 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/Players/player_type.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player.rb'
 require_relative '../../TicTacToeRuby.Core/Players/player_manager.rb'
+require_relative '../../TicTacToeRuby.Console/Players/player_setup.rb'
 
 Given("a new game is started") do
   @players = []
@@ -30,4 +31,17 @@ end
 
 Then("that player cannot go first in the game") do
 	expect(PlayerSelectionValidator.valid?(@selection_for_first_player, @players[0].symbol, @players[1].symbol)).to be false
+end
+
+Given("a PlayerSetup is initialized") do
+  args = {:reader => MockConsoleReader.new("X"), :writer => ConsoleWriter.new }
+  @player_setup = PlayerSetup.new(args)
+end
+
+When("input_choices is called") do
+  @input_choices_actual = @player_setup.input_choices
+end
+
+Then("the returned value is an expected regular pattern") do
+  expect(@input_choices_actual).to eq(/\A[^0-9\s]{1}\z/)
 end
