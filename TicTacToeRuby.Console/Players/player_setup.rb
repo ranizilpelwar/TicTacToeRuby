@@ -1,4 +1,5 @@
 require_relative './player_symbol_setup.rb'
+require_relative '../../TicTacToeRuby.Core/Evaluators/player_symbol_evaluator.rb'
 
 class PlayerSetup
 
@@ -72,7 +73,7 @@ class PlayerSetup
     same_value = true
     while same_value
       symbol_two = user_selection
-      same_value = PlayerSymbolValidator.equal?(symbol_one, symbol_two)
+      same_value = PlayerSymbolEvaluator.equal?(symbol_one, symbol_two)
       @writer.display_message(MessageGenerator.uniqueness_error) unless !same_value
     end
     result = symbol_two
