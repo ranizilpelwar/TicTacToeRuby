@@ -1,7 +1,7 @@
 require_relative '../Output/console_writer.rb'
 require_relative '../Output/message_generator.rb'
 require_relative '../Input/console_reader.rb'
-require_relative '../Validators/input_validator.rb'
+require_relative '../../TicTacToeRuby.Core/Validators/input_validator.rb'
 require_relative '../Input/yaml_reader.rb'
 require_relative '../Output/yaml_writer.rb'
 require_relative '../../TicTacToeRuby.Core/Languages/language_config.rb'
