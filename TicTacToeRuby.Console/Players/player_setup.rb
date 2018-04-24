@@ -2,9 +2,9 @@ require_relative './player_symbol_setup.rb'
 
 class PlayerSetup
 
-  def initialize(writer, reader)
-    @writer = writer
-    @reader = reader
+  def initialize(args)
+    @reader = args[:reader]
+    @writer = args[:writer]
   end
 
   def display_screen_title
@@ -32,10 +32,51 @@ class PlayerSetup
   end
 
   def user_selection
-    input = @reader.read_and_validate(PlayerSymbolValidator.valid?, input_choices, @writer, error_message)
+    input = @reader.read_and_validate(PlayerSymbolValidator.validate_by, input_choices, @writer, error_message)
   end
 
-  def display_and_configure!
-    
+  def display_and_configure!(match_type)
+    display_prompt
+    display_options
+    player_manager = setup_players(match_type)
+  end
+
+  def setup_players(match_type)
+    symbols = get_player_symbols
+    symbol_one = symbols[0]
+    symbol_two = symbols[1]
+    player1_type = match_type.player1_type
+    player2_type = match_type.player2_type
+    player1 = Player.new(player1_type, symbol_one)
+    player2 = Player.new(player2_type, symbol_two)
+   
+    player_manager = PlayerManager.new(player1, player2)
+   
+    symbol_of_first_player = FirstPlayerSetup.prompt_for_first_player_symbol(@writer, @reader, symbol_one, symbol_two)
+    current_player_symbol = player_manager.current_player.symbol
+    player_manager.update_current_player unless symbol_of_first_player == current_player_symbol 
+    result = player_manager
+  end
+
+  def get_player_symbols
+    prompt_for_player_symbol(1)
+    symbol_one = PlayerSymbolSetup.get_symbol_for_player(@writer, @reader)
+    prompt_for_player_symbol(2)
+    symbol_two = get_unique_symbol_for_player2(symbol_one)
+    symbols = [symbol_one, symbol_two]
+  end
+
+  def get_unique_symbol_for_player2(symbol_one)
+    same_value = true
+    while same_value
+      symbol_two = PlayerSymbolSetup.get_symbol_for_player(@writer, @reader)
+      same_value = symbol_one.eql? symbol_two
+      @writer.display_message(MessageGenerator.uniqueness_error) unless !same_value
+    end
+    result = symbol_two
+  end
+
+  def prompt_for_player_symbol(player_number)
+    @writer.display_message(MessageGenerator.player_symbol_prompt(player_number))
   end
 end

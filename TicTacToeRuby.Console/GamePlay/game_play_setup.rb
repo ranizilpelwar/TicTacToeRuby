@@ -9,6 +9,7 @@ require_relative '../../TicTacToeRuby.Console/GamePlay/game_interaction.rb'
 require_relative '../Output/console_writer.rb'
 require_relative '../Input/console_reader.rb'
 require_relative '../Players/player_symbol_setup.rb'
+require_relative '../Players/player_setup.rb'
 require_relative '../Players/first_player_setup.rb'
 require_relative 'match_type_setup.rb'
 require_relative '../Output/message_generator.rb'
@@ -83,20 +84,9 @@ class GamePlaySetup
   end
 
   def setup_players(match_type)
-    symbols = get_player_symbols
-    symbol_one = symbols[0]
-    symbol_two = symbols[1]
-    player1_type = match_type.player1_type
-    player2_type = match_type.player2_type
-    player1 = Player.new(player1_type, symbol_one)
-    player2 = Player.new(player2_type, symbol_two)
-   
-    player_manager = PlayerManager.new(player1, player2)
-   
-    symbol_of_first_player = FirstPlayerSetup.prompt_for_first_player_symbol(@writer, @reader, symbol_one, symbol_two)
-    current_player_symbol = player_manager.current_player.symbol
-    player_manager.update_current_player unless symbol_of_first_player == current_player_symbol 
-    result = player_manager
+    args = {:reader => @reader, :writer => @writer}
+    player_setup = PlayerSetup.new(args)
+    player_setup.display_and_configure!(match_type)
   end
 
   def setup_board
@@ -113,27 +103,5 @@ class GamePlaySetup
 
   def play
     @game_interaction.play_game
-  end
-
-  def get_player_symbols
-    prompt_for_player_symbol(1)
-    symbol_one = PlayerSymbolSetup.get_symbol_for_player(writer, reader)
-    prompt_for_player_symbol(2)
-    symbol_two = get_unique_symbol_for_player2(symbol_one)
-    symbols = [symbol_one, symbol_two]
-  end
-
-  def get_unique_symbol_for_player2(symbol_one)
-    same_value = true
-    while same_value
-      symbol_two = PlayerSymbolSetup.get_symbol_for_player(writer, reader)
-      same_value = symbol_one.eql? symbol_two
-      writer.display_message(MessageGenerator.uniqueness_error) unless !same_value
-    end
-    result = symbol_two
-  end
-
-  def prompt_for_player_symbol(player_number)
-    writer.display_message(MessageGenerator.player_symbol_prompt(player_number))
   end
 end
