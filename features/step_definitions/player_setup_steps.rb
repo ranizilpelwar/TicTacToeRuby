@@ -34,7 +34,8 @@ Then("that player cannot go first in the game") do
 end
 
 Given("a PlayerSetup is initialized") do
-  args = {:reader => MockConsoleReader.new("X"), :writer => ConsoleWriter.new }
+  @reader = MockConsoleReader.new("x")
+  args = {:reader => @reader, :writer => ConsoleWriter.new }
   @player_setup = PlayerSetup.new(args)
 end
 
@@ -44,4 +45,12 @@ end
 
 Then("the returned value is an expected regular pattern") do
   expect(@input_choices_actual).to eq(/\A[^0-9\s]{1}\z/)
+end
+
+When("a user types in a {string}") do |symbol|
+  allow(@reader).to receive(:read_and_validate).and_return("x")
+end
+
+Then("user_selection returns a {string}") do |symbol|
+  expect(@player_setup.user_selection).to eq(symbol)
 end

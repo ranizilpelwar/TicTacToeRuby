@@ -8,3 +8,8 @@ Scenario: input_choices returns a regular expression
 Given a PlayerSetup is initialized
 When input_choices is called
 Then the returned value is an expected regular pattern
+
+Scenario: user_selection returns an uppercased symbol when the input is valid
+Given a PlayerSetup is initialized
+When a user types in a "x"
+Then user_selection returns a "X"
