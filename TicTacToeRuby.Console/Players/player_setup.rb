@@ -62,7 +62,6 @@ class PlayerSetup
 
   def get_player_symbols
     prompt_for_player_symbol(1)
-    #symbol_one = PlayerSymbolSetup.get_symbol_for_player(@writer, @reader)
     symbol_one = user_selection
     prompt_for_player_symbol(2)
     symbol_two = get_unique_symbol_for_player2(symbol_one)
