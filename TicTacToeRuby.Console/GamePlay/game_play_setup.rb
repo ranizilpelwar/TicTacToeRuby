@@ -8,7 +8,6 @@ require_relative '../../TicTacToeRuby.Core/Languages/language_options_adapter.rb
 require_relative '../../TicTacToeRuby.Console/GamePlay/game_interaction.rb'
 require_relative '../Output/console_writer.rb'
 require_relative '../Input/console_reader.rb'
-require_relative '../Players/player_symbol_setup.rb'
 require_relative '../Players/player_setup.rb'
 require_relative '../Players/first_player_setup.rb'
 require_relative 'match_type_setup.rb'

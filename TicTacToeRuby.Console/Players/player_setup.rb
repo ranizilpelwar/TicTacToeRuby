@@ -1,4 +1,3 @@
-require_relative './player_symbol_setup.rb'
 require_relative '../../TicTacToeRuby.Core/Evaluators/player_symbol_evaluator.rb'
 
 class PlayerSetup

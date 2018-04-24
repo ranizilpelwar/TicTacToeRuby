@@ -17,7 +17,6 @@ task :run_tests do
   ruby 'TicTacToeRuby.Core.UnitTests/Validators/tc_tie_game_validation.rb'
   ruby 'TicTacToeRuby.Core.UnitTests/Evaluators/tc_board_score_evaluation_parameterized_tests.rb'
   ruby 'TicTacToeRuby.Core.UnitTests/Evaluators/tc_board_score_evaluation.rb'
-  ruby 'TicTacToeRuby.Console.UnitTests/Players/tc_player_symbol_setup.rb'
   ruby 'TicTacToeRuby.Console.UnitTests/Players/tc_first_player_setup.rb'
   ruby 'TicTacToeRuby.Console.UnitTests/GamePlay/tc_game_interaction.rb'
 end
