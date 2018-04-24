@@ -15,6 +15,10 @@ class PlayerSymbolSetup
   end
 
   def self.display_invalid_input_message(writer)
-    writer.display_message(MessageGenerator.invalid_selection_error)
+    writer.display_message(error_message)
+  end
+
+  def self.error_message
+    MessageGenerator.invalid_selection_error
   end
 end
