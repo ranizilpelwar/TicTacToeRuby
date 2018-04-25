@@ -1,4 +1,3 @@
-require_relative '../Players/player_manager.rb'
 require_relative '../Validators/player_symbol_validator.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
