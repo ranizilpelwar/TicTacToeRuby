@@ -1,4 +1,4 @@
-require_relative '../../TicTacToeRuby.Console/Output/message_generator.rb'
+require_relative '../../TicTacToeRuby.Core/Languages/message_generator.rb'
 
 RSpec.describe "a message generator" do
   context "method called argument_error" do

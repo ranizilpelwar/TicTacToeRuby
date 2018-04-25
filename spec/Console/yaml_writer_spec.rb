@@ -1,4 +1,4 @@
-require_relative '../../TicTacToeRuby.Console/Output/yaml_writer.rb'
+require_relative '../../TicTacToeRuby.Core/Languages/yaml_writer.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 

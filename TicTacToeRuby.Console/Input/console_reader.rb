@@ -1,5 +1,4 @@
-
-require_relative '../Output/message_generator.rb'
+require_relative '../../TicTacToeRuby.Core/Languages/message_generator.rb'
 class ConsoleReader
   
   # This will read the input from the user without storing the Enter key input that the user types at the end.
