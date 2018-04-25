@@ -9,7 +9,7 @@ module YAMLReader
     raise NilReferenceError, "property" if property.nil?
     raise InvalidValueError, "file_path" if file_path == ""
     raise InvalidValueError, "property" if property == ""
-    raise InvalidValueError, "file_path" if !(File.exist?(file_path))
+    raise InvalidValueError, "file_path = #{file_path}" if !(File.exist?(file_path))
     yaml_file = YAML.load_file(file_path)
     data = yaml_file[property]
     raise InvalidValueError, property.to_s if data.nil?

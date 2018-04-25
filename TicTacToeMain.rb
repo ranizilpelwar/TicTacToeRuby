@@ -6,6 +6,6 @@ require_relative 'TicTacToeRuby.Console/Input/console_reader.rb'
 
 console_writer = ConsoleWriter.new
 console_reader = ConsoleReader.new
-game = GamePlaySetup.new(console_writer, console_reader, "TicTacToeRuby.Console/Languages/")
+game = GamePlaySetup.new(console_writer, console_reader, "tictactoeruby.core/config/")
 game.setup
 game.play
