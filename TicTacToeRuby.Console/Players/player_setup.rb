@@ -43,7 +43,7 @@ class PlayerSetup
   end
 
   def setup_players(match_type)
-    symbols = get_player_symbols
+    symbols = player_symbols
     symbol_one = symbols[0]
     symbol_two = symbols[1]
     player1_type = match_type.player1_type
@@ -59,7 +59,7 @@ class PlayerSetup
     result = player_manager
   end
 
-  def get_player_symbols
+  def player_symbols
     prompt_for_player_symbol(1)
     symbol_one = user_selection
     prompt_for_player_symbol(2)
