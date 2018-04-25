@@ -19,3 +19,9 @@ Given a PlayerSetup is initialized
 And player one's symbol is "x"
 When a user types in a "x" first and then a "y"
 Then get_unique_symbol_for_player2 returns a "Y"
+
+Scenario: player_symbols returns an array containing the selected symbols for player 1 and 2
+Given a PlayerSetup is initialized
+When a user types in a "x" first and then a "y"
+And player_symbols is called
+Then player_symbols returns an array containing these symbols

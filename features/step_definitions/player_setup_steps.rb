@@ -60,10 +60,23 @@ Given("player one's symbol is {string}") do |symbol|
 end
 
 When("a user types in a {string} first and then a {string}") do |symbol1, symbol2|
-  allow(@player_setup).to receive(:user_selection).and_return("X", "Y")
+  @entered_symbol_value1 = symbol1.upcase
+  @entered_symbol_value2 = symbol2.upcase
+  allow(@player_setup).to receive(:user_selection).and_return(@entered_symbol_value1, @entered_symbol_value2)
 end
 
 Then("get_unique_symbol_for_player2 returns a {string}") do |symbol|
   expect(@player_setup.get_unique_symbol_for_player2(@symbol_one)).to eq(symbol)
 end
+
+When("player_symbols is called") do
+  allow(@reader).to receive(:read_and_validate).and_return(@entered_symbol_value1, @entered_symbol_value2)
+  @symbols_returned = @player_setup.player_symbols
+end
+
+Then("player_symbols returns an array containing these symbols") do
+  expect(@symbols_returned[0]).to eq(@entered_symbol_value1)
+  expect(@symbols_returned[0]).to eq(@entered_symbol_value1)
+end
+
 
