@@ -7,19 +7,19 @@ module MessageGenerator
 
   attr_reader :language_config
 
-  def self.get_directory
-    directory = "TicTacToeRuby.Console/Languages/"
+  def self.directory
+    directory = "tictactoeruby.core/config/"
   end
 
   def self.get_language_config
-    @language_config = LanguageOptionsAdapter.new("TicTacToeRuby.Console/Languages/") if @language_config.nil? || @language_config.stored_default_tag != @language_config.default_language_tag
+    @language_config = LanguageOptionsAdapter.new(directory) if @language_config.nil? || @language_config.stored_default_tag != @language_config.default_language_tag
     result = @language_config
   end
 
   def self.generate_file_path(file_name, language_tag)
     raise NilReferenceError, "file_name" if file_name.nil?
     raise InvalidValueError, "file_name" if file_name == ""
-    file_path = get_directory + file_name + "." + language_tag + ".yaml"
+    file_path = directory + file_name + "." + language_tag + ".yaml"
   end
 
   def self.get_data(file_name, property)
