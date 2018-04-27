@@ -1,7 +1,7 @@
 require_relative '../../TicTacToeRuby.Core/Exceptions/nil_reference_error.rb'
 
 Given("default language is {string}") do |language|
-  @directory_path_for_default_language = "../TicTacToeRuby/features/test_files/"
+  @directory_path_for_default_language = "../../features/test_files/"
 	@directory_path_for_default_language = @directory_path_for_default_language + "default_language_" + language.downcase + "/"
   raise_error(InvalidValueError) if !File.exist?(@directory_path_for_default_language)
   @starting_default_tag = language == "English" ? "en" : "es"

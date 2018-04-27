@@ -33,7 +33,7 @@ class LanguageOptionsAdapter
   end
 
   def default_language_tag!(tag)
-    raise InvalidValueError, "tag" if !valid?(tag)
+    raise InvalidValueError, "tag = #{tag} @ directory = #{@directory}" if !valid?(tag)
     YAMLWriter.write_data(@directory + GLOBAL_SETTINGS_FILE, "selected_language_tag", tag)
     @language.tag = tag
   end

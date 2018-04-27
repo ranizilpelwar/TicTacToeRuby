@@ -8,7 +8,7 @@ module MessageGenerator
   attr_reader :language_config
 
   def self.directory
-    directory = "tictactoeruby.core/config/"
+    directory = "../config/"
   end
 
   def self.get_language_config

@@ -3,7 +3,7 @@ When("the game is setup") do
   @writer = ConsoleWriter.new
 	@reader = MockConsoleReader.new("1")
   language = "English"	
-	@directory_path_for_default_language = "../TicTacToeRuby/features/test_files/"
+	@directory_path_for_default_language = "../../features/test_files/"
 	@directory_path_for_default_language = @directory_path_for_default_language + "default_language_" + language.downcase + "/"
 	@game_play_setup = GamePlaySetup.new(@writer, @reader, @directory_path_for_default_language)
 	@game_board = GameBoard.new(GameBoard.create_board)
