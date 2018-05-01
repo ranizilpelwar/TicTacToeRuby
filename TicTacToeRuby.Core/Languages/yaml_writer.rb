@@ -5,6 +5,7 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 module YAMLWriter
   def self.write_data(file_path, property, value)
+    file_path = File.dirname(__FILE__) + '/' + file_path
     raise NilReferenceError, "file_path" if file_path.nil?
     raise NilReferenceError, "property" if property.nil?
     raise NilReferenceError, "value" if value.nil?

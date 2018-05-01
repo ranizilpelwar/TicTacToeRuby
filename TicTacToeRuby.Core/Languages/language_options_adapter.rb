@@ -23,12 +23,13 @@ class LanguageOptionsAdapter
   end
   
   def stored_default_tag
-    path = @directory + GLOBAL_SETTINGS_FILE
-    YAMLReader.read_data(path, "selected_language_tag")
+    file_path = @directory + GLOBAL_SETTINGS_FILE
+    YAMLReader.read_data(file_path, "selected_language_tag")
   end
 
   def valid?(tag)
     file_path = @directory + "language_options." + tag + ".yaml"
+    file_path = File.dirname(__FILE__) + '/' + file_path
     File.exist?(file_path)
   end
 
