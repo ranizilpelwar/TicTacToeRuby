@@ -37,8 +37,8 @@ RSpec.describe "a YAML Reader" do
       expect{ YAMLReader.read_data(nil, "welcome") }.to raise_error(NilReferenceError)
     end
 
-    it "raises an NilReferenceError when file is empty" do
-      expect{ YAMLReader.read_data(nil, "welcome") }.to raise_error(NilReferenceError)
+    it "raises an InvalidValueError when file is empty" do
+      expect{ YAMLReader.read_data("", "welcome") }.to raise_error(InvalidValueError)
     end
 
     it "raises an NilReferenceError when property is nil" do
@@ -52,7 +52,7 @@ RSpec.describe "a YAML Reader" do
     end
 
     it "raises an InvalidValueError when an invalid file name is supplied" do
-      file_path = "../../spec/TestFiles/testing.en.yaml"
+      file_path = "Files/testing.en.yaml"
       expect{ YAMLReader.read_data(file_path, "welcome_message") }.to raise_error(InvalidValueError)
     end
     
