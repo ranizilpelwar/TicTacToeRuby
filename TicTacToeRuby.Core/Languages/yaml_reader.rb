@@ -4,8 +4,8 @@ require_relative '../../TicTacToeRuby.Core/Exceptions/invalid_value_error.rb'
 
 module YAMLReader
   def self.read_data(file_path, property)
-    file_path = File.dirname(__FILE__) + '/' + file_path
     raise NilReferenceError, "file_path" if file_path.nil?
+    file_path = File.dirname(__FILE__) + '/' + file_path
     raise NilReferenceError, "property" if property.nil?
     raise InvalidValueError, "file_path" if file_path == ""
     raise InvalidValueError, "property" if property == ""
