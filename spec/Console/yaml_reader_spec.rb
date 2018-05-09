@@ -42,23 +42,28 @@ RSpec.describe "a YAML Reader" do
     end
 
     it "raises an NilReferenceError when property is nil" do
-      expect{ YAMLReader.read_data("tictactoeruby.core/config/application_text.en.yaml", nil) }.to raise_error(NilReferenceError)
+      file_path = "../../spec/TestFiles/testing.en.yaml"
+      expect{ YAMLReader.read_data(file_path, nil) }.to raise_error(NilReferenceError)
     end
 
     it "raises an InvalidValueError when property is empty" do
-      expect{ YAMLReader.read_data("tictactoeruby.core/config/application_text.en.yaml", "") }.to raise_error(InvalidValueError)
+      file_path = "../../spec/TestFiles/testing.en.yaml"
+      expect{ YAMLReader.read_data(file_path, "") }.to raise_error(InvalidValueError)
     end
 
     it "raises an InvalidValueError when an invalid file name is supplied" do
-      expect{ YAMLReader.read_data("tictactoeruby.core/config/fake_file_name.yaml", "welcome_message") }.to raise_error(InvalidValueError)
+      file_path = "../../spec/TestFiles/testing.en.yaml"
+      expect{ YAMLReader.read_data(file_path, "welcome_message") }.to raise_error(InvalidValueError)
     end
     
     it "raises an InvalidValueError when an invalid property name is supplied" do
-      expect{ YAMLReader.read_data("tictactoeruby.core/config/application_text.en.yaml", "fake_property") }.to raise_error(InvalidValueError)
+      file_path = "../../spec/TestFiles/testing.en.yaml"
+      expect{ YAMLReader.read_data(file_path, "fake_property") }.to raise_error(InvalidValueError)
     end
 
     it "returns the text stored in the yaml file when a valid file and property name is supplied" do
-      expect(YAMLReader.read_data("../../spec/TestFiles/testing.en.yaml", "test_readonly_property")).to eq("Welcome message for game!")
+      file_path = "../../spec/TestFiles/testing.en.yaml"
+      expect(YAMLReader.read_data(file_path, "test_readonly_property")).to eq("Welcome message for game!")
     end
   end
 end
