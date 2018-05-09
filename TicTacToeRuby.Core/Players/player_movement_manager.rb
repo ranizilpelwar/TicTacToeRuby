@@ -40,14 +40,16 @@ class PlayerMovementManager
 
   def undo_last_move(game_board, player_manager)
     raise NilReferenceError, "game_board" if game_board.nil?
+    raise NilReferenceError, "player_manager" if player_manager.nil?
     first_player_type = @match_type.player1_type.selected_option
     second_player_type = @match_type.player2_type.selected_option
-    if (first_player_type == :Human && second_player_type == :Computer) || (first_player_type == :Computer && second_player_type == :Human)
+    raise GameRuleViolationError, MessageGenerator.no_moves_to_undo_error if !any_moves_to_undo? || number_of_human_players == 0
+    if number_of_human_players == 1
       game_board.revert_board(get_last_move_for_player(1))
       game_board.revert_board(get_last_move_for_player(2))
       @player1_last_move = no_last_move
       @player2_last_move = no_last_move
-    elsif first_player_type == :Human && second_player_type == :Human
+    elsif number_of_human_players == 2
       player_number = player_manager.get_player_number(player_manager.current_player)
       game_board.revert_board(get_last_move_for_player(player_number))
       if player_number == 1
@@ -55,13 +57,24 @@ class PlayerMovementManager
       else
         @player2_last_move = no_last_move
       end
-    else
-      raise InvalidValueError, "game_board"
     end
   end
 
   def moves_recordable?(match_number)
     match_manager = MatchTypeManager.new
     match_manager.player_type(match_number, 1) == "Human" || match_manager.player_type(match_number, 2) == "Human"
+  end
+
+  def any_moves_to_undo?
+    get_last_move_for_player(1) != -1 && get_last_move_for_player(2) != -1
+  end
+
+  def number_of_human_players
+    first_player_type = @match_type.player1_type.selected_option
+    second_player_type = @match_type.player2_type.selected_option
+    count = 0
+    count = count + 1 if first_player_type == :Human
+    count = count + 1 if second_player_type == :Human
+    count
   end
 end
